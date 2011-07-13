@@ -1,0 +1,12 @@
+#Screen hack to rename current window to running process
+if [[ $TERM == "screen" ]]
+  then
+    export PS1="\033k\033\\\\${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
+  fi
+
+
+#Gnome alias for portability
+if [ -z $GNOME_DESKTOP_SESSION_ID ]
+  then
+    alias open="gnome-open"
+  fi

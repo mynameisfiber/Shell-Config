@@ -1,0 +1,2 @@
+Align.vba: call delete('/home/fiber/.vim/plugin/AlignPlugin.vim')|call delete('/home/fiber/.vim/plugin/AlignMapsPlugin.vim')|call delete('/home/fiber/.vim/plugin/cecutil.vim')|call delete('/home/fiber/.vim/doc/Align.txt')|call delete('/home/fiber/.vim/autoload/Align.vim')|call delete('/home/fiber/.vim/autoload/AlignMaps.vim')
+tagbar.vba: call delete('/home/fiber/.vim/plugin/tagbar.vim')|call delete('/home/fiber/.vim/syntax/tagbar.vim')|call delete('/home/fiber/.vim/doc/tagbar.txt')

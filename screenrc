@@ -1,0 +1,8 @@
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][ %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+defscrollback 1000
+startup_message off
+bindkey -d ^? stuff ^H
+bindkey -d ^@ stuff ^H
+
+shelltitle "$ |bash"
