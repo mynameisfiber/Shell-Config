@@ -10,3 +10,5 @@ if [ -z $GNOME_DESKTOP_SESSION_ID ]
   then
     alias open="gnome-open"
   fi
+  
+alias fuck='wget -qO - rage.thewaffleshop.net' 
