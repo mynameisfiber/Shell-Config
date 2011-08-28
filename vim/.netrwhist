@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/fiber/.config'
-let g:netrw_dirhist_2='/home/fiber/config/.git'
-let g:netrw_dirhist_3='/home/fiber/projects/waveequation/.git'
-let g:netrw_dirhist_4='/home/fiber/config'

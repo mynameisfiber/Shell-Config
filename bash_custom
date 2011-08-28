@@ -6,7 +6,7 @@ if [[ $TERM == "screen" ]]
 
 
 #Gnome alias for portability
-if [ -z $GNOME_DESKTOP_SESSION_ID ]
+if [[ $DESKTOP_SESSION == "gnome" ]]
   then
     alias open="gnome-open"
   fi
