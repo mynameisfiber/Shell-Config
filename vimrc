@@ -22,12 +22,14 @@ set incsearch
 "Omni completion
 :filetype on
 :filetype plugin on
+set nocp
+
 if has("autocmd")
   autocmd Filetype java setlocal omnifunc=javacomplete#Complete
   autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
 endif
 :inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
-:inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
+:inoremap <buffer> <C-S-Space> <C-X><C-O>
 
 "http://vim.wikia.com/wiki/VimTip1608
 set tags+=~/.vim/tags/alltags
