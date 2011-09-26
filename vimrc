@@ -36,6 +36,9 @@ set tags+=~/.vim/tags/alltags
 " build tags of your own project with Ctrl-F12
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+lp --fields=+iaS --extra=+q .<CR>
 
+"Reload all buffers with F4
+nmap <F4> :bufdo e!<CR>
+
 " Opens tagbar with F2
 map <F2> :TagbarToggle<CR>
 " Open NERDTree with F3
