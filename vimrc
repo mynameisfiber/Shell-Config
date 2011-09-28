@@ -43,6 +43,8 @@ nmap <F4> :bufdo e!<CR>
 map <F2> :TagbarToggle<CR>
 " Open NERDTree with F3
 map <F3> :NERDTreeToggle<CR>
+" Open GunDo with F5
+map <F5> :GundoToggle<CR>
 
 "Window Resizing
 map <C-h> <C-w><
