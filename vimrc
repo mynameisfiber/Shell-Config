@@ -6,6 +6,7 @@ filetype plugin indent on
 "Allow moving to the end of the line in visual block mode
  set virtualedit+=block
 
+
 "tabs
 set softtabstop=2
 set shiftwidth=2
