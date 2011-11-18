@@ -30,3 +30,15 @@ plugins=(git deb gnome heroku fuck android pythondoc history-substring-search)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+
+# Setup OSX-specific enviroment
+if [[ $OSTYPE =~ "darwin11.0" ]]
+then
+  # Setting PATH for EPD-7.1-2
+  # The orginal version is saved in .bash_profile.pysave
+  PATH="/Library/Frameworks/EPD64.framework/Versions/Current/bin:${PATH}"
+  export PATH
+  
+  MKL_NUM_THREADS=1
+  export MKL_NUM_THREADS
+fi
