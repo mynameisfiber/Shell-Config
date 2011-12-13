@@ -1,3 +1,8 @@
+if [[ $TERM == "screen" ]]
+  then
+    export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
+  fi
+#
 #Gnome alias for portability
 if [[ $DESKTOP_SESSION == "gnome" ]]
   then

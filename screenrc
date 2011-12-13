@@ -5,5 +5,3 @@ startup_message off
 escape ^\\\
 bindkey -d ^? stuff ^H
 bindkey -d ^@ stuff ^H
-
-shelltitle "$ |bash"
