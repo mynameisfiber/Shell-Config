@@ -4,8 +4,10 @@ CONFIGPATH=`pwd`
 echo "Config path: $CONFIGPATH"
 
 echo "Configuring VIM"
+mv ~/.vimrc ~/.vimrc.bak
 ln -sf $CONFIGPATH/vimrc ~/.vimrc 
-ln -sf $CONFIGPATH/vim ~/.vim
+mv ~/.vim ~/.vim.bak
+ln -sf $CONFIGPATH/vim ~/.vim/
 
 echo "Configuring BASH"
 if [[ ! `grep ". $CONFIGPATH/bash_custom" ~/.bashrc` ]]; then
@@ -13,10 +15,13 @@ if [[ ! `grep ". $CONFIGPATH/bash_custom" ~/.bashrc` ]]; then
 fi
 
 echo "Configuring ZSH"
+mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
 ln -sf $CONFIGPATH/oh-my-zsh ~/.oh-my-zsh
+mv ~/.zshrc ~/.zshrc.bak
 ln -sf $CONFIGPATH/zshrc ~/.zshrc
 
 echo "Configuring SCREEN"
+mv ~/.screenrc ~/.screenrc.bak
 ln -sf $CONFIGPATH/screenrc ~/.screenrc
 
 echo "Installing VIM plugins"
