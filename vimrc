@@ -1,11 +1,13 @@
 "Run pathogen
 call pathogen#infect()
 syntax on
+
+filetype on
+filetype plugin on
 filetype plugin indent on
 
 "Allow moving to the end of the line in visual block mode
  set virtualedit+=block
-
 
 "tabs
 set softtabstop=4

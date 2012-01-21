@@ -7,7 +7,7 @@ echo "Configuring VIM"
 mv ~/.vimrc ~/.vimrc.bak
 ln -sf $CONFIGPATH/vimrc ~/.vimrc 
 mv ~/.vim ~/.vim.bak
-ln -sf $CONFIGPATH/vim ~/.vim/
+ln -sf $CONFIGPATH/vim ~/.vim
 
 echo "Configuring BASH"
 if [[ ! `grep ". $CONFIGPATH/bash_custom" ~/.bashrc` ]]; then
