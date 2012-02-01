@@ -2,6 +2,9 @@
 call pathogen#infect()
 syntax on
 
+"Set reasonable colors for pyflakes highlighting
+hi SpellBad cterm=underline ctermbg=0
+
 filetype on
 filetype plugin on
 filetype plugin indent on
