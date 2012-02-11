@@ -10,3 +10,4 @@ if [[ $DESKTOP_SESSION == "gnome" ]]
   fi
   
 alias fuck='wget -qO - rage.thewaffleshop.net' 
+alias ls='ls -G'
