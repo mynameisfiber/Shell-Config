@@ -13,6 +13,9 @@ echo "Configuring BASH"
 if [[ ! `grep ". $CONFIGPATH/bash_custom" ~/.bashrc` ]]; then
     echo -ne "if [ -f $CONFIGPATH/bash_custom ]; then\n  . $CONFIGPATH/bash_custom \nfi" >> ~/.bashrc
 fi
+if [[ ! `grep ". $CONFIGPATH/bash_custom" ~/.bash_profile` ]]; then
+    echo -ne "if [ -f $CONFIGPATH/bash_custom ]; then\n  . $CONFIGPATH/bash_custom \nfi" >> ~/.bash_profile
+fi
 
 echo "Configuring ZSH"
 mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
