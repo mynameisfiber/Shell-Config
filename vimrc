@@ -46,9 +46,12 @@ map <C-F12> :!ctags -R --sort=yes --c++-kinds=+lp --fields=+iaS --extra=+q .<CR>
 nmap <F4> :bufdo e!<CR>
 
 " Opens tagbar with F2
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 map <F2> :TagbarToggle<CR>
+
 " Open NERDTree with F3
 map <F3> :NERDTreeToggle<CR>
+
 " Open GunDo with F5
 map <F5> :GundoToggle<CR>
 
