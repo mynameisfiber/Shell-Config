@@ -8,6 +8,8 @@ if [[ $DESKTOP_SESSION == "gnome" ]]
   then
     alias open="gnome-open"
   fi
+
+export PATH="/usr/local/bin:$PATH"
   
 alias fuck='wget -qO - rage.thewaffleshop.net' 
 alias ls='ls -G'
