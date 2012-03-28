@@ -37,6 +37,9 @@ endif
 :inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
 :inoremap <buffer> <C-S-Space> <C-X><C-O>
 
+"Leave insert mode with `jk` (avoid escape!)
+imap jk <Esc>
+
 "http://vim.wikia.com/wiki/VimTip1608
 set tags+=~/.vim/tags/alltags
 " build tags of your own project with Ctrl-F12
