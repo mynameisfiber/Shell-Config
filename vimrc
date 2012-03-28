@@ -40,6 +40,16 @@ endif
 "Leave insert mode with `jk` (avoid escape!)
 imap jk <Esc>
 
+" unmap arrow keys
+nmap <right> <nop>
+nmap <left> <nop>
+nmap <up> <nop>
+nmap <down> <nop>
+imap <right> <nop>
+imap <left> <nop>
+imap <up> <nop>
+imap <down> <nop>
+
 "http://vim.wikia.com/wiki/VimTip1608
 set tags+=~/.vim/tags/alltags
 " build tags of your own project with Ctrl-F12
