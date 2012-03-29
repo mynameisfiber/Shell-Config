@@ -16,6 +16,8 @@ fi
 if [[ ! `grep ". $CONFIGPATH/bash_custom" ~/.bash_profile` ]]; then
     echo -ne "if [ -f $CONFIGPATH/bash_custom ]; then\n  . $CONFIGPATH/bash_custom \nfi" >> ~/.bash_profile
 fi
+mv ~/.inputrc ~/.inputrc.bak
+ln -sf $CONFIGPATH/inputrc ~/.inputrc
 
 echo "Configuring ZSH"
 mv ~/.oh-my-zsh ~/.oh-my-zsh.bak

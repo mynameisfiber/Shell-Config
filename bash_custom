@@ -9,5 +9,17 @@ if [[ $DESKTOP_SESSION == "gnome" ]]
     alias open="gnome-open"
   fi
 
+
+#OSX specific
+if [[ "`uname`" == "Darwin" ]]
+  then
+    alias vim="mvim -v"
+  fi
+
+export PATH="/usr/local/bin:$PATH"
+
 alias fuck='wget -qO - rage.thewaffleshop.net' 
 alias ls='ls -G'
+
+# VI mode!
+set -o vi

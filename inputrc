@@ -1,0 +1,4 @@
+# Remap ESC to use 'jk' keypress to leave insert mode
+# reference: http://vim.wikia.com/wiki/Avoid_the_escape_key
+    set keymap vi-insert
+    "jk": vi-movement-mode
