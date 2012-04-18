@@ -16,6 +16,10 @@ if [[ "`uname`" == "Darwin" ]]
     alias vim="mvim -v"
   fi
 
+if [ -f ~/.bash_github ]; then 
+   . ~/.bash_github
+  fi
+
 export PATH="/usr/local/bin:$PATH"
 
 alias fuck='wget -qO - rage.thewaffleshop.net' 
