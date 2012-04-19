@@ -2,6 +2,21 @@
 call pathogen#infect()
 syntax on
 
+syntax enable
+set background=dark
+colorscheme solarized
+
+"Set linenumber stuff
+set numberwidth=3
+set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+highlight LineNr ctermbg=darkgrey
+highlight CursorLine ctermbg=darkgrey cterm=none
+highlight CursorColumn ctermbg=darkgrey 
+set cursorline
+set cursorcolumn
+
 "Set reasonable colors for pyflakes highlighting
 hi SpellBad cterm=underline ctermbg=0
 
@@ -119,7 +134,7 @@ if exists("+showtabline")
              if tabpagewinnr(i,'$') > 1
                let s .= '/' . tabpagewinnr(i,'$')
              endif
-             let s .= (i == t ? ']' : ')') 
+             let s .= (i == t ? '%#TabLineFill#]' : ')') 
              let s .= ' '
              let i = i + 1 
          endwhile 
