@@ -5,6 +5,8 @@ syntax on
 syntax enable
 set background=dark
 colorscheme solarized
+" Solarized background strangeness fix
+highlight Normal ctermbg=none
 
 "Set linenumber stuff
 set numberwidth=3
@@ -12,10 +14,6 @@ set relativenumber
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 highlight LineNr ctermbg=darkgrey
-highlight CursorLine ctermbg=darkgrey cterm=none
-highlight CursorColumn ctermbg=darkgrey 
-set cursorline
-set cursorcolumn
 
 "Set reasonable colors for pyflakes highlighting
 hi SpellBad cterm=underline ctermbg=0
@@ -26,6 +24,9 @@ filetype plugin indent on
 
 "Allow moving to the end of the line in visual block mode
  set virtualedit+=block
+
+"Highlight search results
+set hlsearch
 
 "tabs
 set softtabstop=4
