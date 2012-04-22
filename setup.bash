@@ -16,8 +16,8 @@ fi
 if [[ ! `grep ". $CONFIGPATH/bash_custom" ~/.bash_profile` ]]; then
     echo -ne "if [ -f $CONFIGPATH/bash_custom ]; then\n  . $CONFIGPATH/bash_custom \nfi" >> ~/.bash_profile
 fi
-mv ~/.bash_github ~/.bash_github.bak
-ln -sf $CONFIGPATH/bash_github ~/.bash_github
+mv ~/.bash_scripts ~/.bash_scripts.bak
+ln -sf $CONFIGPATH/bash_scripts ~/.bash_scripts
 mv ~/.inputrc ~/.inputrc.bak
 ln -sf $CONFIGPATH/inputrc ~/.inputrc
 

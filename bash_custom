@@ -27,3 +27,9 @@ alias ls='ls -G'
 
 # VI mode!
 set -o vi
+
+for script in ~/.bash_scripts/*;
+do
+    source $script
+done
+    
