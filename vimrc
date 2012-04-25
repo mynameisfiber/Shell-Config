@@ -2,6 +2,12 @@
 call pathogen#infect()
 syntax on
 
+" New leader
+let mapleader=","
+
+" Get rid of the topbar on gui mode
+set guioptions-=T
+
 syntax enable
 set background=dark
 colorscheme solarized
