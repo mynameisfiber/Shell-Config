@@ -1,5 +1,8 @@
 "Run pathogen
 call pathogen#infect()
+
+set rtp+=/usr/local/go/misc/vim
+
 syntax on
 
 " New leader
@@ -91,10 +94,10 @@ map <F3> :NERDTreeToggle<CR>
 map <F5> :GundoToggle<CR>
 
 "Window Resizing
-map <C-h> <C-w><
+map <C-h> <C-w>>
 map <C-j> <C-W>-
 map <C-k> <C-W>+
-map <C-l> <C-w>>
+map <C-l> <C-w><
 
 "Tab Movement and creation
 :map <C-S-tab> :tabprevious<CR>
