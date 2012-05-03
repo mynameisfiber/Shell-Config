@@ -9,8 +9,8 @@ syntax on
 let mapleader=","
 
 " Yank, comment, paste.
-nmap <leader>y Y,c<space>p
-vmap <leader>y Ygv,c<space>p
+nmap <leader>y yy,c<space>p
+vmap <leader>y yygv,c<space>p
 
 " Get rid of the topbar on gui mode
 "set guioptions-=T
