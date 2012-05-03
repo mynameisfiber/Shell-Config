@@ -10,6 +10,7 @@ let mapleader=","
 
 " Yank, comment, paste.
 nmap <leader>y Y,c<space>p
+vmap <leader>y Ygv,c<space>p
 
 " Get rid of the topbar on gui mode
 "set guioptions-=T
