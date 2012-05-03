@@ -8,7 +8,11 @@ syntax on
 " New leader
 let mapleader=","
 
+" Yank, comment, paste.
+nmap <leader>y Y,c<space>p
+
 " Get rid of the topbar on gui mode
+"set guioptions-=T
 set guioptions-=T
 
 syntax enable
