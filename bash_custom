@@ -10,11 +10,6 @@ if [[ $DESKTOP_SESSION == "gnome" ]]
   fi
 
 
-#OSX specific
-if [[ "`uname`" == "Darwin" ]]
-  then
-    alias vim="mvim -v"
-  fi
 
 if [ -f ~/.bash_github ]; then 
    . ~/.bash_github
@@ -23,10 +18,17 @@ if [ -f ~/.bash_github ]; then
 export PATH="/usr/local/bin:$PATH"
 
 alias fuck='wget -qO - rage.thewaffleshop.net' 
-alias ls='ls -G --color=auto'
+alias ls='ls --color=auto -G'
 
 # VI mode!
 set -o vi
+
+#OSX specific
+if [[ "`uname`" == "Darwin" ]]
+  then
+    alias vim="mvim -v"
+    alias ls='ls -G'
+  fi
 
 for script in ~/.bash_scripts/*;
 do
