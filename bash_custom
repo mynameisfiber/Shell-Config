@@ -23,7 +23,7 @@ if [ -f ~/.bash_github ]; then
 export PATH="/usr/local/bin:$PATH"
 
 alias fuck='wget -qO - rage.thewaffleshop.net' 
-alias ls='ls -G'
+alias ls='ls -G --color=auto'
 
 # VI mode!
 set -o vi
@@ -32,4 +32,4 @@ for script in ~/.bash_scripts/*;
 do
     source $script
 done
-    
+
