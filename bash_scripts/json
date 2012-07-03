@@ -1,1 +1,1 @@
-function jsonlint() { echo $@ | python -m json.tool; }
+alias jsonlint='python -m json.tool'

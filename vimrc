@@ -23,7 +23,7 @@ colorscheme solarized
 highlight Normal ctermbg=none
 
 "Set linenumber stuff
-set numberwidth=3
+set numberwidth=5
 set relativenumber
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber

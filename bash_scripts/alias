@@ -1,0 +1,3 @@
+alias fuck='wget -qO - rage.thewaffleshop.net' 
+alias ls='ls --color=auto -G'
+alias less='ls -RSM~gIsw'
