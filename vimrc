@@ -2,7 +2,6 @@
 call pathogen#infect()
 
 set rtp+=/usr/local/go/misc/vim
-
 syntax on
 
 " New leader
@@ -16,6 +15,7 @@ vmap <leader>y yygv,c<space>p
 "set guioptions-=T
 set guioptions-=T
 
+" Colors!
 syntax enable
 set background=dark
 colorscheme solarized
@@ -32,12 +32,16 @@ highlight LineNr ctermbg=darkgrey
 "Set reasonable colors for pyflakes highlighting
 hi SpellBad cterm=underline ctermbg=0
 
+" Enable filetype support for awesome plugin goodness
 filetype on
 filetype plugin on
 filetype plugin indent on
 
+" bash-like file completion
+set wildmode=longest,list
+
 "Allow moving to the end of the line in visual block mode
- set virtualedit+=block
+set virtualedit+=block
 
 "Highlight search results
 set hlsearch
@@ -53,7 +57,11 @@ set autoindent
 
 "Search config
 set ignorecase
+set smartcase
 set incsearch
+
+"Finding keeps cursor in the middle of the screen
+nnoremap n nzz
 
 "Omni completion
 :filetype on
@@ -80,6 +88,12 @@ imap <left> <nop>
 imap <up> <nop>
 imap <down> <nop>
 
+" More intuitive motions through wrapped lines
+set linebreak
+nnoremap gj j
+nnoremap gk k
+
+
 "http://vim.wikia.com/wiki/VimTip1608
 set tags+=~/.vim/tags/alltags
 " build tags of your own project with Ctrl-F12
@@ -94,6 +108,8 @@ map <F2> :TagbarToggle<CR>
 
 " Open NERDTree with F3
 map <F3> :NERDTreeToggle<CR>
+" Filter out annoying files in nerdtree
+let NERDTreeIgnore = ['\.pyc$', '\.sw[op]$']
 
 " Open GunDo with F5
 map <F5> :GundoToggle<CR>
