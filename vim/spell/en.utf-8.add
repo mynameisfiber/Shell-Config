@@ -10,3 +10,5 @@ accessor
 iterable
 realtime
 Jaccard
+pubsub
+simplequeue
