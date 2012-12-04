@@ -12,3 +12,5 @@ realtime
 Jaccard
 pubsub
 simplequeue
+sharded
+multicasted

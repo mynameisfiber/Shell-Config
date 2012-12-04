@@ -128,6 +128,21 @@ map <C-l> <C-w><
 :nmap <C-S-t> :tabnew<CR>
 :imap <C-S-t> <Esc>:tabnew<CR>
 
+"Fold on preprocessor definitions
+autocmd FileType [ch] call FoldPreprocessor()
+function! FoldPreprocessor()
+    set foldmarker=#if,#endif
+    set foldmethod=marker
+endfunction
+
+"In normal mode, press Space to toggle the current fold open/closed. However, if
+"the cursor is not in a fold, move to the right (the default behavior). In
+"addition, with the manual fold method, you can create a fold by visually
+"selecting some lines, then pressing Space.
+" http://vim.wikia.com/wiki/Folding
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+
 "Tabline
 if exists("+guioptions") 
      set go-=e 
