@@ -25,6 +25,7 @@ if [[ "`uname`" == "Darwin" ]]
   then
     alias vim="mvim -v"
     alias ls='ls -G'
+    export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
   fi
 
 for script in ~/.bash_scripts/*;

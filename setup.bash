@@ -27,6 +27,10 @@ ln -sf $CONFIGPATH/oh-my-zsh ~/.oh-my-zsh
 mv ~/.zshrc ~/.zshrc.bak
 ln -sf $CONFIGPATH/zshrc ~/.zshrc
 
+echo "Configuring AsciiDoc"
+mv ~/.asciidoc ~/.asciidoc.bak
+ln -sf $CONFIGPATH/asciidoc ~/.asciidoc
+
 echo "Configuring SCREEN"
 mv ~/.screenrc ~/.screenrc.bak
 ln -sf $CONFIGPATH/screenrc ~/.screenrc

@@ -11,6 +11,10 @@ let mapleader=","
 nmap <leader>y yy,c<space>p
 vmap <leader>y yygv,c<space>p
 
+"status line
+:set laststatus=2
+:set statusline=%t\ %y%r\ [%c,%l]
+
 " Get rid of the topbar on gui mode
 "set guioptions-=T
 set guioptions-=T
@@ -134,6 +138,9 @@ function! FoldPreprocessor()
     set foldmarker=#if,#endif
     set foldmethod=marker
 endfunction
+
+"Make asciidoc easier to work with
+autocmd FileType asciidoc :set tw=80
 
 "In normal mode, press Space to toggle the current fold open/closed. However, if
 "the cursor is not in a fold, move to the right (the default behavior). In
