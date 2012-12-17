@@ -4,6 +4,9 @@ call pathogen#infect()
 set rtp+=/usr/local/go/misc/vim
 syntax on
 
+" backspace fix
+set backspace=2
+
 " New leader
 let mapleader=","
 
