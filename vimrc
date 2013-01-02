@@ -110,8 +110,40 @@ map <C-F12> :!ctags -R --sort=yes --c++-kinds=+lp --fields=+iaS --extra=+q .<CR>
 nmap <F4> :bufdo e!<CR>
 
 " Opens tagbar with F2
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 map <F2> :TagbarToggle<CR>
+
+" general ctypes location
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+
+" ctype settings for go:
+" https://github.com/jstemmer/gotags
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
 " Open NERDTree with F3
 map <F3> :NERDTreeToggle<CR>
