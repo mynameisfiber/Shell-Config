@@ -14,6 +14,9 @@ let mapleader=","
 nmap <leader>y yy,c<space>p
 vmap <leader>y yygv,c<space>p
 
+" Markdown preview
+nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; maruku --html -o $f %; open $f<CR>
+
 "status line
 :set laststatus=2
 :set statusline=%t\ %y%r\ [%c,%l]

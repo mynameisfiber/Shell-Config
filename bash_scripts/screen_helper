@@ -1,6 +1,6 @@
 function scd() {
-    screen -X chdir $@
     cd $@
+    screen -X chdir $PWD
 }
 
 function project() {
