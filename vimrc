@@ -14,6 +14,10 @@ let mapleader=","
 nmap <leader>y yy,c<space>p
 vmap <leader>y yygv,c<space>p
 
+" Various copy/paste niceties (assumes pbcopy/pbpaste is installed)
+vmap <leader>c ! pbcopy<CR>:undo<CR>
+nmap <leader>v :set paste<CR>! pbpaste<CR>:set nopaste<CR>
+
 " Markdown preview
 nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; maruku --html -o $f %; open $f<CR>
 
