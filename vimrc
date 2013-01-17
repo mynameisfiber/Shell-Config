@@ -77,18 +77,6 @@ set incsearch
 "Finding keeps cursor in the middle of the screen
 nnoremap n nzz
 
-"Omni completion
-:filetype on
-:filetype plugin on
-set nocp
-
-if has("autocmd")
-  autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-  autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
-endif
-:inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
-:inoremap <buffer> <C-S-Space> <C-X><C-O>
-
 "Leave insert mode with `jk` (avoid escape!)
 imap jk <Esc>
 

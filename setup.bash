@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "We will need sudo access to install some pyhton packages"
+sudo -v
+
 CONFIGPATH=`pwd`
 echo "Config path: $CONFIGPATH"
 
@@ -34,6 +37,9 @@ ln -sf $CONFIGPATH/asciidoc ~/.asciidoc
 echo "Configuring SCREEN"
 mv ~/.screenrc ~/.screenrc.bak
 ln -sf $CONFIGPATH/screenrc ~/.screenrc
+
+echo "Installing required python packages"
+sudo pip install jedi
 
 echo "Installing VIM plugins"
 git submodule update --init
