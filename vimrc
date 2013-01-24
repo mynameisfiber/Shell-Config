@@ -149,10 +149,15 @@ let NERDTreeIgnore = ['\.pyc$', '\.sw[op]$']
 map <F5> :GundoToggle<CR>
 
 "Window Resizing
-map <C-h> <C-w>>
-map <C-j> <C-W>-
-map <C-k> <C-W>+
-map <C-l> <C-w><
+map <C-A-l> <C-w>>
+map <C-A-k> <C-W>-
+map <C-A-j> <C-W>+
+map <C-A-h> <C-w><
+
+map <C-l> 5<C-w>>
+map <C-k> 5<C-W>-
+map <C-j> 5<C-W>+
+map <C-h> 5<C-w><
 
 "Tab Movement and creation
 :map <C-S-tab> :tabprevious<CR>
