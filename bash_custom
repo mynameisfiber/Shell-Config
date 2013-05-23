@@ -30,6 +30,6 @@ if [[ "`uname`" == "Darwin" ]]
 
 for script in ~/.bash_scripts/*;
 do
-    source $script
+    source "$script"
 done
 
