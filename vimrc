@@ -19,7 +19,7 @@ vmap <leader>c ! pbcopy<CR>:undo<CR>
 nmap <leader>v :set paste<CR>! pbpaste<CR>:set nopaste<CR>
 
 " Markdown preview
-nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; maruku --html -o $f %; open $f<CR>
+nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; redcarpet --parse-no_intra_emphasis --parse-fenced_code_blocks --parse-tables % > $f; open $f<CR>
 
 "status line
 :set laststatus=2

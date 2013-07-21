@@ -1,7 +1,0 @@
-Instructions:
-  $ ln -sf $CONFIGPATH/vimrc ~/.vimrc 
-  $ ln -sf $CONFIGPATH/vim ~/.vim
-  $ echo -ne "if [ -f $CONFIGPATH/bash_custom ]; then\n  . $CONFIGPATH/bash_custom \nfi" >> ~/.bashrc
-  $ ln -sf $CONFIGPATH/screenrc ~/.screenrc
-
-or run ./setup.bash
