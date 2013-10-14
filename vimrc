@@ -23,7 +23,7 @@ nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; redcarpet --parse-no_intra_emp
 
 "status line
 :set laststatus=2
-:set statusline=%t\ %y%r\ [%c,%l]
+:set statusline=%t\ %y%r%{fugitive#statusline()}\ [%c,%l]
 
 " Get rid of the topbar on gui mode
 "set guioptions-=T
@@ -38,9 +38,10 @@ highlight Normal ctermbg=none
 
 "Set linenumber stuff
 set numberwidth=5
+"Setting number then relativenumber gives us relative numbering with the
+"current line having the absolute line number
+set number
 set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
 highlight LineNr ctermbg=darkgrey
 
 "Set reasonable colors for pyflakes highlighting
