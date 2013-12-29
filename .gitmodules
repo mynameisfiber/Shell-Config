@@ -49,3 +49,6 @@
 [submodule "vim/bundle/dart"]
 	path = vim/bundle/dart
 	url = git@github.com:dart-lang/dart-vim-plugin.git
+[submodule "vim/bundle/zenroom"]
+	path = vim/bundle/zenroom
+	url = git@github.com:amix/vim-zenroom.git

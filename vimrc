@@ -25,9 +25,8 @@ nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; redcarpet --parse-no_intra_emp
 :set laststatus=2
 :set statusline=%t\ %y%r%{fugitive#statusline()}\ [%c,%l]
 
-" Get rid of the topbar on gui mode
-"set guioptions-=T
-set guioptions-=T
+"only explicitly add some gui options
+set guioptions=aem
 
 " Colors!
 syntax enable
