@@ -42,3 +42,5 @@ then
   MKL_NUM_THREADS=1
   export MKL_NUM_THREADS
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

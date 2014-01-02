@@ -26,10 +26,13 @@ if [[ "`uname`" == "Darwin" ]]
     alias vim="mvim -v"
     alias ls='ls -G'
     export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
+    # Go to ios sim. directory
+    alias cdios='cd /Users/macodactyl/Library/Application\ Support/iPhone\ Simulator/'
   fi
 
 for script in ~/.bash_scripts/*;
 do
     source "$script"
 done
+
 

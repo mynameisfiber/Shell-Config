@@ -23,7 +23,7 @@ nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; maruku --html -o $f %; open $f
 
 "status line
 :set laststatus=2
-:set statusline=%t\ %y%r\ [%c,%l]
+:set statusline=%t\ %y%r\ [%l,%c]\ %P
 
 " Get rid of the topbar on gui mode
 "set guioptions-=T
@@ -32,16 +32,16 @@ set guioptions-=T
 " Colors!
 syntax enable
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 " Solarized background strangeness fix
 highlight Normal ctermbg=none
 
 "Set linenumber stuff
-set numberwidth=5
-set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-highlight LineNr ctermbg=darkgrey
+"set numberwidth=5
+"set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
+"highlight LineNr ctermbg=darkgrey
 
 "Set reasonable colors for pyflakes highlighting
 hi SpellBad cterm=underline ctermbg=0
@@ -77,18 +77,47 @@ set incsearch
 "Finding keeps cursor in the middle of the screen
 nnoremap n nzz
 
+":nmap - Display normal mode maps
+":imap - Display insert mode maps
+":vmap - Display visual and select mode maps
+":smap - Display select mode maps
+":xmap - Display visual mode maps
+":cmap - Display command-line mode maps
+":omap - Display operator pending mode maps
+
 "Leave insert mode with `jk` (avoid escape!)
 imap jk <Esc>
 
+"the original gf
+map <leader>gf gf
+
+"vsp the file under the cursor
+map gv :vertical wincmd f<CR>
+
+"open file in new tab (similar to gf) with `gf`
+map gf <C-w>gf
+
+"map gT (go back a tab) to GT
+map GT gT
+
+"map <Space> to add a space to the right of the cursor
+nmap <leader><Space> a<Space><Esc>
+
+"map <Space><Space> to add a new line below the cursor 
+nmap <leader><CR> o<Esc>
+
+"map ,nohl to add a new line below the cursor 
+nmap <leader>nohl :nohl<CR>
+
 " unmap arrow keys
-nmap <right> <nop>
-nmap <left> <nop>
-nmap <up> <nop>
-nmap <down> <nop>
-imap <right> <nop>
-imap <left> <nop>
-imap <up> <nop>
-imap <down> <nop>
+"nmap <right> <nop>
+"nmap <left> <nop>
+"nmap <up> <nop>
+"nmap <down> <nop>
+"imap <right> <nop>
+"imap <left> <nop>
+"imap <up> <nop>
+"imap <down> <nop>
 
 " More intuitive motions through wrapped lines
 set linebreak
@@ -233,3 +262,19 @@ if exists("+showtabline")
      set stal=2 
      set tabline=%!MyTabLine() 
 endif
+
+fun! GrepWord()
+    let s:term = expand('<cword>')
+    :exe ":!grep -r " . s:term . " *"
+endfun
+
+fun! GrepWordPipeOut()
+    let s:term = expand('<cword>')
+    :exe ":!grep -r " . s:term . " * > out"
+endfun
+
+map sear :call GrepWord()<CR>
+map fsear :call GrepWordPipeOut()<CR>
+
+" format json
+command JSON :%!python -m json.tool
