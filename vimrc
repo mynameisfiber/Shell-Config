@@ -91,9 +91,12 @@ imap <up> <nop>
 imap <down> <nop>
 
 " More intuitive motions through wrapped lines
+" http://vim.wikia.com/wiki/Move_cursor_by_display_lines_when_wrapping
 set linebreak
-nnoremap gj j
-nnoremap gk k
+noremap  <buffer> <silent> k gk
+noremap  <buffer> <silent> j gj
+noremap  <buffer> <silent> 0 g0
+noremap  <buffer> <silent> $ g$
 
 
 "http://vim.wikia.com/wiki/VimTip1608
