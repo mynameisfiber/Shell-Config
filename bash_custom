@@ -3,11 +3,6 @@ if [[ $TERM == "screen" ]]
     export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
   fi
 #
-#Gnome alias for portability
-if [[ $DESKTOP_SESSION == "gnome" ]]
-  then
-    alias open="gnome-open"
-  fi
 
 
 
@@ -20,17 +15,12 @@ export PATH="/usr/local/bin:$PATH"
 # VI mode!
 set -o vi
 
-#OSX specific
-if [[ "`uname`" == "Darwin" ]]
-  then
-    alias vim="mvim -v"
-    alias ls='ls -G'
-    export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
-    export PATH="/Applications/git-annex.app/Contents/MacOS:$PATH"
-  fi
 
 for script in ~/.bash_scripts/*;
 do
-    source "$script"
+    if [ -r "$script" ]; then
+        source "$script"
+    fi
 done
 
+source ~/.profile_custom
