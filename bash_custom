@@ -23,4 +23,4 @@ do
     fi
 done
 
-source ~/.profile_custom
+source ~/.profile

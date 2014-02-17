@@ -34,4 +34,4 @@ source $ZSH/oh-my-zsh.sh
 bindkey -v
 export KEYTIMEOUT=1
 
-source ~/.profile_custom
+source ~/.profile
