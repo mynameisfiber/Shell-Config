@@ -117,7 +117,12 @@ imap <F1> <Esc>
 " general ctypes location
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
-" ctype settings for go:
+" golint for golang
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+
+
+" ctype settings for golang:
 " https://github.com/jstemmer/gotags
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
