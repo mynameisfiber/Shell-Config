@@ -6,7 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="tonotdo"
-ZSH_THEME="micha"
+ZSH_THEME="gallois"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -25,7 +25,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git fuck pythondoc history-substring-search)
+plugins=(git battery brew colorize compleat cp golang git-fast history osx python screen ssh-agent vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
