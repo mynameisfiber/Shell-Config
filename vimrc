@@ -18,6 +18,9 @@ vmap <leader>y yygv,c<space>p
 vmap <leader>c ! pbcopy<CR>:undo<CR>
 nmap <leader>v :set paste<CR>! pbpaste<CR>:set nopaste<CR>
 
+" OSX clipboard support with * and + buffer
+set clipboard=unnamed
+
 " Markdown preview
 nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; redcarpet --parse-no_intra_emphasis --parse-fenced_code_blocks --parse-tables % > $f; open $f<CR>
 
@@ -93,10 +96,10 @@ imap <down> <nop>
 " More intuitive motions through wrapped lines
 " http://vim.wikia.com/wiki/Move_cursor_by_display_lines_when_wrapping
 set linebreak
-noremap  <buffer> <silent> k gk
-noremap  <buffer> <silent> j gj
-noremap  <buffer> <silent> 0 g0
-noremap  <buffer> <silent> $ g$
+noremap <buffer> <silent> k gk
+noremap <buffer> <silent> j gj
+noremap <buffer> <silent> 0 g0
+noremap <buffer> <silent> $ g$
 
 
 "http://vim.wikia.com/wiki/VimTip1608

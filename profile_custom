@@ -18,6 +18,9 @@ if [[ "`uname`" == "Darwin" ]]
 
     # python path from `brew install llvm`
     export PYTHONPATH="/usr/local/opt/llvm/lib/python2.7/site-packages:$PYTHONPATH"
+
+    # python path for homebrew
+    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
   fi
 
 # General shell scripts
