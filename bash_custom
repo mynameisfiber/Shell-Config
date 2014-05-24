@@ -14,6 +14,7 @@ export PATH="/usr/local/bin:$PATH"
 
 # VI mode!
 set -o vi
+export EDITOR="vim"
 
 
 for script in ~/.bash_scripts/*;
@@ -23,4 +24,3 @@ do
     fi
 done
 
-source ~/.profile
