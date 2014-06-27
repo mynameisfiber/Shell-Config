@@ -29,11 +29,16 @@ fi
 mv ~/.inputrc ~/.inputrc.bak
 ln -sf $CONFIGPATH/inputrc ~/.inputrc
 
+echo "Configuring bin"
+mv ~/.bin ~/.bin.bak
+rm ~/.bin
+ln -sfF $CONFIGPATH/bin ~/.bin
+
 echo "Configuring scripts"
 mv ~/.bash_scripts ~/.bash_scripts.bak
 rm ~/.bash_scripts
-
 ln -sfF $CONFIGPATH/bash_scripts ~/.bash_scripts
+
 mv ~/.profile_scripts ~/.profile_scripts.bak
 rm ~/.profile_scripts
 ln -sfF $CONFIGPATH/profile_scripts ~/.profile_scripts
@@ -51,6 +56,10 @@ ln -sf $CONFIGPATH/asciidoc ~/.asciidoc
 echo "Configuring SCREEN"
 mv ~/.screenrc ~/.screenrc.bak
 ln -sf $CONFIGPATH/screenrc ~/.screenrc
+
+echo "Configuring awesome"
+mv ~/.config/awesome ~/.config/awesome.bak
+ln -sf $CONFIGPATH/awesome ~/.config/awesome
 
 echo "Installing required python packages"
 pip install -r requirements.txt

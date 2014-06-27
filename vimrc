@@ -14,9 +14,9 @@ let mapleader=","
 nmap <leader>y yy,c<space>p
 vmap <leader>y yygv,c<space>p
 
-" Various copy/paste niceties (assumes pbcopy/pbpaste is installed)
-vmap <leader>c ! pbcopy<CR>:undo<CR>
-nmap <leader>v :set paste<CR>! pbpaste<CR>:set nopaste<CR>
+" Various copy/paste niceties (assumes xcopy is installed)
+vmap <leader>c ! xcopy -o<CR>:undo<CR>
+nmap <leader>v :set xcopy -o<CR>! pbpaste<CR>:set nopaste<CR>
 
 " OSX clipboard support with * and + buffer
 set clipboard=unnamed

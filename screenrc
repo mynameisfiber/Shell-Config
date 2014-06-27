@@ -5,3 +5,9 @@ startup_message off
 escape ^Jj
 bindkey -d ^? stuff ^H
 bindkey -d ^@ stuff ^H
+
+screen 0
+select 0
+exec $HOME/.bin/screen_ssh_agent
+exec true
+source $HOME/.ssh/screen_agent
