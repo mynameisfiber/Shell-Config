@@ -1,0 +1,22 @@
+export PRIMARY_DISPLAY="eDP1"
+function refreshmonitors {
+    xrandrparams="--output eDP1 --auto --primary"
+    if [[ "$1" == "" ]]; then
+        connectedOutputs=$(xrandr | grep " connected" | cut -d' ' -f1)
+        lastDisplay=$PRIMARY_DISPLAY
+        for output in $connectedOutputs; do
+            if [[ "$output" != "$PRIMARY_DISPLAY" ]]; then
+                xrandrparams="$xrandrparams --output $output --auto --left-of $lastDisplay"
+                lastDisplay=$output
+            fi;
+        done;
+    elif [[ "$1" == "off" ]]; then
+        allOutputs=$(xrandr | grep "connected" | cut -d' ' -f1)
+        for output in $allOutputs; do
+            if [[ "$output" != "$PRIMARY_DISPLAY" ]]; then
+                xrandrparams="$xrandrparams --output $output --off"
+            fi;
+        done;
+    fi
+    xrandr $xrandrparams
+}

@@ -1,3 +1,5 @@
+export GOPATH="/home/micha/projects/golang/:/usr/share/go"
+
 # install in /etc/bash_completion.d/ or your personal directory
 
 complete -f -X '!*.8' 8l

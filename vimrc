@@ -14,9 +14,9 @@ let mapleader=","
 nmap <leader>y yy,c<space>p
 vmap <leader>y yygv,c<space>p
 
-" Various copy/paste niceties (assumes xcopy is installed)
-vmap <leader>c ! xcopy -o<CR>:undo<CR>
-nmap <leader>v :set xcopy -o<CR>! pbpaste<CR>:set nopaste<CR>
+" Various copy/paste niceties (assumes pbcopy/pbpaste is installed or is aliased)
+vmap <leader>y "+y
+nmap <leader>p "+p
 
 " OSX clipboard support with * and + buffer
 set clipboard=unnamed
@@ -118,7 +118,7 @@ map <F1> <Esc>
 imap <F1> <Esc>
 
 " general ctypes location
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
 
 " golint for golang
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim

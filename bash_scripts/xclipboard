@@ -1,0 +1,2 @@
+alias pbcopy='xclip -i -selection "clipboard"'
+alias pbpaste='xclip -o -selection "clipboard"'

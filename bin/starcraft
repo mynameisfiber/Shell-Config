@@ -1,0 +1,8 @@
+#!/bin/bash
+
+wine ~/.wine/drive_c/users/Public/Application\ Data/Battle.net/Agent/Agent.exe --nohttpauth
+
+sleep 5
+
+wine ~/.wine/drive_c/Program\ Files/Battle.net/Battle.net.exe 
+
