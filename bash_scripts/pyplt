@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function pyplt() {
+    if which py; then
+        filename=$( tempfile --prefix=pyplt --suffix=.png)
+        py -c 'import matplotlib.pyplot as py' -C "py.savefig('${filename}')" $@
+        echo "Saved file to $filename"
+        display $filename
+    else
+        echo "You must install `py` with:"
+        echo "  $ sudo pip install pythonpy"
+    fi
+}
