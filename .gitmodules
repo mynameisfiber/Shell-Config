@@ -52,3 +52,9 @@
 [submodule "vim/bundle/zenroom"]
 	path = vim/bundle/zenroom
 	url = git@github.com:amix/vim-zenroom.git
+[submodule "bin/markdown2ctags"]
+	path = bin/markdown2ctags
+	url = git@github.com:jszakmeister/markdown2ctags.git
+[submodule "vim/bundle/targets.vim"]
+	path = vim/bundle/targets.vim
+	url = git://github.com/wellle/targets.vim.git

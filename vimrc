@@ -1,6 +1,7 @@
 "Run pathogen
 call pathogen#infect()
 
+set rtp+=/usr/share/vim/addons
 set rtp+=/usr/local/go/misc/vim
 syntax on
 
@@ -93,6 +94,24 @@ imap <left> <nop>
 imap <up> <nop>
 imap <down> <nop>
 
+" also map ^c-arrow to something useful instead of deleting parts of the text
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+nmap <silent> <C-Right> <c-w>l
+nmap <silent> <C-Left> <c-w>h
+nmap <silent> <C-Up> <c-w>k
+nmap <silent> <C-Down> <c-w>j
+imap <C-w> <C-o><C-w>
+imap <silent> <C-Right> <c-w>l
+imap <silent> <C-Left> <c-w>h
+imap <silent> <C-Up> <c-w>k
+imap <silent> <C-Down> <c-w>j
+
 " More intuitive motions through wrapped lines
 " http://vim.wikia.com/wiki/Move_cursor_by_display_lines_when_wrapping
 set linebreak
@@ -121,9 +140,24 @@ imap <F1> <Esc>
 let g:tagbar_ctags_bin = '/usr/bin/ctags'
 
 " golint for golang
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+set rtp+=$HOME/projects/golang/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
+" tagbar settings for markdown using markdown2ctags
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : '~/config/bin/markdown2ctags/markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
 
 " ctype settings for golang:
 " https://github.com/jstemmer/gotags
