@@ -18,8 +18,9 @@ local M = awful.util.table.join(
     awful.key({ }, "XF86AudioMicMute",
         function () awful.util.spawn("amixer -D default sset Capture toggle", false) end
     ),
-    -- move current client to another screen
-    awful.key({modkey}, "o", awful.client.movetoscreen) 
+    
+    -- multi-display keys
+    awful.key({modkey}, "o", awful.client.movetoscreen)
 )
 
 return M

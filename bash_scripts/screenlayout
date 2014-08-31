@@ -1,0 +1,19 @@
+export SCREENLAYOUTSPATH=$HOME/.screenlayouts
+
+function screenlayout { 
+    layout=$1
+    script=$SCREENLAYOUTSPATH/${layout}.sh
+    if [ -x "$script" ]; then
+        echo "Setting layout to: ${layout}"
+        eval ${script}
+    else
+        echo "Could not find definition for layout: ${layout}"
+    fi
+}
+
+_screenlayout()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$( ls $SCREENLAYOUTSPATH)" -- $cur | sed 's/.sh//') )
+}
+complete -F _screenlayout screenlayout
