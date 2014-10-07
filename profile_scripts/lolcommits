@@ -1,2 +1,3 @@
 export LOLCOMMITS_ANIMATE=3
 export LOLCOMMITS_FORK=true
+export LOLCOMMITS_STEALTH=true

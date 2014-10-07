@@ -58,3 +58,6 @@
 [submodule "vim/bundle/targets.vim"]
 	path = vim/bundle/targets.vim
 	url = git://github.com/wellle/targets.vim.git
+[submodule "vim/bundle/Dockerfile.vim"]
+	path = vim/bundle/Dockerfile.vim
+	url = git@github.com:ekalinin/Dockerfile.vim.git
