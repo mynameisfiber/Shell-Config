@@ -140,8 +140,8 @@ imap <F1> <Esc>
 let g:tagbar_ctags_bin = '/usr/bin/ctags'
 
 " golint for golang
-set rtp+=$HOME/projects/golang/src/github.com/golang/lint/misc/vim
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+"set rtp+=$HOME/projects/golang/src/github.com/golang/lint/misc/vim
+"autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 " tagbar settings for markdown using markdown2ctags
 let g:tagbar_type_markdown = {
