@@ -8,7 +8,6 @@ if [[ $DESKTOP_SESSION == "gnome" ]]
 if [[ "`uname`" == "Darwin" ]]
   then
     alias vim="mvim -v"
-    alias ls='ls -G'
     
     # asciidoc crap
     export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
