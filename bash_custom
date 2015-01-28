@@ -24,3 +24,4 @@ do
     fi
 done
 
+source ~/.profile_custom
