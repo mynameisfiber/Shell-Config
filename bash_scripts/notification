@@ -1,0 +1,10 @@
+function notification() {
+    dbus-send \
+        --dest=org.freedesktop.Notifications \
+            /org/freedesktop/Notifications  \
+            org.freedesktop.Notifications.Notify \
+            string:"" uint32:0 \
+            string:"" string:"$1" \
+            string:"$2" array:string:"" \
+            array:string:"" int32:-1;
+}

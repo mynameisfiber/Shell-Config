@@ -11,6 +11,9 @@ set backspace=2
 " New leader
 let mapleader=","
 
+" Screw Ex-mode
+nnoremap Q <nop>
+
 " Yank, comment, paste.
 nmap <leader>y yy,c<space>p
 vmap <leader>y yygv,c<space>p
