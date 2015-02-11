@@ -228,6 +228,11 @@ endfunction
 
 "Make asciidoc easier to work with
 autocmd FileType asciidoc :set tw=80
+autocmd FileType asciidoc :set spell
+"
+"Make markdown easier to work with
+autocmd FileType markdown :set tw=80
+autocmd FileType markdown :set spell
 
 "In normal mode, press Space to toggle the current fold open/closed. However, if
 "the cursor is not in a fold, move to the right (the default behavior). In

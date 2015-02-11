@@ -1,1 +1,1 @@
-/Users/micha/config/vim
+/home/micha/config/vim

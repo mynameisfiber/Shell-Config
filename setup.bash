@@ -68,6 +68,10 @@ ln -sf $CONFIGPATH/awesome ~/.config/awesome
 echo "Installing required python packages"
 pip install -r requirements.txt
 
+echo "Configuring git"
+mv ~/.gitconfig ~/.gitconfig.bak
+cat $CONFIGPATH/gitconfig | sed s:{{CONFIGPATH}}:$CONFIGPATH:g > ~/.gitconfig
+
 echo "Installing VIM plugins"
 git submodule update --init
 

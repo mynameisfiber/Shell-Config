@@ -1,0 +1,4 @@
+    ### lolcommits hook (begin) ###
+    export PATH="/usr/bin/ruby:$PATH"
+lolcommits --capture
+    ###  lolcommits hook (end)  ###

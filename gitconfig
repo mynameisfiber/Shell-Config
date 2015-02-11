@@ -1,0 +1,7 @@
+[user]
+    name = Micha Gorelick
+    email = mynameisfiber@gmail.com
+[push]
+	default = simple
+[init]
+	templatedir = {{CONFIGPATH}}/git_template
