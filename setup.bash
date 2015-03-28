@@ -73,7 +73,7 @@ mv ~/.gitconfig ~/.gitconfig.bak
 cat $CONFIGPATH/gitconfig | sed s:{{CONFIGPATH}}:$CONFIGPATH:g > ~/.gitconfig
 
 echo "Installing VIM plugins"
-git submodule update --init
+git submodule update --init --recursive
 
 echo "Upgrading VIM plugins (this may be redundant)"
-git submodule foreach git pull origin master
+git submodule foreach --recursive git pull origin master

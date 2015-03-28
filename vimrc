@@ -14,13 +14,26 @@ let mapleader=","
 " Screw Ex-mode
 nnoremap Q <nop>
 
+" vim-expand-region remaping
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
 " Yank, comment, paste.
-nmap <leader>y yy,c<space>p
-vmap <leader>y yygv,c<space>p
+nmap <leader>Y yy,c<space>p
+vmap <leader>Y yygv,c<space>p
 
 " Various copy/paste niceties (assumes pbcopy/pbpaste is installed or is aliased)
-vmap <leader>y "+y
-nmap <leader>p "+p
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+" General remapings
+nnoremap <Leader>w :w<CR>
+nmap <Leader><Leader> V
+map q: :q
 
 " OSX clipboard support with * and + buffer
 set clipboard=unnamed

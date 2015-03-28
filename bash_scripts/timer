@@ -1,0 +1,39 @@
+export TIMERPATH=$HOME/.timer
+
+function timer_start() {
+    mkdir -p "$TIMERPATH";
+    if [[ -e "$TIMERPATH/$1" ]]; then
+        echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" > $TIMERPATH/_HISTORY
+    fi;
+    date +%s > $TIMERPATH/$1
+}
+
+function timer_stop() {
+    echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" > $TIMERPATH/_HISTORY
+    rm -i $TIMERPATH/$1
+}
+
+function timer() {
+    target=$1
+    if [[ -z "$target" ]]; then
+        target=$( ls $TIMERPATH | grep -v "_HISTORY" )
+    fi
+    for t in $target; do
+        python <<EOF
+from datetime import datetime
+t = int(open("$TIMERPATH/$t").read().strip())
+print "$t:", str(datetime.now() - datetime.fromtimestamp(t))
+EOF
+    done
+}
+
+timer
+
+_timer()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$( ls $TIMERPATH | grep -v "_HISTORY"; cat $TIMERPATH/_HISTORY | cut -f1 )" -- $cur) )
+}
+complete -F _timer timer_start
+complete -F _timer timer_stop
+complete -F _timer timer
