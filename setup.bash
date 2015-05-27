@@ -77,3 +77,9 @@ git submodule update --init --recursive
 
 echo "Upgrading VIM plugins (this may be redundant)"
 git submodule foreach --recursive git pull origin master
+
+echo "Installing LOLssh"
+pushd lolssh
+python setup.py install --user
+bash ./install
+popd

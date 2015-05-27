@@ -64,3 +64,6 @@
 [submodule "vim/bundle/vim-expand-region"]
 	path = vim/bundle/vim-expand-region
 	url = git@github.com:terryma/vim-expand-region.git
+[submodule "lolssh"]
+	path = lolssh
+	url = git@github.com:mynameisfiber/lolssh.git

@@ -264,10 +264,16 @@ globalkeys = awful.util.table.join(globalkeys,
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({modkey}, "s",    
+        function(c)
+            c.sticky = not c.sticky
+        end),
     awful.key({modkey, "Control"}, "space",    
         function(c)
             awful.client.floating.toggle()
             c.ontop = not c.ontop
+            c.sticky = not c.sticky
+            c.skip_taskbar = not c.skip_taskbar
         end),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),

@@ -1,15 +1,19 @@
 export TIMERPATH=$HOME/.timer
 
+if [ ! -d "$TIMERPATH" ] ; then
+    mkdir $TIMERPATH
+fi
+
 function timer_start() {
     mkdir -p "$TIMERPATH";
     if [[ -e "$TIMERPATH/$1" ]]; then
-        echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" > $TIMERPATH/_HISTORY
+        echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" >> $TIMERPATH/_HISTORY
     fi;
     date +%s > $TIMERPATH/$1
 }
 
 function timer_stop() {
-    echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" > $TIMERPATH/_HISTORY
+    echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" >> $TIMERPATH/_HISTORY
     rm -i $TIMERPATH/$1
 }
 
