@@ -66,7 +66,7 @@ mv ~/.config/awesome ~/.config/awesome.bak
 ln -sf $CONFIGPATH/awesome ~/.config/awesome
 
 echo "Installing required python packages"
-pip install -r requirements.txt
+pip install -r requirements.txt --user
 
 echo "Configuring git"
 mv ~/.gitconfig ~/.gitconfig.bak
