@@ -20,7 +20,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 " Yank, comment, paste.
 nmap <leader>Y yy,c<space>p
-vmap <leader>Y yygv,c<space>p
+vmap <leader>Y ygv,c<space>P
 
 " Various copy/paste niceties (assumes pbcopy/pbpaste is installed or is aliased)
 vmap <Leader>y "+y
@@ -63,8 +63,25 @@ set number
 set relativenumber
 highlight LineNr ctermbg=darkgrey
 
-"Set reasonable colors for pyflakes highlighting
+"Set reasonable colors for spellcheck highlighting
 hi SpellBad cterm=underline ctermbg=0
+
+"syntastic 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
+let g:syntastic_enable_highlighting=1
+
+function! ToggleErrors()
+    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+         " No location/quickfix list shown, open syntastic error location panel
+         Errors
+    else
+        lclose
+    endif
+endfunction
+nnoremap <silent> <C-e> :<C-u>call ToggleErrors()<CR>
 
 " Enable filetype support for awesome plugin goodness
 filetype on
