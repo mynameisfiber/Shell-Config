@@ -18,6 +18,18 @@ local M = awful.util.table.join(
     awful.key({ }, "XF86AudioMicMute",
         function () awful.util.spawn("amixer -D default sset Capture toggle", false) end
     ),
+    awful.key({"Mod1"}, "z",
+        function () awful.util.spawn("playerctl previous", false) end
+    ),
+    awful.key({"Mod1"}, "x",
+        function () awful.util.spawn("playerctl stop", false) end
+    ),
+    awful.key({"Mod1"}, "c",
+        function () awful.util.spawn("playerctl play-pause", false) end
+    ),
+    awful.key({"Mod1"}, "v",
+        function () awful.util.spawn("playerctl next", false) end
+    ),
 
     -- multi-display keys
     awful.key({modkey}, "o", awful.client.movetoscreen)

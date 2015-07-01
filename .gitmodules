@@ -40,9 +40,6 @@
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
-[submodule "vim/bundle/CoVim"]
-	path = vim/bundle/CoVim
-	url = https://github.com/FredKSchott/CoVim.git
 [submodule "vim/bundle/dart"]
 	path = vim/bundle/dart
 	url = git@github.com:dart-lang/dart-vim-plugin.git
