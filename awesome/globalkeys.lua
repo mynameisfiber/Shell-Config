@@ -1,16 +1,22 @@
+function change_volume(how)
+    os.execute(
+        '~/config/awesome/change_volume.sh "' .. how .. '"'
+    )
+end
+
 local M = awful.util.table.join(
     -- Audio keys
     awful.key({ }, "XF86AudioRaiseVolume",
-        function () awful.util.spawn("pactl -- set-sink-volume 1 +5%", false) end
+        function () change_volume("+5%") end
     ),
     awful.key({ }, "XF86AudioLowerVolume",
-        function () awful.util.spawn("pactl -- set-sink-volume 1 -5%", false) end
+        function () change_volume("-5%") end
     ),
     awful.key({"Shift"}, "XF86AudioRaiseVolume",
-        function () awful.util.spawn("pactl -- set-sink-volume 1 +1%", false) end
+        function () change_volume("+1%") end
     ),
     awful.key({"Shift"}, "XF86AudioLowerVolume",
-        function () awful.util.spawn("pactl -- set-sink-volume 1 -1%", false) end
+        function () change_volume("-1%") end
     ),
     awful.key({ }, "XF86AudioMute",
         function () awful.util.spawn("amixer -D default sset Master toggle", false) end
