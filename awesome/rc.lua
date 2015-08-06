@@ -274,6 +274,7 @@ clientkeys = awful.util.table.join(
             c.ontop = not c.ontop
             c.sticky = not c.sticky
             c.skip_taskbar = not c.skip_taskbar
+            client.focus.filter(c)
         end),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),

@@ -259,7 +259,20 @@ endfunction
 "Make asciidoc easier to work with
 autocmd FileType asciidoc :set tw=80
 autocmd FileType asciidoc :set spell
-"
+let g:tagbar_type_asciidoc = {
+    \ 'ctagstype' : 'asciidoc',
+    \ 'kinds' : [
+        \ 'h:table of contents',
+        \ 'a:anchors:1',
+        \ 't:titles:1',
+        \ 'n:includes:1',
+        \ 'i:images:1',
+        \ 'I:inline images:1'
+    \ ],
+    \ 'sort' : 0
+\ }
+
+
 "Make markdown easier to work with
 autocmd FileType markdown :set tw=80
 autocmd FileType markdown :set spell

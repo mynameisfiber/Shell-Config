@@ -53,6 +53,10 @@ echo "Configuring AsciiDoc"
 mv ~/.asciidoc ~/.asciidoc.bak
 ln -sf $CONFIGPATH/asciidoc ~/.asciidoc
 
+echo "Configuring ctags"
+mv ~/.ctags ~/.ctags.bak
+ln -sf $CONFIGPATH/ctags ~/.ctags
+
 echo "Configuring screen layouts"
 mv ~/.screenlayouts ~/.screenlayouts.bak
 ln -sf $CONFIGPATH/screenlayouts ~/.screenlayouts
