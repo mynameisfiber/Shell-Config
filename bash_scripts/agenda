@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function agenda() {
+    if [[ -e ~/tmp/agenda.txt ]]; then
+        echo -e "\e[1;31m`date`\e[0m";
+        cat ~/tmp/agenda.txt;
+    fi;
+}
+agenda

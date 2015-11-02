@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ "$1" == "up" ]]; then
+    move="Left";
+elif [[ "$1" == "down" ]]; then
+    move="Right";
+else
+    echo "Invalid move (must be 'up' or 'down'): $1"
+    exit
+fi
+
+for i in $( seq 3 ); do 
+    dbus-send --print-reply --dest=org.Cinnamon /org/Cinnamon org.Cinnamon.switchWorkspace${move}; 
+done;

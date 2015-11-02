@@ -1,0 +1,4 @@
+random_string()
+{
+    cat /dev/urandom | tr -dc ${2:-"a-zA-Z0-9"} | head -c ${1:-32}
+}
