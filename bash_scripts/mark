@@ -1,20 +1,29 @@
 export MARKPATH=$HOME/.marks
 function jump { 
-    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+    local path=$( echo $* | sed 's/ /\//g' )
+    cd -P "$MARKPATH/$path" 2>/dev/null || echo "No such mark: $path"
 }
 function mark { 
-    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+    local path=$( echo $* | sed 's/ /\//g' )
+    local length=$(($#-1))
+    local parentPath=$( echo ${@:1:$length} | sed 's/ /\//g' )
+    mkdir -p "$MARKPATH/$parentPath"; ln -s "$(pwd)" "$MARKPATH/$path"
 }
 function unmark { 
-    rm -i "$MARKPATH/$1 "
+    local path=$( echo $* | sed 's/ /\//g' )
+    rm -i "$MARKPATH/$path"
+    find "$MARKPATH" -type d -empty -delete
 }
 function marks {
-    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- && echo
+    tree --noreport "$MARKPATH"
 }
 
 _jump()
 {
-    local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $(compgen -W "$( ls $MARKPATH )" -- $cur) )
+    local cur=${COMP_WORDS[$COMP_CWORD]}
+    local length=$(($COMP_CWORD-1))
+    local parentPath=$( echo ${COMP_WORDS[*]:1:$length} | sed 's/ /\//g' )
+    COMPREPLY=( $(compgen -W "$( ls $MARKPATH/$parentPath )" -- $cur) )
 }
 complete -F _jump jump
+complete -F _jump unmark
