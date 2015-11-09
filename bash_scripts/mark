@@ -15,7 +15,7 @@ function unmark {
     find "$MARKPATH" -type d -empty -delete
 }
 function marks {
-    tree --noreport "$MARKPATH"
+    tree --noreport "$MARKPATH" | tail -n +2
 }
 
 _jump()
