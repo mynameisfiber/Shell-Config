@@ -1,5 +1,7 @@
 "Run pathogen
-call pathogen#infect()
+" For some reason this makes your spaces tabs and no amount of
+" expandtab can do anything about it!
+"call pathogen#infect()
 
 set rtp+=/usr/local/go/misc/vim
 syntax on
@@ -47,9 +49,12 @@ highlight Normal ctermbg=none
 hi SpellBad cterm=underline ctermbg=0
 
 " Enable filetype support for awesome plugin goodness
-filetype on
-filetype plugin on
-filetype plugin indent on
+" DONT ENABLE.  for some reason this makes your spaces tabs and no amount of
+" expandtab can do anything about it!
+"filetype on
+"filetype plugin on
+"filetype plugin indent on
+
 
 " bash-like file completion
 set wildmode=longest,list
