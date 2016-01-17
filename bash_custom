@@ -35,4 +35,32 @@ do
     source "$script"
 done
 
+# Same function that's in bash_github but doesn't include parentheses
+gitbranch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+function growl {
+    # If there's no parameter, display "Boom!"
+    if [ -z "$1" ]; then
+        text="Boom!"
+    else
+        text="$1"
+    fi
+    if [ -z "$2" ]; then
+        title="Your task finished"
+    else
+        title="$2"
+    fi
+    osascript -e 'display notification "'"$text"'" with title "'"$title"'"'
+}
 
+function cdl {
+    # If there's no parameter, cd/ls
+    if [ -z "$1" ]; then
+        cd; ls;
+    else
+        cd $1; ls;
+    fi
+}
+
+alias git_branches_by_date="git for-each-ref --sort=-committerdate refs/heads/"

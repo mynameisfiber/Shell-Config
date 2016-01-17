@@ -103,10 +103,10 @@ map GT gT
 "map <Space> to add a space to the right of the cursor
 nmap <leader><Space> a<Space><Esc>
 
-"map <Space><Space> to add a new line below the cursor 
+"map <Space><Space> to add a new line below the cursor
 nmap <leader><CR> o<Esc>
 
-"map ,nohl to add a new line below the cursor 
+"map ,nohl remove highlights
 nmap <leader>nohl :nohl<CR>
 
 " unmap arrow keys
@@ -265,16 +265,60 @@ endif
 
 fun! GrepWord()
     let s:term = expand('<cword>')
-    :exe ":!grep -r " . s:term . " *"
+    :exe ":!grep --color=always -r " . s:term . " *"
+endfun
+
+fun! SearchGit()
+    let s:term = expand('<cword>')
+    :exe ":!git grep " . s:term . ""
 endfun
 
 fun! GrepWordPipeOut()
     let s:term = expand('<cword>')
-    :exe ":!grep -r " . s:term . " * > out"
+    :exe ":!grep --color=always -r " . s:term . " * > out"
+endfun
+
+fun! GitGrepWordPipeOut()
+    let s:term = expand('<cword>')
+    :exe ":!git grep -i " . s:term . " > out"
 endfun
 
 map sear :call GrepWord()<CR>
 map fsear :call GrepWordPipeOut()<CR>
+map fgsear :call GitGrepWordPipeOut()<CR>
+map sg :call SearchGit()<CR>
 
 " format json
 command JSON :%!python -m json.tool
+
+" convert page of 
+" [filename]: [line of code]
+" to
+" [filename]
+fun! ListFiles()
+    " remove everything after the colon
+    :%s/:.*$//g
+    " remove duplicates
+    :sort u
+endfun
+command Listfiles :call ListFiles()
+
+
+" Run a given vim command on the results of fuzzy selecting from a given shell
+" command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+    try
+        let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+    catch /Vim:Interrupt/
+        " Swallow the ^C so that the redraw below happens; otherwise there will be
+        " leftovers from selecta on the screen
+        redraw!
+        return
+    endtry
+    redraw!
+    exec a:vim_command . " " . selection
+endfunction
+
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
