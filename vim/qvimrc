@@ -1,0 +1,6 @@
+set nocompatible
+syntax enable
+colorscheme jc
+
+source $HOME/.vim/vimrcs/settings.vimrc
+source $HOME/.vim/vimrcs/commands.vimrc
