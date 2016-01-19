@@ -12,9 +12,8 @@ function project() {
     if screen -ls | grep -P "[0-9]*\.${name}\t" &> /dev/null; then
         screen -r $name
     else
-        screen -d -m -S $name
-        screen -S $name -p 0 -X exec vim
-        screen -S $name -X screen
-        screen -r $name -p 2
+        screen -AdmS $name -t vim vim
+        screen -S $name -X screen -t cmd
+        screen -r $name
     fi
 }
