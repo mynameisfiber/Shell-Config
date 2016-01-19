@@ -1,1 +1,1 @@
-.vim
+/home/micha/config/vim
