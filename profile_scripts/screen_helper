@@ -5,15 +5,23 @@ function scd() {
 
 function project() {
     if [[ "$1" == "" ]]; then
-        name=$( pwd | xargs basename )
+        local name=$( pwd | xargs basename )
     else
-        name=$1
+        local name=$1
     fi
     if screen -ls | grep -P "[0-9]*\.${name}\t" &> /dev/null; then
-        screen -r $name
+        screen -d -r $name
     else
         screen -AdmS $name -t vim vim
         screen -S $name -X screen -t cmd
         screen -r $name
     fi
 }
+
+function _project() {
+    local cur=${COMP_WORDS[$COMP_CWORD]}
+    local sessions=$( screen -ls | grep -Po  "[0-9]+\.([^\t]+)" | cut -d. -f2- )
+    COMPREPLY=( $(compgen -W "$sessions" -- $cur) )
+}
+
+complete -F _project project
