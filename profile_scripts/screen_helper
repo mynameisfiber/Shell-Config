@@ -13,7 +13,7 @@ function project() {
         screen -d -r $name
     else
         screen -AdmS $name -t vim vim
-        screen -S $name -X screen -t cmd
+        screen -S $name -X screen -t tab
         screen -r $name
     fi
 }

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if /bin/lsmod | /bin/grep psmouse 
+    then
+        gksudo --message "Disabling Mouse" \
+            "/sbin/modprobe -r psmouse"
+    else
+        gksudo --message "Enabling Mouse" \
+            "/sbin/modprobe psmouse"
+fi
+

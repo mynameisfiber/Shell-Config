@@ -3,6 +3,6 @@ hardstatus string '%{= kG}[ %{G}%H %{g}][ %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?
 defscrollback 1000
 startup_message off
 escape ^Jj
-bindkey -d ^? stuff ^H
-bindkey -d ^@ stuff ^H
+#bindkey -d ^? stuff ^H
+#bindkey -d ^@ stuff ^H
 shelltitle "tab"
