@@ -25,9 +25,6 @@
 [submodule "vim/bundle/solarized"]
 	path = vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = https://github.com/wincent/Command-T.git
 [submodule "vim/bundle/vim-markdown"]
 	path = vim/bundle/vim-markdown
 	url = https://github.com/hallison/vim-markdown.git
@@ -64,3 +61,21 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git@github.com:scrooloose/syntastic.git
+[submodule "vim/bundle/ctrlpvim"]
+	path = vim/bundle/ctrlpvim
+	url = git@github.com:ctrlpvim/ctrlp.vim.git
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
+[submodule "vim/bundle/vim-airline-themes"]
+	path = vim/bundle/vim-airline-themes
+	url = git@github.com:vim-airline/vim-airline-themes.git
+[submodule "vim/bundle/vim-bufferline"]
+	path = vim/bundle/vim-bufferline
+	url = git@github.com:bling/vim-bufferline.git
+[submodule "vim/bundle/tabline"]
+	path = vim/bundle/tabline
+	url = git@github.com:mkitt/tabline.vim.git
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
+	url = git@github.com:airblade/vim-gitgutter.git

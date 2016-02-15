@@ -30,6 +30,11 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+" buffer movements
+nmap bT :bprevious<cr>
+nmap bt :bnext<cr>
+nmap <leader>b :ls<cr>:buffer<space>
+
 " General remapings
 nnoremap <Leader>w :w<CR>
 nmap <Leader><Leader> V
@@ -46,14 +51,19 @@ nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; redcarpet --parse-no_intra_emp
 :set statusline=%t\ %y%r%{fugitive#statusline()}\ [%c,%l]
 
 "only explicitly add some gui options
-set guioptions=aem
+"set guioptions=aem
 
 " Colors!
 syntax enable
 set background=dark
 colorscheme solarized
 " Solarized background strangeness fix
-highlight Normal ctermbg=none
+highlight Normal ctermbg=None
+highlight LineNr ctermfg=grey ctermbg=None
+
+" gitgutter
+let g:gitgutter_override_sign_column_highlight = 0
+highlight SignColumn ctermbg=None
 
 "Set linenumber stuff
 set numberwidth=5
@@ -61,7 +71,6 @@ set numberwidth=5
 "current line having the absolute line number
 set number
 set relativenumber
-highlight LineNr ctermbg=darkgrey
 
 "Set reasonable colors for spellcheck highlighting
 hi SpellBad cterm=underline ctermbg=0
@@ -226,7 +235,7 @@ let g:tagbar_type_go = {
 " Open NERDTree with F3
 map <F3> :NERDTreeToggle<CR>
 " Filter out annoying files in nerdtree
-let NERDTreeIgnore = ['\.pyc$', '\.sw[op]$']
+let NERDTreeIgnore = ['\.pyc$', '\.sw[op]$', '__pycache__']
 
 " Open GunDo with F5
 map <F5> :GundoToggle<CR>
@@ -289,51 +298,40 @@ autocmd FileType markdown :set spell
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-"Tabline
-if exists("+guioptions") 
-     set go-=e 
-endif 
-if exists("+showtabline") 
-     function MyTabLine() 
-         let s = '' 
-         let t = tabpagenr() 
-         let i = 1 
-         while i <= tabpagenr('$') 
-             let buflist = tabpagebuflist(i) 
-             let winnr = tabpagewinnr(i) 
-             let s .= ' %' . i . 'T' 
-             let s .= (i == t ? '%1*[' : '%2*%#TabLineFill#(') 
-             let s .= i  
+" air-line
+let g:airline_powerline_fonts = 1
+"let g:airline_theme = 'hybrid'
 
-             let modified = 0
-             for curbuf in buflist
-               let modified += getbufvar(curbuf, "&modified")
-             endfor
-             if modified > 0
-               let s .= '*'
-             else
-               let s .= '-'
-             endif
+" Tabline enhancements
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 
-             let s .= '%*' 
-             let s .= (i == t ? '%#TabLineSel#' : '') 
-             let file = bufname(buflist[winnr - 1]) 
-             let file = fnamemodify(file, ':p:.:t') 
-             if file == '' 
-                 let file = '[No Name]' 
-             endif 
-             let s .= file 
-             if tabpagewinnr(i,'$') > 1
-               let s .= '/' . tabpagewinnr(i,'$')
-             endif
-             let s .= (i == t ? '%#TabLineFill#]' : ')') 
-             let s .= ' '
-             let i = i + 1 
-         endwhile 
-         let s .= '%T%#TabLineFill#%=' 
-         let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X') 
-         return s 
-     endfunction 
-     set stal=2 
-     set tabline=%!MyTabLine() 
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
 endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
