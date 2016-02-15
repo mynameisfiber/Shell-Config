@@ -300,7 +300,10 @@ vnoremap <Space> zf
 
 " air-line
 let g:airline_powerline_fonts = 1
-"let g:airline_theme = 'hybrid'
+let g:airline_theme = 'solarized'
+
+" without this we get info in both bufferline and commandline
+let g:bufferline_echo = 0
 
 " Tabline enhancements
 let g:airline#extensions#tabline#enabled = 1
