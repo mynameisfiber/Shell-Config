@@ -75,7 +75,7 @@ set relativenumber
 "Set reasonable colors for spellcheck highlighting
 hi SpellBad cterm=underline ctermbg=0
 
-"syntastic 
+"syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
@@ -297,6 +297,9 @@ autocmd FileType markdown :set spell
 " http://vim.wikia.com/wiki/Folding
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
+
+" change ctrlp to be invoked like command-t
+let g:ctrlp_map = '<leader>t'
 
 " air-line
 let g:airline_powerline_fonts = 1
