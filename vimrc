@@ -1,7 +1,5 @@
 "Run pathogen
-" For some reason this makes your spaces tabs and no amount of
-" expandtab can do anything about it!
-"call pathogen#infect()
+call pathogen#infect()
 
 set rtp+=/usr/local/go/misc/vim
 syntax on
@@ -20,6 +18,7 @@ vmap <leader>y yygv,c<space>p
 vmap <leader>c ! pbcopy<CR>:undo<CR>
 nmap <leader>v :set paste<CR>! pbpaste<CR>:set nopaste<CR>
 
+
 " Markdown preview
 nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; maruku --html -o $f %; open $f<CR>
 
@@ -27,9 +26,11 @@ nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; maruku --html -o $f %; open $f
 :set laststatus=2
 :set statusline=%t\ %y%r\ [%l,%c]\ %P
 
+
 " Get rid of the topbar on gui mode
 "set guioptions-=T
 set guioptions-=T
+
 
 " Colors!
 syntax enable
@@ -37,6 +38,7 @@ set background=dark
 "colorscheme solarized
 " Solarized background strangeness fix
 highlight Normal ctermbg=none
+
 
 "Set linenumber stuff
 "set numberwidth=5
@@ -49,11 +51,9 @@ highlight Normal ctermbg=none
 hi SpellBad cterm=underline ctermbg=0
 
 " Enable filetype support for awesome plugin goodness
-" DONT ENABLE.  for some reason this makes your spaces tabs and no amount of
-" expandtab can do anything about it!
-"filetype on
-"filetype plugin on
-"filetype plugin indent on
+filetype on
+filetype plugin on
+filetype plugin indent on
 
 
 " bash-like file completion
@@ -73,6 +73,7 @@ set tabstop=4
 set smarttab
 set smartindent
 set autoindent
+
 
 "Search config
 set ignorecase
@@ -138,6 +139,7 @@ map <C-F12> :!ctags -R --sort=yes --c++-kinds=+lp --fields=+iaS --extra=+q .<CR>
 "Reload all buffers with F4
 nmap <F4> :bufdo e!<CR>
 
+
 " Opens tagbar with F2
 map <F2> :TagbarToggle<CR>
 
@@ -174,6 +176,7 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+
 " Open NERDTree with F3
 map <F3> :NERDTreeToggle<CR>
 " Filter out annoying files in nerdtree
@@ -201,6 +204,7 @@ map <C-h> 5<C-w><
 :nmap <C-S-t> :tabnew<CR>
 :imap <C-S-t> <Esc>:tabnew<CR>
 
+
 "Fold on preprocessor definitions
 autocmd FileType [ch] call FoldPreprocessor()
 function! FoldPreprocessor()
@@ -218,6 +222,7 @@ autocmd FileType asciidoc :set tw=80
 " http://vim.wikia.com/wiki/Folding
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
+
 
 "Tabline
 if exists("+guioptions") 
@@ -267,6 +272,7 @@ if exists("+showtabline")
      set stal=2 
      set tabline=%!MyTabLine() 
 endif
+
 
 fun! GrepWord()
     let s:term = expand('<cword>')
@@ -324,10 +330,11 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
     exec a:vim_command . " " . selection
 endfunction
 
+
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
 
 if filereadable("/Users/expensisaurus/.vim/php_vimrc.vim")
-    so /Users/expensisaurus/.vim/php_vimrc.vim
+    "so /Users/expensisaurus/.vim/php_vimrc.vim
 endif
