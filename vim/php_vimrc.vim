@@ -296,9 +296,9 @@ let g:NERDTreeMapHelp = "h"
 nnoremap <Leader>l :call LineNumberToggle()<cr>
 
 " PHPDoc commands
-inoremap <C-d> <ESC>:call PhpDocSingle()<CR>i
-nnoremap <C-d> :call PhpDocSingle()<CR>
-vnoremap <C-d> :call PhpDocRange()<CR>
+inoremap <C-i> <ESC>:call PhpDocSingle()<CR>i
+nnoremap <C-i> :call PhpDocSingle()<CR>
+vnoremap <C-i> :call PhpDocRange()<CR>
 
 " Tree of nerd
 nnoremap <Leader>n :NERDTreeToggle<CR>
