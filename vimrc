@@ -118,15 +118,8 @@ nmap <leader>nohl :nohl<CR> :SearchReset<CR>
 "map ,/ to do fancy search (MultipleSearch.vim)
 nmap <leader>/ :Search 
 
-" unmap arrow keys
-"nmap <right> <nop>
-"nmap <left> <nop>
-"nmap <up> <nop>
-"nmap <down> <nop>
-"imap <right> <nop>
-"imap <left> <nop>
-"imap <up> <nop>
-"imap <down> <nop>
+"map ,blame to :GBlame (fugitive)
+nmap <leader>b :Gblame<CR>
 
 " More intuitive motions through wrapped lines
 set linebreak
