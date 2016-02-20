@@ -339,5 +339,5 @@ endfunction
 nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
 
 if filereadable("/Users/expensisaurus/.vim/php_vimrc.vim")
-    "so /Users/expensisaurus/.vim/php_vimrc.vim
+    so /Users/expensisaurus/.vim/php_vimrc.vim
 endif

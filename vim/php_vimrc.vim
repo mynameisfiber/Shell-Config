@@ -186,49 +186,6 @@ function! LineNumberToggle()
   endif
 endfunc
 "}}}
-"{{{ Toggle the arrow keys
-
-let g:arrow_keys_enabled = 1
-noremap <Up> <nop>
-noremap <Down> <nop>
-noremap <Left> <nop>
-noremap <Right> <nop>
-
-function! ArrowKeysToggle()
-  if g:arrow_keys_enabled == 1
-    call DisableArrowKeys()
-    echo "Disabling arrow keys"
-    let g:arrow_keys_enabled = 0
-  else
-    call EnableArrowKeys()
-    echo "Enabling arrow keys"
-    let g:arrow_keys_enabled = 1
-  end
-endfunc
-
-function! EnableArrowKeys()
-  noremap <Up> k
-  inoremap <Up> <Up>
-  noremap <Down> j
-  inoremap <Down> <Down>
-  noremap <Left> h
-  inoremap <Left> <Left>
-  noremap <Right> l
-  inoremap <Right> <Right>
-endfunc
-
-function! DisableArrowKeys()
-  noremap <Up> <nop>
-  inoremap <Up> <nop>
-  noremap <Down> <nop>
-  inoremap <Down> <nop>
-  noremap <Left> <nop>
-  inoremap <Left> <nop>
-  noremap <Right> <nop>
-  inoremap <Right> <nop>
-endfunc
-"}}}
-"}}}
 
 "{{{ Commands
 " Common mistypings
@@ -241,9 +198,7 @@ command! W w
 command! -nargs=1 -complete=file E e <args>
 command! -bang -nargs=1 -complete=file E e<bang> <args>
 command! -nargs=1 -complete=tag Tag tag <args>
-" Save a file that requires sudoing even when
-" you opened it as a normal user.
-command! Sw w !sudo tee % > /dev/null
+
 " Show difference between modified buffer and original file
 command! DiffSaved call s:DiffWithSaved()
 "}}}
