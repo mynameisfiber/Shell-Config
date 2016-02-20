@@ -113,7 +113,10 @@ nmap <leader><Space> a<Space><Esc>
 nmap <leader><CR> o<Esc>
 
 "map ,nohl remove highlights
-nmap <leader>nohl :nohl<CR>
+nmap <leader>nohl :nohl<CR> :SearchReset<CR>
+
+"map ,/ to do fancy search (MultipleSearch.vim)
+nmap <leader>/ :Search 
 
 " unmap arrow keys
 "nmap <right> <nop>
