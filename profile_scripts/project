@@ -1,0 +1,20 @@
+function project() {
+    if [[ "$1" == "" ]]; then
+        local name=$( pwd | xargs basename )
+    else
+        local name=$1
+    fi
+    if tmux ls | cut -d: -f1 | grep "${name}" &> /dev/null; then
+        tmux a -t $name
+    else
+        tmux new -s ${name}
+    fi
+}
+
+function _project() {
+    local cur=${COMP_WORDS[$COMP_CWORD]}
+    local sessions=$( tmux ls | cut -d: -f1 )
+    COMPREPLY=( $(compgen -W "$sessions" -- $cur) )
+}
+
+complete -F _project project

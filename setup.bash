@@ -18,6 +18,10 @@ if [[ ! `grep ". ~/.profile_custom" ~/.profile` ]]; then
     echo -ne "if [ -f ~/.profile_custom ]; then\n  . ~/.profile_custom \nfi" >> ~/.profile
 fi
 
+echo "Configuring powerline"
+mkdir ~/.config/
+ln -sf $CONFIGPATH/powerline ~/.config/
+
 mv ~/.bash_custom ~/.bash_custom.bak
 ln -sf $CONFIGPATH/bash_custom ~/.bash_custom
 if [[ ! `grep ". ~/.bash_custom" ~/.bashrc` ]]; then
@@ -65,12 +69,16 @@ echo "Configuring SCREEN"
 mv ~/.screenrc ~/.screenrc.bak
 ln -sf $CONFIGPATH/screenrc ~/.screenrc
 
+echo "Configuring tmux"
+mv ~/.tmux.conf ~/.tmux.conf.bak
+ln -sf $CONFIGPATH/tmux.conf ~/.tmux.conf
+
 echo "Configuring awesome"
 mv ~/.config/awesome ~/.config/awesome.bak
 ln -sf $CONFIGPATH/awesome ~/.config/awesome
 
 echo "Installing required python packages"
-pip install -r requirements.txt --user
+pip3 install -r requirements.txt --user
 
 echo "Configuring git"
 mv ~/.gitconfig ~/.gitconfig.bak

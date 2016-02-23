@@ -1,3 +1,4 @@
 jedi
 pep8
 hg+https://bitbucket.org/logilab/pylint
+powerline

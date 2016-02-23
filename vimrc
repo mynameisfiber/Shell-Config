@@ -34,6 +34,7 @@ vmap <Leader>P "+P
 nmap bT :bprevious<cr>
 nmap bt :bnext<cr>
 nmap <leader>b :ls<cr>:buffer<space>
+nmap bv :vert sb<space>
 
 " General remapings
 nnoremap <Leader>w :w<CR>
@@ -45,10 +46,6 @@ set clipboard=unnamed
 
 " Markdown preview
 nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; redcarpet --parse-no_intra_emphasis --parse-fenced_code_blocks --parse-tables % > $f; open $f<CR>
-
-"status line
-:set laststatus=2
-:set statusline=%t\ %y%r%{fugitive#statusline()}\ [%c,%l]
 
 "only explicitly add some gui options
 "set guioptions=aem
@@ -237,6 +234,9 @@ map <F3> :NERDTreeToggle<CR>
 " Filter out annoying files in nerdtree
 let NERDTreeIgnore = ['\.pyc$', '\.sw[op]$', '__pycache__']
 
+" filter cache files everywhere
+set wildignore+=*__pycache__*,*.pyc
+
 " Open GunDo with F5
 map <F5> :GundoToggle<CR>
 
@@ -258,6 +258,23 @@ map <C-h> 5<C-w><
 :imap <C-tab> <Esc>:tabnext<CR>i
 :nmap <C-S-t> :tabnew<CR>
 :imap <C-S-t> <Esc>:tabnew<CR>
+
+noremap fj gt
+noremap jf gT
+nmap gt <nop>
+nmap gT <nop>
+
+"split creation
+" window
+nmap <leader>swh  :topleft  vnew<CR>
+nmap <leader>swl :botright vnew<CR>
+nmap <leader>swk    :topleft  new<CR>
+nmap <leader>swj  :botright new<CR>
+" buffer
+nmap <leader>sh   :leftabove  vnew<CR>
+nmap <leader>sl  :rightbelow vnew<CR>
+nmap <leader>sk     :leftabove  new<CR>
+nmap <leader>sj   :rightbelow new<CR>
 
 "Fold on preprocessor definitions
 autocmd FileType [ch] call FoldPreprocessor()
@@ -302,8 +319,9 @@ vnoremap <Space> zf
 let g:ctrlp_map = '<leader>t'
 
 " air-line
+set laststatus=2 " always open
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'dark'
 
 " without this we get info in both bufferline and commandline
 let g:bufferline_echo = 0
@@ -341,3 +359,13 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+" Close hidden buffers
+function DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+nmap bd :call DeleteHiddenBuffers()<cr>

@@ -1,0 +1,29 @@
+{
+	"segments": {
+		"right": [
+			{
+				"function": "powerline.segments.common.bat.battery",
+                "name" : "battery",
+                "args" : {
+                    "gamify" : true,
+				    "full_heart": "♥",
+				    "empty_heart": "♡",
+				    "online": "⚡︎",
+				    "offline": " ",
+                    "steps" : 5
+                }
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"name": "time",
+				"args": {
+					"format": "%H:%M",
+					"istime": true
+				}
+			},
+			{
+				"function": "powerline.segments.common.net.hostname"
+			}
+		]
+	}
+}
