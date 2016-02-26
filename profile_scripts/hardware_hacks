@@ -1,0 +1,5 @@
+PRODUCT_VERSION=$( cat /sys/devices/virtual/dmi/id/product_version )
+
+if [ "$PRODUCT_VERSION" == "ThinkPad X240" ]; then
+    xmodmap -e "keycode 118 = End"
+fi

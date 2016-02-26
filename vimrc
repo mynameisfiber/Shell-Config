@@ -11,6 +11,9 @@ set backspace=2
 " New leader
 let mapleader=","
 
+" speedup the delay for mappings
+set timeout timeoutlen=100
+
 " Screw Ex-mode
 nnoremap Q <nop>
 
@@ -100,6 +103,9 @@ set wildmode=longest,list
 
 "Allow moving to the end of the line in visual block mode
 set virtualedit+=block
+
+" q to get out of visual mode
+vmap q <Esc>
 
 "Highlight search results
 set hlsearch
