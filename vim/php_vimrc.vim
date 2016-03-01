@@ -1,4 +1,4 @@
-" Copied from ~/Source/myvim/vimrc
+" Copied from ~/Source/myvim/vimrc - http://blog.joncairns.com/2012/05/using-vim-as-a-php-ide/
 " Vundle init
 set rtp+=~/.vim/bundle/vundle/
 
@@ -270,7 +270,7 @@ nnoremap <leader>z :%s/\s\+$//<cr>:let @/=''<CR>
 let g:ctrlp_working_path_mode = 'ra'
 
 " Tab completion - local
-let g:SuperTabDefaultCompletionType = "<c-x><c-p>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " Vdebug options
 let g:vdebug_options = {"on_close":"detach"}
