@@ -12,7 +12,7 @@ set backspace=2
 let mapleader=","
 
 " speedup the delay for mappings
-set timeout timeoutlen=100
+"set timeout timeoutlen=100
 
 " Screw Ex-mode
 nnoremap Q <nop>
@@ -266,7 +266,7 @@ map <C-h> 5<C-w><
 :imap <C-S-t> <Esc>:tabnew<CR>
 
 noremap fj gt
-noremap jf gT
+noremap fJ gT
 nmap gt <nop>
 nmap gT <nop>
 
