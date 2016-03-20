@@ -1,6 +1,6 @@
 function project() {
     if [[ "$1" == "" ]]; then
-        local name=$( pwd | xargs basename )
+        local name=$( pwd | xargs basename | tr -d . )
     else
         local name=$1
     fi

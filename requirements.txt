@@ -2,3 +2,4 @@ jedi
 pep8
 hg+https://bitbucket.org/logilab/pylint
 git+https://github.com/powerline/powerline.git
+proselint

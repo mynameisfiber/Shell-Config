@@ -79,3 +79,6 @@
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
+[submodule "proselint"]
+	path = proselint
+	url = https://github.com/amperser/proselint.git
