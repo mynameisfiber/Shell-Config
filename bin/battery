@@ -1,0 +1,28 @@
+#!/bin/bash
+
+POWER="⚡"
+EMPTY_HEART="♡"
+FULL_HEART="♥"
+
+function battery_status() {
+    cat /sys/class/power_supply/BAT*/$1 | \
+        paste -d+ -s - | \
+        bc -l 
+}
+
+function repeat() {
+    eval printf -- '$1%.s' {1..$2}
+}
+
+num_stars=$1
+curr_battery=$( battery_status energy_now )
+full_battery=$( battery_status energy_full )
+percent=$( echo "$curr_battery / $full_battery" | bc -l )
+charging=$( cat /sys/class/power_supply/AC/online )
+
+full_hearts=$( echo "($num_stars * $percent)/1" | bc )
+empty_hearts=$( echo "($num_stars - $full_hearts)/1" | bc )
+
+[ $charging == 1 ] && echo -n $POWER
+repeat $FULL_HEART $full_hearts
+repeat $EMPTY_HEART $empty_hearts

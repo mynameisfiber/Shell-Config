@@ -329,6 +329,9 @@ vnoremap <Space> zf
 " change ctrlp to be invoked like command-t
 let g:ctrlp_map = '<leader>t'
 
+" ctlrp root path uses git
+let g:ctrlp_working_path_mode = 'ra'
+
 " air-line
 set laststatus=2 " always open
 let g:airline_powerline_fonts = 1
