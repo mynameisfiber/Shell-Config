@@ -20,9 +20,9 @@ full_battery=$( battery_status energy_full )
 percent=$( echo "$curr_battery / $full_battery" | bc -l )
 charging=$( cat /sys/class/power_supply/AC/online )
 
-full_hearts=$( echo "($num_stars * $percent)/1" | bc )
+full_hearts=$( echo "($num_stars * $percent + 1)/1" | bc )
 empty_hearts=$( echo "($num_stars - $full_hearts)/1" | bc )
 
 [ $charging == 1 ] && echo -n $POWER
-repeat $FULL_HEART $full_hearts
-repeat $EMPTY_HEART $empty_hearts
+[ "$full_hearts" -gt 0 ] && repeat $FULL_HEART $full_hearts
+[ "$empty_hearts" -gt 0 ] && repeat $EMPTY_HEART $empty_hearts

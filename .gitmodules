@@ -82,3 +82,6 @@
 [submodule "proselint"]
 	path = proselint
 	url = https://github.com/amperser/proselint.git
+[submodule "vim/bundle/stan.vim"]
+	path = vim/bundle/stan.vim
+	url = https://github.com/lindemann09/stan.vim.git
