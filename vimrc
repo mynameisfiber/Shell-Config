@@ -332,6 +332,13 @@ let g:ctrlp_map = '<leader>t'
 " ctlrp root path uses git
 let g:ctrlp_working_path_mode = 'ra'
 
+" ignore big folders
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|__pycache__|data)$',
+  \ 'file': '\v\.(exe|so|dll|pyc)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
 " air-line
 set laststatus=2 " always open
 let g:airline_powerline_fonts = 1
