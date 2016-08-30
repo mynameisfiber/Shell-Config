@@ -1,5 +1,4 @@
 jedi
 pep8
 flake8
-git+https://github.com/powerline/powerline.git
 proselint

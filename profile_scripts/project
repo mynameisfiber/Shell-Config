@@ -1,10 +1,20 @@
+function _projectNames() {
+    tmux ls | cut -d: -f1
+}
+
 function project() {
     if [[ "$1" == "" ]]; then
-        local name=$( pwd | xargs basename | tr -d . )
+        local path=$PWD
+        local gitParent=$( git rev-parse --show-toplevel )
+        if [[ ! -z "$gitParent" ]]; then
+            cd $gitParent;
+            path=$gitParent;
+        fi
+        local name=$( echo $path | xargs basename | tr -d . )
     else
         local name=$1
     fi
-    if tmux ls | cut -d: -f1 | grep "${name}" &> /dev/null; then
+    if  _projectNames | grep "${name}" &> /dev/null; then
         tmux a -t $name
     else
         tmux new -s ${name}
@@ -13,7 +23,7 @@ function project() {
 
 function _project() {
     local cur=${COMP_WORDS[$COMP_CWORD]}
-    local sessions=$( tmux ls | cut -d: -f1 )
+    local sessions=$( _projectNames )
     COMPREPLY=( $(compgen -W "$sessions" -- $cur) )
 }
 
