@@ -83,7 +83,7 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_highlighting=1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_python_checkers=["flake8"]
-let g:syntastic_asciidoc_checkers=["asciidoc", "proselint"]
+let g:syntastic_asciidoc_checkers=["proselint"]
 let g:syntastic_text_checkers=["proselint"]
 let g:syntastic_markdown_checkers=["proselint"]
 
