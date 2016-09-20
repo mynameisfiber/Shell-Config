@@ -2,6 +2,11 @@ function _projectNames() {
     tmux ls | cut -d: -f1
 }
 
+function update_ssh() {
+    eval `tmux show-environment | grep '^SSH_AUTH_SOCK='`;
+    export SSH_AUTH_SOCK
+}
+
 function project() {
     if [[ "$1" == "" ]]; then
         local path=$PWD
