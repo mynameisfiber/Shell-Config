@@ -26,6 +26,8 @@ function project() {
     fi
 }
 
+alias tmux_takeover='tmux detach -a'
+
 function _project() {
     local cur=${COMP_WORDS[$COMP_CWORD]}
     local sessions=$( _projectNames )
