@@ -2,7 +2,7 @@ function _projectNames() {
     tmux ls | cut -d: -f1
 }
 
-function update_ssh() {
+function ssh-tmux-update() {
     eval `tmux show-environment | grep '^SSH_AUTH_SOCK='`;
     export SSH_AUTH_SOCK
 }
@@ -26,7 +26,7 @@ function project() {
     fi
 }
 
-alias tmux_takeover='tmux detach -a'
+alias tmux-takeover='tmux detach -a'
 
 function _project() {
     local cur=${COMP_WORDS[$COMP_CWORD]}
