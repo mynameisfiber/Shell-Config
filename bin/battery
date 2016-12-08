@@ -14,7 +14,11 @@ function repeat() {
     eval printf -- '$1%.s' {1..$2}
 }
 
-num_stars=$1
+if [[ -z "$1" ]]; then
+    num_stars=5
+else
+    num_stars=$1
+fi
 curr_battery=$( battery_status energy_now )
 full_battery=$( battery_status energy_full )
 percent=$( echo "$curr_battery / $full_battery" | bc -l )
