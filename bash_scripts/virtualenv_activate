@@ -1,5 +1,12 @@
 #!/bin/bash
 
 function activate() {
-    source ./venv/bin/activate
+    if [ -e ./venv/bin/activate ]; then
+        echo "Activating virtualenv."
+        source ./venv/bin/activate
+    fi
 }
+
+if [[ $TMUX ]]; then
+    activate;
+fi
