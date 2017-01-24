@@ -1,87 +1,84 @@
 [submodule "vim/bundle/Align"]
-	path = vim/bundle/Align
+	path = dotfiles/.vim/bundle/Align
 	url = https://github.com/vim-scripts/Align.git
 [submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
+	path = dotfiles/.vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "vim/bundle/OmniCppComplete"]
-	path = vim/bundle/OmniCppComplete
+	path = dotfiles/.vim/bundle/OmniCppComplete
 	url = https://github.com/vim-scripts/OmniCppComplete.git
 [submodule "vim/bundle/tagbar"]
-	path = vim/bundle/tagbar
+	path = dotfiles/.vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 [submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
+	path = dotfiles/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/gundo.vim"]
-	path = vim/bundle/gundo.vim
+	path = dotfiles/.vim/bundle/gundo.vim
 	url = https://github.com/sjl/gundo.vim.git
 [submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
+	path = dotfiles/.vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "oh-my-zsh"]
-	path = oh-my-zsh
+	path = dotfiles/.oh-my-zsh
 	url = git@github.com:robbyrussell/oh-my-zsh.git
 [submodule "vim/bundle/solarized"]
-	path = vim/bundle/solarized
+	path = dotfiles/.vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
+	path = dotfiles/.vim/bundle/vim-markdown
 	url = https://github.com/hallison/vim-markdown.git
 [submodule "vim/bundle/ack.vim"]
-	path = vim/bundle/ack.vim
+	path = dotfiles/.vim/bundle/ack.vim
 	url = git://github.com/mileszs/ack.vim.git
 [submodule "vim/bundle/jedi"]
-	path = vim/bundle/jedi
+	path = dotfiles/.vim/bundle/jedi
 	url = git://github.com/davidhalter/jedi-vim.git
 [submodule "vim/bundle/supertab"]
-	path = vim/bundle/supertab
+	path = dotfiles/.vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
 [submodule "vim/bundle/dart"]
-	path = vim/bundle/dart
+	path = dotfiles/.vim/bundle/dart
 	url = git@github.com:dart-lang/dart-vim-plugin.git
 [submodule "vim/bundle/zenroom"]
 	path = vim/bundle/zenroom
 	url = git@github.com:amix/vim-zenroom.git
 [submodule "bin/markdown2ctags"]
-	path = bin/markdown2ctags
+	path = dotfiles/.bin/markdown2ctags
 	url = git@github.com:jszakmeister/markdown2ctags.git
 [submodule "vim/bundle/targets.vim"]
-	path = vim/bundle/targets.vim
+	path = dotfiles/.vim/bundle/targets.vim
 	url = git://github.com/wellle/targets.vim.git
 [submodule "vim/bundle/Dockerfile.vim"]
-	path = vim/bundle/Dockerfile.vim
+	path = dotfiles/.vim/bundle/Dockerfile.vim
 	url = git@github.com:ekalinin/Dockerfile.vim.git
 [submodule "vim/bundle/vim-expand-region"]
-	path = vim/bundle/vim-expand-region
+	path = dotfiles/.vim/bundle/vim-expand-region
 	url = git@github.com:terryma/vim-expand-region.git
 [submodule "lolssh"]
 	path = lolssh
 	url = git@github.com:mynameisfiber/lolssh.git
 [submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
+	path = dotfiles/.vim/bundle/syntastic
 	url = git@github.com:scrooloose/syntastic.git
 [submodule "vim/bundle/ctrlpvim"]
-	path = vim/bundle/ctrlpvim
+	path = dotfiles/.vim/bundle/ctrlpvim
 	url = git@github.com:ctrlpvim/ctrlp.vim.git
 [submodule "vim/bundle/vim-airline"]
-	path = vim/bundle/vim-airline
+	path = dotfiles/.vim/bundle/vim-airline
 	url = git@github.com:vim-airline/vim-airline.git
 [submodule "vim/bundle/vim-airline-themes"]
-	path = vim/bundle/vim-airline-themes
+	path = dotfiles/.vim/bundle/vim-airline-themes
 	url = git@github.com:vim-airline/vim-airline-themes.git
 [submodule "vim/bundle/vim-bufferline"]
-	path = vim/bundle/vim-bufferline
+	path = dotfiles/.vim/bundle/vim-bufferline
 	url = git@github.com:bling/vim-bufferline.git
 [submodule "vim/bundle/tabline"]
-	path = vim/bundle/tabline
+	path = dotfiles/.vim/bundle/tabline
 	url = git@github.com:mkitt/tabline.vim.git
 [submodule "vim/bundle/vim-gitgutter"]
-	path = vim/bundle/vim-gitgutter
+	path = dotfiles/.vim/bundle/vim-gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
-[submodule "proselint"]
-	path = proselint
-	url = https://github.com/amperser/proselint.git
 [submodule "vim/bundle/stan.vim"]
-	path = vim/bundle/stan.vim
+	path = dotfiles/.vim/bundle/stan.vim
 	url = https://github.com/lindemann09/stan.vim.git

@@ -4,4 +4,4 @@
 [push]
 	default = simple
 [init]
-	templatedir = {{CONFIGPATH}}/git_template
+	templatedir = ~/.git/git_template

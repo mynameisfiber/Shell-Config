@@ -1,97 +1,49 @@
 #!/bin/bash
 
 CONFIGPATH=`pwd`
+mkdir dotfiles/.config/
 echo "Config path: $CONFIGPATH"
 
 echo "Configuring VIM"
-mv ~/.vimrc ~/.vimrc.bak
-ln -sf $CONFIGPATH/vimrc ~/.vimrc 
-mv ~/.vim ~/.vim.bak
-ln -sf $CONFIGPATH/vim ~/.vim
+git mv vimrc dotfiles/.vimrc 
+git mv vim dotfiles/.vim
 
 
 echo "Configuring shell"
-mv ~/.profile_custom ~/.profile_custom.bak
-ln -sf $CONFIGPATH/profile_custom ~/.profile_custom
-echo "Configuring general profile"
-if [[ ! `grep ". ~/.profile_custom" ~/.profile` ]]; then
-    echo -ne "if [ -f ~/.profile_custom ]; then\n  . ~/.profile_custom \nfi" >> ~/.profile
-fi
+git mv profile_custom dotfiles/.profile_custom
 
-echo "Configuring powerline"
-mkdir ~/.config/
-ln -sf $CONFIGPATH/powerline ~/.config/
-
-mv ~/.bash_custom ~/.bash_custom.bak
-ln -sf $CONFIGPATH/bash_custom ~/.bash_custom
-if [[ ! `grep ". ~/.bash_custom" ~/.bashrc` ]]; then
-    echo -ne "if [ -f ~/.bash_custom ]; then\n  . ~/.bash_custom \nfi" >> ~/.bashrc
-fi
-if [[ ! `grep ". ~/.bash_custom" ~/.bash_profile` ]]; then
-    echo -ne "if [ -f ~/.bash_custom ]; then\n  . ~/.bash_custom \nfi" >> ~/.bash_profile
-fi
-mv ~/.inputrc ~/.inputrc.bak
-ln -sf $CONFIGPATH/inputrc ~/.inputrc
+git mv bash_custom dotfiles/.bash_custom
+git mv inputrc dotfiles/.inputrc
 
 echo "Configuring bin"
-mv ~/.bin ~/.bin.bak
-rm ~/.bin
-ln -sfF $CONFIGPATH/bin ~/.bin
+git mv bin dotfiles/.bin
 
 echo "Configuring scripts"
-mv ~/.bash_scripts ~/.bash_scripts.bak
-rm ~/.bash_scripts
-ln -sfF $CONFIGPATH/bash_scripts ~/.bash_scripts
+git mv bash_scripts dotfiles/.bash_scripts
 
-mv ~/.profile_scripts ~/.profile_scripts.bak
-rm ~/.profile_scripts
-ln -sfF $CONFIGPATH/profile_scripts ~/.profile_scripts
+git mv profile_scripts dotfiles/.profile_scripts
 
 echo "Configuring ZSH"
-mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
-ln -sf $CONFIGPATH/oh-my-zsh ~/.oh-my-zsh
-mv ~/.zshrc ~/.zshrc.bak
-ln -sf $CONFIGPATH/zshrc ~/.zshrc
+git mv oh-my-zsh dotfiles/.oh-my-zsh
+git mv zshrc dotfiles/.zshrc
 
 echo "Configuring AsciiDoc"
-mv ~/.asciidoc ~/.asciidoc.bak
-ln -sf $CONFIGPATH/asciidoc ~/.asciidoc
+git mv asciidoc dotfiles/.asciidoc
 
 echo "Configuring ctags"
-mv ~/.ctags ~/.ctags.bak
-ln -sf $CONFIGPATH/ctags ~/.ctags
+git mv ctags dotfiles/.ctags
 
 echo "Configuring screen layouts"
-mv ~/.screenlayouts ~/.screenlayouts.bak
-ln -sf $CONFIGPATH/screenlayouts ~/.screenlayouts
+git mv screenlayouts dotfiles/.screenlayouts
 
 echo "Configuring SCREEN"
-mv ~/.screenrc ~/.screenrc.bak
-ln -sf $CONFIGPATH/screenrc ~/.screenrc
+git mv screenrc dotfiles/.screenrc
 
 echo "Configuring tmux"
-mv ~/.tmux.conf ~/.tmux.conf.bak
-ln -sf $CONFIGPATH/tmux.conf ~/.tmux.conf
+git mv tmux.conf dotfiles/.tmux.conf
 
 echo "Configuring awesome"
-mv ~/.config/awesome ~/.config/awesome.bak
-ln -sf $CONFIGPATH/awesome ~/.config/awesome
+git mv awesome dotfiles/.config/awesome
+echo "Configuring powerline"
+git mv powerline dotfiles/.config/
 
-echo "Installing required python packages"
-pip3 install -r requirements.txt --user
-
-echo "Configuring git"
-mv ~/.gitconfig ~/.gitconfig.bak
-cat $CONFIGPATH/gitconfig | sed s:{{CONFIGPATH}}:$CONFIGPATH:g > ~/.gitconfig
-
-echo "Installing VIM plugins"
-git submodule update --init --recursive
-
-echo "Upgrading VIM plugins (this may be redundant)"
-git submodule foreach --recursive git pull origin master
-
-echo "Installing LOLssh"
-pushd lolssh
-python setup.py install --user
-bash ./install
-popd
