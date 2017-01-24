@@ -1,49 +1,34 @@
 #!/bin/bash
 
-CONFIGPATH=`pwd`
-mkdir dotfiles/.config/
-echo "Config path: $CONFIGPATH"
+set -e #exit on error
 
-echo "Configuring VIM"
-git mv vimrc dotfiles/.vimrc 
-git mv vim dotfiles/.vim
+function inject_shell_custom() {
+	local toinject=$1
+	local customfile=$2
+	if [[ ! `grep ". $customfile" $toinject` ]]; then
+	    echo -ne "if [ -f $customfile ]; then\n  . $customfile \nfi" >> $toinject
+	fi
+}
 
 
-echo "Configuring shell"
-git mv profile_custom dotfiles/.profile_custom
+echo "*******Installing required python packages"
+pip3 install -Ur requirements.txt --user
 
-git mv bash_custom dotfiles/.bash_custom
-git mv inputrc dotfiles/.inputrc
+echo "*******Updating submodules"
+git submodule update --init --recursive
+git submodule foreach  git pull -f origin master
 
-echo "Configuring bin"
-git mv bin dotfiles/.bin
+echo "*******Refreshing dotfiles"
+stow -R dotfiles
 
-echo "Configuring scripts"
-git mv bash_scripts dotfiles/.bash_scripts
+echo "*******Injecting custom shell profiles"
+inject_shell_custom ~/.profile ~/.profile_custom
+inject_shell_custom ~/.bashrc ~/.bash_custom
+inject_shell_custom ~/.bash_profile ~/.bash_custom
 
-git mv profile_scripts dotfiles/.profile_scripts
-
-echo "Configuring ZSH"
-git mv oh-my-zsh dotfiles/.oh-my-zsh
-git mv zshrc dotfiles/.zshrc
-
-echo "Configuring AsciiDoc"
-git mv asciidoc dotfiles/.asciidoc
-
-echo "Configuring ctags"
-git mv ctags dotfiles/.ctags
-
-echo "Configuring screen layouts"
-git mv screenlayouts dotfiles/.screenlayouts
-
-echo "Configuring SCREEN"
-git mv screenrc dotfiles/.screenrc
-
-echo "Configuring tmux"
-git mv tmux.conf dotfiles/.tmux.conf
-
-echo "Configuring awesome"
-git mv awesome dotfiles/.config/awesome
-echo "Configuring powerline"
-git mv powerline dotfiles/.config/
+echo "*******Installing LOLssh"
+cd lolssh
+python setup.py install --user
+bash ./install
+cd ..
 

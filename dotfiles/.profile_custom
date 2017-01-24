@@ -1,31 +1,34 @@
-#Gnome alias for portability
-if [[ $DESKTOP_SESSION == "gnome" ]]
-  then
-    alias open="gnome-open"
-  fi
-
-#OSX specific
-if [[ "`uname`" == "Darwin" ]]
-  then
-    alias vim="mvim -v"
+if [[ -z "$LOADED_PROFILE_CUSTOM" ]]; then
+    #Gnome alias for portability
+    if [[ $DESKTOP_SESSION == "gnome" ]]
+      then
+        alias open="gnome-open"
+      fi
     
-    # asciidoc crap
-    export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
-
-    # Adding git-annex to git
-    export PATH="/Applications/git-annex.app/Contents/MacOS:$PATH"
-
-    # python path from `brew install llvm`
-    export PYTHONPATH="/usr/local/opt/llvm/lib/python2.7/site-packages:$PYTHONPATH"
-
-    # python path for homebrew
-    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-  fi
-
-# General shell scripts
-for script in ~/.profile_scripts/*;
-do
-    if [ -r "$script" ]; then
-        source "$script"
-    fi
-done
+    #OSX specific
+    if [[ "`uname`" == "Darwin" ]]
+      then
+        alias vim="mvim -v"
+        
+        # asciidoc crap
+        export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
+    
+        # Adding git-annex to git
+        export PATH="/Applications/git-annex.app/Contents/MacOS:$PATH"
+    
+        # python path from `brew install llvm`
+        export PYTHONPATH="/usr/local/opt/llvm/lib/python2.7/site-packages:$PYTHONPATH"
+    
+        # python path for homebrew
+        export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+      fi
+    
+    # General shell scripts
+    for script in ~/.profile_scripts/*;
+    do
+        if [ -r "$script" ]; then
+            source "$script"
+        fi
+    done
+    export LOADED_PROFILE_CUSTOM=1
+fi
