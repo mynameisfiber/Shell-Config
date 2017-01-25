@@ -6,7 +6,7 @@ function inject_shell_custom() {
 	local toinject=$1
 	local customfile=$2
 	if [[ ! `grep ". $customfile" $toinject` ]]; then
-	    echo -ne "if [ -f $customfile ]; then\n  . $customfile \nfi" >> $toinject
+	    echo -ne "\nif [ -f $customfile ]; then\n  . $customfile \nfi" >> $toinject
 	fi
 }
 
