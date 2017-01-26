@@ -1,30 +1,20 @@
-if [[ -z "$LOADED_BASH_CUSTOM" ]]; then
-    if [[ $TERM == "screen" ]]
-      then
-        export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
-      fi
-    #
-    
-    
-    
-    if [ -f ~/.bash_github ]; then 
-       . ~/.bash_github
-      fi
-    
-    export PATH="/usr/local/bin:$PATH"
-    
-    # VI mode!
-    set -o vi
-    export EDITOR="vim"
-    
-    
-    for script in ~/.bash_scripts/*;
-    do
-        if [ -r "$script" ]; then
-            source "$script"
-        fi
-    done
-    
-    source ~/.profile_custom
-    export LOADED_BASH_CUSTOM=1
-fi
+if [[ $TERM == "screen" ]]
+  then
+    export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
+  fi
+
+export PATH="/usr/local/bin:$PATH"
+
+# VI mode!
+set -o vi
+export EDITOR="vim"
+
+
+for script in ~/.bash_scripts/*;
+do
+    if [ -r "$script" ]; then
+        source "$script"
+    fi
+done
+
+source ~/.profile_custom

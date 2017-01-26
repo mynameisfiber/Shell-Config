@@ -2,3 +2,4 @@ jedi
 pep8
 flake8
 proselint
+virtualenv
