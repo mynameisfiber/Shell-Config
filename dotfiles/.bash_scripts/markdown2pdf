@@ -1,0 +1,13 @@
+function markdown2pdf() {
+    filename=$1
+    pdffilename=$2
+    if [[ -z "$filename" ]]; then
+        echo "Usage: $FUNCNAME markdown_file [pdf_file]"
+        return
+    fi
+    if [[ -z "$pdffilename" ]]; then
+        extension="${filename##*.}"
+        pdffilename="${filename%.*}.pdf"
+    fi
+    pandoc -V geometry:margin=1in $filename -o $pdffilename
+}
