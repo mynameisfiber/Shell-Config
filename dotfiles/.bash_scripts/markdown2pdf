@@ -11,3 +11,5 @@ function markdown2pdf() {
     fi
     pandoc -V geometry:margin=1in $filename -o $pdffilename
 }
+
+complete -f -X '!*.@(md|markdown)' markdown2pdf
