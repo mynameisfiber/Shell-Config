@@ -4,4 +4,4 @@
 [push]
 	default = simple
 [init]
-	templatedir = ~/.gitrc/git_template
+	templatedir = ~/.gitrc/git_templates
