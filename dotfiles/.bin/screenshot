@@ -1,0 +1,12 @@
+#!/bin/bash
+
+import /tmp/screenshot.png
+
+if [ -z "$1" ]; then
+    echo "to clipboard"
+    xclip -selection "clipboard" -t image/png /tmp/screenshot.png
+    rm -f /tmp/screenshot.png
+else
+    echo "to file: $1"
+    mv /tmp/screenshot.png ~/$1.png
+fi

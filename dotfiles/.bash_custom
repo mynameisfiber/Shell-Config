@@ -12,7 +12,7 @@ export EDITOR="vim"
 
 for script in ~/.bash_scripts/*;
 do
-    if [ -r "$script" ]; then
+    if [ -r "$script" -a -f "$script" ]; then
         source "$script"
     fi
 done
