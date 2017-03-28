@@ -5,3 +5,6 @@ startup_message off
 #escape ^\\\
 #bindkey -d ^? stuff ^H
 #bindkey -d ^@ stuff ^H
+#better scrollback? http://unix.stackexchange.com/questions/40242/scroll-inside-screen-or-pause-output
+# Enable mouse scrolling and scroll bar history scrolling
+termcapinfo xterm* ti@:te@

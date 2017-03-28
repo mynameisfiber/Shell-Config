@@ -292,8 +292,8 @@ endfun
 
 map sear :call GrepWord()<CR>
 map fsear :call GrepWordPipeOut()<CR>
-map fgsear :call GitGrepWordPipeOut()<CR>
 map sg :call SearchGit()<CR>
+map sgo :call GitGrepWordPipeOut()<CR>
 
 " format json
 command JSON :%!python -m json.tool
@@ -330,6 +330,17 @@ endfunction
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
+
+
+" syntastic # this wasn't working so you moved it to nonworkingBundle
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
 
 if filereadable("/Users/expensisaurus/.vim/php_vimrc.vim")
     so /Users/expensisaurus/.vim/php_vimrc.vim
