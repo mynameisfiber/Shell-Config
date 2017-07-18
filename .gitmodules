@@ -85,3 +85,6 @@
 [submodule "stowsh"]
 	path = stowsh
 	url = git@github.com:williamsmj/stowsh.git
+[submodule "dotfiles/.vim/bundle/vim-minimap"]
+	path = dotfiles/.vim/bundle/vim-minimap
+	url = git@github.com:severin-lemaignan/vim-minimap.git
