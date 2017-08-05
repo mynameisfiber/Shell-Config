@@ -88,3 +88,9 @@
 [submodule "dotfiles/.vim/bundle/vim-minimap"]
 	path = dotfiles/.vim/bundle/vim-minimap
 	url = git@github.com:severin-lemaignan/vim-minimap.git
+[submodule "dotfiles/.vim/bundle/vim-tmux-focus-events"]
+	path = dotfiles/.vim/bundle/vim-tmux-focus-events
+	url = git@github.com:tmux-plugins/vim-tmux-focus-events.git
+[submodule "dotfiles/.vim/bundle/vim-tmux-clipboard"]
+	path = dotfiles/.vim/bundle/vim-tmux-clipboard
+	url = git@github.com:roxma/vim-tmux-clipboard.git
