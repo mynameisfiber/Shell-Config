@@ -1,5 +1,3 @@
-local awful = require("awful")
-
 function run_once(cmd)
     findme = cmd
     firstspace = cmd:find(" ")
@@ -9,7 +7,8 @@ function run_once(cmd)
     awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
-run_once("nm-applet")
-run_once("volti")
-run_once("blueman-applet")
+run_once("wicd-client -t")
+run_once("syndaemon -i 1 -K")
+run_once("gpg-agent --daemon")
+run_once("dualtidy")
 run_once("fluxgui")
