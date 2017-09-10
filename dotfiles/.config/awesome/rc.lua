@@ -48,7 +48,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
-beautiful.wallpaper = "/home/micha/Documents/wallpapers/calvin_stars.jpg"
+beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpaper.jpg"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
