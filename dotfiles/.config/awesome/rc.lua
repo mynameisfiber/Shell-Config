@@ -11,9 +11,6 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
--- Custom Global Keys
-globalkeys = require("globalkeys")
-
 -- Autostart
 require("autostart")
 
@@ -255,6 +252,10 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 -- {{{ Key bindings
+--
+-- Custom Global Keys
+globalkeys = require("globalkeys")(modkey)
+
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),

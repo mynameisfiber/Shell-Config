@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xautolock -enable
+xautolock -locknow &> /dev/null

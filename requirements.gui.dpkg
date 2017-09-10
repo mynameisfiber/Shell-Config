@@ -1,0 +1,6 @@
+i3lock
+xautolock
+libnotify-bin
+volti
+fluxgui
+--no-install-recommends network-manager-gnome
