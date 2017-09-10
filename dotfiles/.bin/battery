@@ -5,7 +5,8 @@ EMPTY_HEART="♡"
 FULL_HEART="♥"
 
 function battery_status() {
-    cat /sys/class/power_supply/BAT*/$1 | \
+    paths=$( eval echo /sys/class/power_supply/BAT*/$@ )
+    cat $paths 2> /dev/null | \
         paste -d+ -s - | \
         bc -l 
 }
@@ -19,8 +20,8 @@ if [[ -z "$1" ]]; then
 else
     num_stars=$1
 fi
-curr_battery=$( battery_status {charge,energy}_now )
-full_battery=$( battery_status {charge,energy}_full )
+curr_battery=$( battery_status "{charge,energy}_now" )
+full_battery=$( battery_status "{charge,energy}_full" )
 percent=$( echo "$curr_battery / $full_battery" | bc -l )
 charging=$( cat /sys/class/power_supply/AC/online )
 
