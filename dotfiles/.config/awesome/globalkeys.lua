@@ -11,10 +11,10 @@ function make_global_keys(modkey)
     local globalkeys = awful.util.table.join(
         -- Audio keys
         awful.key({ }, "XF86AudioRaiseVolume",
-            function () change_volume("+5%") end
+            function () change_volume("+3%") end
         ),
         awful.key({ }, "XF86AudioLowerVolume",
-            function () change_volume("-5%") end
+            function () change_volume("-3%") end
         ),
         awful.key({"Shift"}, "XF86AudioRaiseVolume",
             function () change_volume("+1%") end
@@ -23,10 +23,10 @@ function make_global_keys(modkey)
             function () change_volume("-1%") end
         ),
         awful.key({ }, "XF86AudioMute",
-            function () awful.util.spawn("amixer -D default sset Master toggle", false) end
+            function () awful.util.spawn("amixer -D pulse set Master 1+ toggle", false) end
         ),
         awful.key({ }, "XF86AudioMicMute",
-            function () awful.util.spawn("amixer -D default sset Capture toggle", false) end
+            function () awful.util.spawn("amixer -D pulse set Capture 1+ toggle", false) end
         ),
     
         -- Brightness
