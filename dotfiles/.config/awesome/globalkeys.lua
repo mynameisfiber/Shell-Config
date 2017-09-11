@@ -36,15 +36,22 @@ function make_global_keys(modkey)
         awful.key({ }, "XF86MonBrightnessDown",
             function() awful.util.spawn("xbacklight -5%") end
         ),
+        awful.key({ "Shift"}, "XF86MonBrightnessUp",
+            function() awful.util.spawn("xbacklight +1%") end
+        ),
+        awful.key({ "Shift"}, "XF86MonBrightnessDown",
+            function() awful.util.spawn("xbacklight -1%") end
+        ),
     
         -- Lock
-    	awful.key({ modkey}, "l",
+    	awful.key({ }, "XF86Search",
               function ()
                   awful.util.spawn("sync")
+                  awful.util.spawn("xautolock -enable")
                   awful.util.spawn("xautolock -locknow")
               end
     	),
-    	awful.key({ modkey, "Shift"}, "l",
+    	awful.key({"Shift"}, "XF86Search",
               function () awful.util.spawn("xautolock -toggle") end
     	)
 
