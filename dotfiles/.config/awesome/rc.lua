@@ -131,7 +131,7 @@ spacer = wibox.widget.textbox(" ‖ ")
 mytextclock = wibox.widget.textclock("%b %e, %l:%M")
 
 -- Battery Monitor
-batterymon = awful.widget.watch('bash -c "~/.bin/battery 10"', 30)
+batterymon = awful.widget.watch('bash -c "~/.bin/battery 20"', 30)
 
 
 -- Create a wibox for each screen and add it
