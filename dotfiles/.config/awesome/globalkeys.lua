@@ -53,23 +53,18 @@ function make_global_keys(modkey)
     	),
     	awful.key({"Shift"}, "XF86Search",
               function () awful.util.spawn("xautolock -toggle") end
-    	)
+    	),
 
-        --awful.key({"Mod1"}, "z",
-            --function () awful.util.spawn("playerctl previous", false) end
-        --),
-        --awful.key({"Mod1"}, "x",
-            --function () awful.util.spawn("playerctl stop", false) end
-        --),
-        --awful.key({"Mod1"}, "c",
-            --function () awful.util.spawn("playerctl play-pause", false) end
-        --),
-        --awful.key({"Mod1"}, "v",
-            --function () awful.util.spawn("playerctl next", false) end
-        --),
-    
-        ---- multi-display keys
-        --awful.key({modkey}, "o", awful.client.movetoscreen)
+        -- Media Keys
+        awful.key({}, "XF86AudioNext",
+            function () awful.util.spawn("mediacontrol Next") end
+        ),
+        awful.key({}, "XF86AudioPrev",
+            function () awful.util.spawn("mediacontrol Previous") end
+        ),
+        awful.key({}, "XF86AudioPlay",
+            function () awful.util.spawn("mediacontrol PlayPause") end
+        )
     )
     
     return globalkeys
