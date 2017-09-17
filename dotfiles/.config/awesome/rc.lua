@@ -338,7 +338,16 @@ globalkeys = awful.util.table.join(globalkeys,
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey }, "r",
+              function ()
+                  awful.prompt.run {
+                    prompt       = "Run: ",
+                    textbox      = awful.screen.focused().mypromptbox.widget,
+                    exe_callback = awful.util.spawn_with_shell,
+                    history_path = awful.util.get_cache_dir() .. "/history_run",
+                    completion_callback = awful.completion.shell,
+                  }
+              end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
