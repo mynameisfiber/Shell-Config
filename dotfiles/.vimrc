@@ -25,7 +25,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 nmap <leader>Y yy,c<space>p
 vmap <leader>Y ygv,c<space>P
 
-" Various copy/paste niceties (assumes pbcopy/pbpaste is installed or is aliased)
+" Various copy/paste niceties (assumes vim is compiled with +clipboard)
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
@@ -44,8 +44,8 @@ nnoremap <Leader>w :w<CR>
 nmap <Leader><Leader> V
 map q: :q
 
-" OSX clipboard support with * and + buffer
-set clipboard=unnamed
+" Set vim keyboard so that the system copy buffer syncs with vims
+set clipboard^=unnamed,unnamedplus
 
 " Markdown preview
 nmap <Leader>m ! f=$( mktemp -u -t mkdown ).html; redcarpet --parse-no_intra_emphasis --parse-fenced_code_blocks --parse-tables % > $f; open $f<CR>
