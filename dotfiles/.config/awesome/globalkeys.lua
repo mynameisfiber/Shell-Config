@@ -64,6 +64,15 @@ function make_global_keys(modkey)
         ),
         awful.key({}, "XF86AudioPlay",
             function () awful.util.spawn("mediacontrol PlayPause") end
+        ),
+
+        -- Toggle wibox.
+        awful.key({ modkey}, "b",
+                  function ()
+                      local screen = awful.screen.focused()
+                      screen.mywibox.visible = not screen.mywibox.visible
+                  end,
+                  {description = "toggle wibox on current screen"}
         )
     )
     

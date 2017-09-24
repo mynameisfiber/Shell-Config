@@ -257,7 +257,7 @@ root.buttons(awful.util.table.join(
 globalkeys = require("globalkeys")(modkey)
 
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey, "Shift"   }, "/",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -380,8 +380,12 @@ clientkeys = awful.util.table.join(
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+    awful.key({ modkey,           }, "t",      function (c) awful.titlebar.toggle(c)         end,
+              {description = "toggle titlebar", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
+    awful.key({ modkey,           }, "s",      function (c) c.sticky = not c.sticky          end,
+              {description = "toggle sticky", group = "client"}),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
@@ -565,6 +569,8 @@ client.connect_signal("request::titlebars", function(c)
         },
         layout = wibox.layout.align.horizontal
     }
+    -- Hide titlebar so we don't see it by default
+    awful.titlebar.hide(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
