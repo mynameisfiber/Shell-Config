@@ -1,4 +1,5 @@
 local awful = require("awful")
+local naughty = require("naughty")
 
 function change_volume(how)
     os.execute(
@@ -6,6 +7,19 @@ function change_volume(how)
     )
 end
 
+local naughtybightid = nil
+function change_brightness(how)
+    os.execute("xbacklight " .. how)
+    awful.spawn.with_line_callback("xbacklight", {
+        stdout = function (line) 
+            naughtybrightid = naughty.notify({
+                text = tonumber(line) .. "%",
+                title = "Brightness",
+                replaces_id = naughtybrightid
+            }).id
+        end
+    })
+end
 
 function make_global_keys(modkey)
     local globalkeys = awful.util.table.join(
@@ -31,16 +45,16 @@ function make_global_keys(modkey)
     
         -- Brightness
         awful.key({ }, "XF86MonBrightnessUp",
-            function() awful.util.spawn("xbacklight +5%") end
+            function() change_brightness("+5%") end
         ),
         awful.key({ }, "XF86MonBrightnessDown",
-            function() awful.util.spawn("xbacklight -5%") end
+            function() change_brightness("-5%") end
         ),
         awful.key({ "Shift"}, "XF86MonBrightnessUp",
-            function() awful.util.spawn("xbacklight +1%") end
+            function() change_brightness("+1%") end
         ),
         awful.key({ "Shift"}, "XF86MonBrightnessDown",
-            function() awful.util.spawn("xbacklight -1%") end
+            function() change_brightness("-1%") end
         ),
     
         -- Lock
@@ -73,6 +87,11 @@ function make_global_keys(modkey)
                       screen.mywibox.visible = not screen.mywibox.visible
                   end,
                   {description = "toggle wibox on current screen"}
+        ),
+
+        -- Open file manager
+        awful.key({ modkey}, "o",
+            function () awful.util.spawn("nautilus --no-desktop") end
         )
     )
     
