@@ -21,7 +21,7 @@ function change_brightness(how)
     awful.spawn.with_line_callback("xbacklight", {
         stdout = function (line) 
             naughtybrightid = naughty.notify({
-                text = tonumber(line) .. "%",
+                text = string.format("%0.1f%%", tonumber(line)),
                 title = "Brightness",
                 replaces_id = naughtybrightid
             }).id
