@@ -31,9 +31,6 @@
 [submodule "dotfiles/.vim/bundle/ack.vim"]
 	path = dotfiles/.vim/bundle/ack.vim
 	url = git://github.com/mileszs/ack.vim.git
-[submodule "dotfiles/.vim/bundle/jedi"]
-	path = dotfiles/.vim/bundle/jedi
-	url = git://github.com/davidhalter/jedi-vim.git
 [submodule "dotfiles/.vim/bundle/supertab"]
 	path = dotfiles/.vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
