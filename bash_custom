@@ -64,3 +64,12 @@ function cdl {
 }
 
 alias git_branches_by_date="git for-each-ref --sort=-committerdate refs/heads/"
+
+function push(){
+    branch=`git rev-parse --abbrev-ref HEAD`
+        if [ $branch == 'master' ]; then
+            echo "DO NOT PUSH TO MASTER"
+        else
+            git push origin $branch
+                fi
+}

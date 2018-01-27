@@ -292,8 +292,8 @@ endfun
 
 map sear :call GrepWord()<CR>
 map fsear :call GrepWordPipeOut()<CR>
-map sg :call SearchGit()<CR>
 map sgo :call GitGrepWordPipeOut()<CR>
+map sg :call SearchGit()<CR>
 
 " format json
 command JSON :%!python -m json.tool
@@ -325,7 +325,6 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
     redraw!
     exec a:vim_command . " " . selection
 endfunction
-
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
