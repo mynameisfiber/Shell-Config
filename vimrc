@@ -345,3 +345,11 @@ nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
 if filereadable("/Users/expensisaurus/.vim/php_vimrc.vim")
     so /Users/expensisaurus/.vim/php_vimrc.vim
 endif
+
+
+" Open file on github in current line and on current hash
+" Note: this depends on the git url alias
+nmap <leader>g :!echo `git url`/blob/`git rev-parse --short HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
+
+" hopefully this makes drawing quicker
+set lazyredraw
