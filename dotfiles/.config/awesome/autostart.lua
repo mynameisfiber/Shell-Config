@@ -29,3 +29,6 @@ run_once("blueman-applet")
 
 -- change monitor colors at night
 run_once("fluxgui")
+
+--- compositing for transparency
+run_once("unagi")

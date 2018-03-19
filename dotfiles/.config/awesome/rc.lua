@@ -48,7 +48,7 @@ beautiful.init(awful.util.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpaper.jpg"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "terminator"
+terminal = "tilix"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -94,6 +94,28 @@ local function client_menu_toggle_fn()
         end
     end
 end
+
+local function toggleCaffeine()
+    local mon=''
+    if not naughty.is_suspended() then
+        naughty.notify({ text = "Lounging" })
+        mon='☐'
+        awful.util.spawn("xautolock -disable")
+        awful.util.spawn("xset s off")
+        awful.util.spawn("xset -dpms")
+    else
+        naughty.notify({ text = "Drinking Coffee" })
+        mon='☑'
+        awful.util.spawn("xautolock -enable")
+        awful.util.spawn("xset s on")
+        awful.util.spawn("xset +dpms")
+    end
+    awful.util.spawn("gsettings set org.gnome.desktop.notifications " ..
+                     "show-banners " .. tostring(naughty.is_suspended()) .. " &")
+    caffeinemon.text = mon
+    naughty.toggle()
+end
+
 -- }}}
 
 -- {{{ Menu
@@ -133,6 +155,14 @@ mytextclock = wibox.widget.textclock("%b %e, %l:%M")
 -- Battery Monitor
 batterymon = awful.widget.watch('bash -c "~/.bin/battery 20"', 30)
 
+-- Notification Monitor
+caffeinemon = wibox.widget{
+    text = '☑',
+    align  = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox,
+}
+caffeinemon:connect_signal("button::press", toggleCaffeine)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -233,6 +263,7 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             batterymon,
             spacer,
+            caffeinemon,
             wibox.widget.systray(),
             spacer,
             mytextclock,
@@ -362,7 +393,10 @@ globalkeys = awful.util.table.join(globalkeys,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- Caffeine states
+    awful.key({ modkey }, "c", toggleCaffeine)
 )
 
 clientkeys = awful.util.table.join(
@@ -378,7 +412,7 @@ clientkeys = awful.util.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) awful.titlebar.toggle(c)         end,
               {description = "toggle titlebar", group = "client"}),
