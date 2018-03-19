@@ -1,0 +1,10 @@
+function ping_server() {
+    server=${1:='8.8.8.8'}
+    (
+        while ! ping -c 1 -W 1 $server
+        do
+            sleep 1;
+        done;
+    ) > /dev/null;
+    notify-send -u critical "$server is online";
+}

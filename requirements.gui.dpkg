@@ -4,3 +4,4 @@ libnotify-bin
 volti
 fluxgui
 --no-install-recommends network-manager-gnome
+unagi
