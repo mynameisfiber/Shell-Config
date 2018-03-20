@@ -1,1 +1,2 @@
-[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+xmodmap ~/.Xmodmap
+exec awesome

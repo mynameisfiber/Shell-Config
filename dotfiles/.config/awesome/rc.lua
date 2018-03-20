@@ -14,9 +14,6 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Autostart
 require("autostart")
 
--- Load Debian menu entries
-require("debian.menu")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -129,7 +126,6 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -412,7 +408,7 @@ clientkeys = awful.util.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey, "Control" }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) awful.titlebar.toggle(c)         end,
               {description = "toggle titlebar", group = "client"}),

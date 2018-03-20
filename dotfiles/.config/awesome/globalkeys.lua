@@ -1,10 +1,18 @@
 local awful = require("awful")
 local naughty = require("naughty")
 
+local naughtyvolumeid = nil
 function change_volume(how)
-    os.execute(
-        '~/.config/awesome/scripts/change_volume.sh "' .. how .. '"'
-    )
+    os.execute("amixer -q sset Master " .. how)
+    awful.spawn.with_line_callback("amixer get Master | tail -n 1", {
+        stdout = function (line) 
+            naughtybrightid = naughty.notify({
+                text = line,
+                title = "Volume",
+                replaces_id = naughtybrightid
+            }).id
+        end
+    })
 end
 
 local naughtybightid = nil
@@ -25,19 +33,19 @@ function make_global_keys(modkey)
     local globalkeys = awful.util.table.join(
         -- Audio keys
         awful.key({ }, "XF86AudioRaiseVolume",
-            function () change_volume("+3%") end
+            function () change_volume("3%+") end
         ),
         awful.key({ }, "XF86AudioLowerVolume",
-            function () change_volume("-3%") end
+            function () change_volume("3%-") end
         ),
         awful.key({"Shift"}, "XF86AudioRaiseVolume",
-            function () change_volume("+1%") end
+            function () change_volume("1%+") end
         ),
         awful.key({"Shift"}, "XF86AudioLowerVolume",
-            function () change_volume("-1%") end
+            function () change_volume("1%-") end
         ),
         awful.key({ }, "XF86AudioMute",
-            function () awful.util.spawn("amixer -D pulse set Master 1+ toggle", false) end
+            function () change_volume("toggle") end
         ),
         awful.key({ }, "XF86AudioMicMute",
             function () awful.util.spawn("amixer -D pulse set Capture 1+ toggle", false) end
