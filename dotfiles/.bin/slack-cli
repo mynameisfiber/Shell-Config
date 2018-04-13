@@ -1,0 +1,31 @@
+#!/bin/bash
+
+_TMUX_NAME="slackterm"
+
+function _startSlack() {
+    i=0
+    for config in $( ls ~/.slack-term/*.json ); do
+        if [[ "$i" -eq "0" ]]; then
+            TMUX="tmux new-session -d -s ${_TMUX_NAME}"
+        else
+            TMUX="tmux new-window -P -t ${_TMUX_NAME}:$i"
+        fi
+        i=$(( $i + 1 ))
+        name=$( basename $config | cut -d. -f1 )
+        echo ${TMUX} -n $name "slack-term -config ${config}"
+        ${TMUX} -n $name "slack-term -config ${config}"
+    done
+    tmux select-window -t ${_TMUX_NAME}:0
+    tmux attach-session -t ${_TMUX_NAME}
+}
+
+echo "Updating slack"
+go get -u github.com/erroneousboat/slack-term
+
+if tmux has-session -t ${_TMUX_NAME}; then
+    echo "attaching"
+    tmux a -t ${_TMUX_NAME}
+else
+    echo "starting new"
+    _startSlack
+fi
