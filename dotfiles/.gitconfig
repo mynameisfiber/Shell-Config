@@ -1,10 +1,7 @@
 [user]
 	name = Micha Gorelick
 	email = mynameisfiber@gmail.com
-	signingkey = 5FF7A3FC1E2030D7
 [push]
 	default = simple
 [init]
 	templatedir = ~/.gitrc/git_templates
-[commit]
-	gpgsign = true
