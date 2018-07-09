@@ -12,8 +12,7 @@ function _startSlack() {
         fi
         i=$(( $i + 1 ))
         name=$( basename $config | cut -d. -f1 )
-        echo ${TMUX} -n $name "slack-term -config ${config}"
-        ${TMUX} -n $name "slack-term -config ${config}"
+        ${TMUX} -n $name "while true; do slack-term -config ${config}; done;"
     done
     tmux select-window -t ${_TMUX_NAME}:0
     tmux attach-session -t ${_TMUX_NAME}

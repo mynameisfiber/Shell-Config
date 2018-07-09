@@ -35,3 +35,6 @@ bindkey -v
 export KEYTIMEOUT=1
 
 source ~/.profile
+
+# added by travis gem
+[ -f /home/micha/.travis/travis.sh ] && source /home/micha/.travis/travis.sh

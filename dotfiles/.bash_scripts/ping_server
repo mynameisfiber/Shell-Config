@@ -3,6 +3,7 @@ function ping_server() {
     (
         while ! ping -c 1 -W 1 $server
         do
+            echo -ne '.'
             sleep 1;
         done;
     ) > /dev/null;

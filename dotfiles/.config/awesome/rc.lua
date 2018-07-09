@@ -45,7 +45,7 @@ beautiful.init(awful.util.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpaper.jpg"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "tilix"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
