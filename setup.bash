@@ -28,7 +28,7 @@ inject_shell_custom ~/.bash_profile ~/.bash_custom
 
 echo "*******Installing LOLssh"
 cd lolssh
-python setup.py install --user
+python3 setup.py install --user
 bash ./install
 cd ..
 
