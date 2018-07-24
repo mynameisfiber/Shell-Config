@@ -1,0 +1,5 @@
+# make pip locally installed packages availible 
+export PATH="$HOME/.local/bin:$PATH"
+
+# set py3.7+ `breakpoint()` to use ipython embed
+export PYTHONBREAKPOINT="IPython.embed"
