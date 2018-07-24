@@ -4,9 +4,6 @@
 [submodule "dotfiles/.vim/bundle/nerdtree"]
 	path = dotfiles/.vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "dotfiles/.vim/bundle/OmniCppComplete"]
-	path = dotfiles/.vim/bundle/OmniCppComplete
-	url = https://github.com/vim-scripts/OmniCppComplete.git
 [submodule "dotfiles/.vim/bundle/tagbar"]
 	path = dotfiles/.vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
@@ -31,12 +28,6 @@
 [submodule "dotfiles/.vim/bundle/ack.vim"]
 	path = dotfiles/.vim/bundle/ack.vim
 	url = git://github.com/mileszs/ack.vim.git
-[submodule "dotfiles/.vim/bundle/jedi"]
-	path = dotfiles/.vim/bundle/jedi
-	url = git://github.com/davidhalter/jedi-vim.git
-[submodule "dotfiles/.vim/bundle/supertab"]
-	path = dotfiles/.vim/bundle/supertab
-	url = git://github.com/ervandew/supertab.git
 [submodule "dotfiles/.vim/bundle/dart"]
 	path = dotfiles/.vim/bundle/dart
 	url = git@github.com:dart-lang/dart-vim-plugin.git

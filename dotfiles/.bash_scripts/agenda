@@ -7,11 +7,4 @@ function agenda() {
     fi;
 }
 
-function todo() {
-    if [[ -e ~/.taskrc ]]; then
-        echo "Tasks:"; task list | head -n -2 | tail -n +2
-    fi;
-}
-
 agenda
-todo

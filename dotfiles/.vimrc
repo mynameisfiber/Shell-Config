@@ -21,6 +21,14 @@ nnoremap Q <nop>
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
+" Tab completion from the top using SuperTab plugin
+let g:completor_python_binary = 'python'
+let g:completor_auto_trigger = 1
+inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
 " Yank, comment, paste.
 nmap <leader>Y yy,c<space>p
 vmap <leader>Y ygv,c<space>P
@@ -34,10 +42,10 @@ vmap <Leader>p "+p
 vmap <Leader>P "+P
 
 " buffer movements
-nmap bT :bprevious<cr>
-nmap bt :bnext<cr>
+nmap BT :bprevious<cr>
+nmap Bt :bnext<cr>
 nmap <leader>b :ls<cr>:buffer<space>
-nmap bv :vert sb<space>
+nmap Bv :vert sb<space>
 
 " General remapings
 nnoremap <Leader>w :w<CR>
@@ -393,4 +401,4 @@ function DeleteHiddenBuffers()
         silent execute 'bwipeout' buf
     endfor
 endfunction
-nmap bd :call DeleteHiddenBuffers()<cr>
+nmap Bd :call DeleteHiddenBuffers()<cr>

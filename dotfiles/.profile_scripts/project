@@ -19,8 +19,8 @@ function project() {
     else
         local name=$1
     fi
-    if  _projectNames | grep "${name}" &> /dev/null; then
-        tmux a -t $name
+    if  tmux has-session -t "${name}"; then
+        tmux attach -t $name
     else
         tmux new -s ${name}
     fi
