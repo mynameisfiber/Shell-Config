@@ -47,8 +47,25 @@ function make_global_keys(modkey)
         awful.key({ }, "XF86AudioMute",
             function () change_volume("toggle") end
         ),
+
+        awful.key({ modkey}, "F3",
+            function () change_volume("3%+") end
+        ),
+        awful.key({ modkey}, "F2",
+            function () change_volume("3%-") end
+        ),
+        awful.key({ modkey, "Shift"}, "F3",
+            function () change_volume("1%+") end
+        ),
+        awful.key({ modkey, "Shift"}, "F2",
+            function () change_volume("1%-") end
+        ),
+        awful.key({ modkey}, "F1",
+            function () change_volume("toggle") end
+        ),
+
         awful.key({ }, "XF86AudioMicMute",
-            function () awful.util.spawn("amixer -D pulse set Capture 1+ toggle", false) end
+            function () awful.util.spawn("amixer set Capture 1+ toggle", false) end
         ),
     
         -- Brightness
@@ -79,13 +96,23 @@ function make_global_keys(modkey)
 
         -- Media Keys
         awful.key({}, "XF86AudioNext",
-            function () awful.util.spawn("mediacontrol Next") end
+            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Next") end
         ),
         awful.key({}, "XF86AudioPrev",
-            function () awful.util.spawn("mediacontrol Previous") end
+            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Previous") end
         ),
         awful.key({}, "XF86AudioPlay",
-            function () awful.util.spawn("mediacontrol PlayPause") end
+            function () awful.util.spawn_with_shell("~/.bin/mediacontrol PlayPause") end
+        ),
+
+        awful.key({ modkey, "Control"}, "F3",
+            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Next") end
+        ),
+        awful.key({ modkey, "Control"}, "F2",
+            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Previous") end
+        ),
+        awful.key({ modkey, "Control"}, "F1",
+            function () awful.util.spawn_with_shell("~/.bin/mediacontrol PlayPause") end
         ),
 
         -- Toggle wibox.
