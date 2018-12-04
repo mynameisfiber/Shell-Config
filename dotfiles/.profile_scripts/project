@@ -1,5 +1,5 @@
 function _projectNames() {
-    tmux ls | cut -d: -f1
+    tmux ls 2> /dev/null | cut -d: -f1
 }
 
 function ssh-tmux-update() {

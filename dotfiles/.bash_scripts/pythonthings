@@ -3,3 +3,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # set py3.7+ `breakpoint()` to use ipython embed
 export PYTHONBREAKPOINT="IPython.embed"
+
+# have pipenv store virtualenv's in project directory instead of globally
+export PIPENV_VENV_IN_PROJECT=1
