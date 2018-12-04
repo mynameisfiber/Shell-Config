@@ -1,5 +1,6 @@
 export GOPATH="$HOME/projects/golang/:/usr/share/go"
 export PATH="$HOME/projects/golang/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
 
 # install in /etc/bash_completion.d/ or your personal directory
 

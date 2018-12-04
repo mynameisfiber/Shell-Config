@@ -1,9 +1,11 @@
 #!/bin/bash
+# Must install and configure gcal-cli in addition to the crontab:
+# */10 * * * * /usr/local/bin/gcalcli agenda "$( date )" "$(date --date='2day')" > ~/tmp/agenda.txt
 
 function agenda() {
     if [[ -e ~/tmp/agenda.txt ]]; then
         echo -e "\e[1;31m`date`\e[0m";
-        cat ~/tmp/agenda.txt;
+        cat ~/tmp/agenda.txt | tail -n +2 | head -n -1;
     fi;
 }
 

@@ -31,4 +31,4 @@ run_once("blueman-applet")
 run_once("fluxgui")
 
 --- compositing for transparency
-run_once("unagi")
+--run_once("unagi")
