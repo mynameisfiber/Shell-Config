@@ -3,7 +3,7 @@
 CUDA_VERSIONS=$( ls -d /usr/local/cuda-* | cut -d- -f2 )
 
 function activate_cuda() {
-    if [[ -z "$CUDA_VERSIONS" ]]; then
+    if [[ ! -z "$CUDA_VERSIONS" ]]; then
         local version=$1
         [ -z "$version" ] && version=$( cat ~/.cuda_version 2> /dev/null )
         [ -z "$version" ] && version=$( ls -d /usr/local/cuda-* | cut -d- -f2 | head -n 1)
