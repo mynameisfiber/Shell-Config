@@ -1,0 +1,24 @@
+#!/bin/bash
+
+CUDA_VERSIONS=$( ls -d /usr/local/cuda-* | cut -d- -f2 )
+
+function activate_cuda() {
+    if [[ -z "$CUDA_VERSIONS" ]]; then
+        local version=$1
+        [ -z "$version" ] && version=$( cat ~/.cuda_version 2> /dev/null )
+        [ -z "$version" ] && version=$( ls -d /usr/local/cuda-* | cut -d- -f2 | head -n 1)
+        export PATH=$PATH:/usr/local/cuda-$version/bin
+        export CUDADIR=/usr/local/cuda-$version
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$version/lib64
+        echo $version > ~/.cuda_version
+    fi
+}
+activate_cuda
+
+function _activate_cuda() {
+    local cur=${COMP_WORDS[$COMP_CWORD]}
+    local sessions=$CUDA_VERSIONS
+    COMPREPLY=( $(compgen -W "$sessions" -- $cur) )
+}
+
+complete -F _activate_cuda activate_cuda
