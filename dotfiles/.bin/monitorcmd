@@ -51,12 +51,12 @@ mkdir -p $( dirname $filename )
 count=0
 while true ; do
     if [ -e "$filename" ]; then
-        for i in `seq $((maxlog-1)) -1 1`; do
+        for i in $( seq $((maxlog-1)) -1 1 ); do
             [ -e "$filename.$i" ] && mv -f "$filename."{$i,$((i+1))}
         done 
         mv -f $filename{,.1}
     fi;
-    $cmd > $filename 2>&1
+    ( $cmd ) > $filename 2>&1
     if [ "$verbose" -eq '1' ]; then
         echo -n '.'
         if [ "$count" -eq 600 ]; then
