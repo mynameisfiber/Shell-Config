@@ -1,0 +1,70 @@
+#!/bin/bash
+
+usage() {
+    echo "usage: $0 [-f filename] [-i interval] [-m maxlog] [-v] <command>"
+}
+
+filename=./log
+interval=1
+maxlog=10
+verbose=0
+while [ "$1" != "" ]; do
+    case $1 in
+        -f | --file )           shift
+                                filename=$1
+                                shift
+                                ;;
+        -i | --interval )       shift
+                                interval=$1
+                                shift
+                                ;;
+        -m | --maxlog )         shift
+                                maxlog=$1
+                                shift
+                                ;;
+        -v | --verbose )        shift
+                                verbose=1
+                                ;;
+        -h | --help )           usage
+                                exit
+                                ;;
+        *)                      break
+                                ;;
+    esac
+done
+
+cmd=$1
+if [ -z "$cmd" ]; then
+    usage
+    exit
+fi
+
+if [ "$verbose" -eq '1' ]; then
+    echo "filename = $filename"
+    echo "interval = $interval"
+    echo "maxlog = $maxlog"
+    echo "verbose = $verbose"
+    echo "command = $cmd"
+fi
+
+mkdir -p $( dirname $filename )
+count=0
+while true ; do
+    if [ -e "$filename" ]; then
+        for i in `seq $((maxlog-1)) -1 1`; do
+            [ -e "$filename.$i" ] && mv -f "$filename."{$i,$((i+1))}
+        done 
+        mv -f $filename{,.1}
+    fi;
+    $cmd > $filename 2>&1
+    if [ "$verbose" -eq '1' ]; then
+        echo -n '.'
+        if [ "$count" -eq 600 ]; then
+            count=0
+            date
+        fi
+    fi
+    sleep $interval
+    count=$(( $count + 1 ))
+done;
+
