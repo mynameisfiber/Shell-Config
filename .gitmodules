@@ -85,3 +85,6 @@
 [submodule "dotfiles/.vim/bundle/vim-tmux-clipboard"]
 	path = dotfiles/.vim/bundle/vim-tmux-clipboard
 	url = git@github.com:roxma/vim-tmux-clipboard.git
+[submodule "dotfiles/.pyenv"]
+	path = dotfiles/.pyenv
+	url = https://github.com/pyenv/pyenv.git
