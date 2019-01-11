@@ -7,3 +7,5 @@ mcd()
 {
     mkdir -p $1; cd $1;
 }
+
+export PROMPT_DIRTRIM=2

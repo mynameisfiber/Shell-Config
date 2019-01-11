@@ -1,3 +1,5 @@
+export PATH="/usr/sbin:$PATH"
+
 #Gnome alias for portability
 if [[ $DESKTOP_SESSION == "gnome" ]]
   then
