@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "usage: $0 [-f filename] [-i interval] [-m maxlog] [-v] <command>"
+    echo "usage: $0 [-f filename] [-i interval] [-m maxlog] [-v[-v]] <command>"
 }
 
 filename=./log
@@ -23,7 +23,7 @@ while [ "$1" != "" ]; do
                                 shift
                                 ;;
         -v | --verbose )        shift
-                                verbose=1
+                                verbose=$(( $verbose + 1 ))
                                 ;;
         -h | --help )           usage
                                 exit
@@ -39,7 +39,7 @@ if [ -z "$cmd" ]; then
     exit
 fi
 
-if [ "$verbose" -eq '1' ]; then
+if [ "$verbose" -ge '1' ]; then
     echo "filename = $filename"
     echo "interval = $interval"
     echo "maxlog = $maxlog"
@@ -56,15 +56,20 @@ while true ; do
         done 
         mv -f $filename{,.1}
     fi;
-    ( $cmd ) > $filename 2>&1
+    ( eval $cmd ) > $filename 2>&1
     if [ "$verbose" -eq '1' ]; then
         echo -n '.'
         if [ "$count" -eq 600 ]; then
             count=0
             date
+        else
+            count=$(( $count + 1 ))
         fi
+    elif [ "$verbose" -eq '2' ]; then
+        lines=$( tput lines )
+        clear
+        head -n $(( $lines - 1)) $filename
     fi
     sleep $interval
-    count=$(( $count + 1 ))
 done;
 
