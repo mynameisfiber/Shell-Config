@@ -15,8 +15,8 @@ echo "*******Installing required python packages"
 pip3 install -Ur requirements.txt --user
 
 echo "*******Updating submodules"
-git submodule update --init --recursive
-git submodule foreach  git pull -f origin master
+git config --global core.excludesfile '~/.gitignore'
+git submodule update --init --recursive --remote
 
 echo "*******Refreshing dotfiles"
 stow -R dotfiles

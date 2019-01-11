@@ -5,3 +5,5 @@
 	default = simple
 [init]
 	templatedir = ~/.gitrc/git_templates
+[core]
+	excludesfile = ~/.gitignore
