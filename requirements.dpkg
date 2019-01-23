@@ -1,4 +1,12 @@
+# the basics
+vim
 python3
 git
 build-essential
 fonts-powerline
+
+# python stuff
+libffi-dev
+libreadline-dev
+libsqlite3-dev
+libbz2-dev

@@ -1,7 +1,10 @@
+awesome
 i3lock
 xautolock
 libnotify-bin
 volti
-fluxgui
---no-install-recommends network-manager-gnome
+network-manager-gnome
 unagi
+x11-xserver-utils
+
+# fluxgui

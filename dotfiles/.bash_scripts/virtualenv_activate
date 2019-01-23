@@ -4,7 +4,7 @@ function activate() {
     if [ -e ./venv/bin/activate ]; then
         echo "Activating virtualenv."
         source ./venv/bin/activate
-    elif [[ -e Pipfile && "$PIPENV_ACTIVE" -ne "1" ]]; then
+    elif [[ -e ./.venv/bin/activate && "$PIPENV_ACTIVE" -ne "1" ]]; then
         source ./.venv/bin/activate
     fi
 }
