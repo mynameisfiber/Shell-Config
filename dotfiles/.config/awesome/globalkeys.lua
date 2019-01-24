@@ -94,6 +94,14 @@ function make_global_keys(modkey)
               function () awful.util.spawn("xautolock -toggle") end
     	),
 
+        -- Touchpad Control
+        awful.key({}, "XF86Explorer",
+            function () awful.util.spawn_with_shell("~/.bin/touchpad_toggle") end
+        ),
+        awful.key({ modkey}, "F12",
+            function () awful.util.spawn_with_shell("~/.bin/touchpad_toggle") end
+        ),
+
         -- Media Keys
         awful.key({}, "XF86AudioNext",
             function () awful.util.spawn_with_shell("~/.bin/mediacontrol Next") end
