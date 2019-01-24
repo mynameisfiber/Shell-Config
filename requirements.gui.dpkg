@@ -9,4 +9,7 @@ x11-xserver-utils
 xbacklight
 xclip
 
+# better touchpad
+xserver-xorg-input-synaptics
+
 # fluxgui
