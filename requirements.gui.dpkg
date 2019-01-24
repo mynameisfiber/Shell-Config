@@ -9,6 +9,9 @@ x11-xserver-utils
 xbacklight
 xclip
 
+# for lolcommits
+ffmpeg
+
 # better touchpad
 xserver-xorg-input-synaptics
 

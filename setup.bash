@@ -44,6 +44,11 @@ echo "*******Installing required python packages"
 pip3 install -U --user pip
 pip3 install -Ur requirements.txt --user
 
+if [ ! -z "$DISPLAY" ]; then
+    echo "********Installing lolcommits"
+    gem install lolcommits
+fi
+
 echo "*******Updating submodules"
 git config --global core.excludesfile '~/.gitignore'
 git submodule update --init --recursive --remote
