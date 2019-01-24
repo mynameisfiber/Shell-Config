@@ -6,5 +6,7 @@ volti
 network-manager-gnome
 unagi
 x11-xserver-utils
+xbacklight
+xclip
 
 # fluxgui
