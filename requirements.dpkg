@@ -1,12 +1,17 @@
 # the basics
+tmux
 vim
 python3
 git
 build-essential
 fonts-powerline
+cmake
+stow
 
 # python stuff
 libffi-dev
 libreadline-dev
 libsqlite3-dev
 libbz2-dev
+zlib1g-dev
+libssl-dev
