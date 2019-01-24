@@ -10,6 +10,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+-- OS for file handling
+local os = require("os")
 
 -- Autostart
 require("autostart")
@@ -92,25 +94,31 @@ local function client_menu_toggle_fn()
     end
 end
 
-local function toggleCaffeine()
-    local mon=''
-    if not naughty.is_suspended() then
-        naughty.notify({ text = "Lounging" })
-        mon='☐'
-        awful.util.spawn("xautolock -disable")
-        awful.util.spawn("xset s off")
-        awful.util.spawn("xset -dpms")
+local function caffeineStatus()
+    return awful.util.file_readable(
+        os.getenv("HOME") .. "/.caffeine"
+    )
+end
+
+local function caffeineText(isOn)
+    if isOn then
+        return '☑'
     else
-        naughty.notify({ text = "Drinking Coffee" })
-        mon='☑'
-        awful.util.spawn("xautolock -enable")
-        awful.util.spawn("xset s on")
-        awful.util.spawn("xset +dpms")
+        return '☐'
     end
-    awful.util.spawn("gsettings set org.gnome.desktop.notifications " ..
-                     "show-banners " .. tostring(naughty.is_suspended()) .. " &")
-    caffeinemon.text = mon
-    naughty.toggle()
+end
+
+local function caffeineToggle()
+    awful.spawn.with_shell("~/.bin/caffeine")
+    local caffeine_on = caffeineStatus()
+    if caffeine_on == True then
+        -- caffeine ON
+        naughty.suspend()
+    else
+        -- caffeine OFF
+        naughty.resume()
+    end
+    caffeinemon.text = caffeineText(caffeine_on)
 end
 
 -- }}}
@@ -153,12 +161,12 @@ batterymon = awful.widget.watch('bash -c "~/.bin/battery 20"', 30)
 
 -- Notification Monitor
 caffeinemon = wibox.widget{
-    text = '☑',
+    text = caffeineText(caffeineStatus()),
     align  = 'center',
     valign = 'center',
     widget = wibox.widget.textbox,
 }
-caffeinemon:connect_signal("button::press", toggleCaffeine)
+caffeinemon:connect_signal("button::press", caffeineToggle)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+QUIET=$1
+caffeine_status_file=~/.caffeine
+
+if xautolock -exit; then
+    echo "Caffeine On"
+    touch $caffeine_status_file
+    [ -z "$QUIET" ] && notify-send -u normal -t 5000 -- 'Caffeine On' 'Screen will not sleep' 2> /dev/null
+    #xset s off
+    #xset -dpms
+    gsettings set org.gnome.desktop.notifications show-banners false
+else
+    echo "Caffeine Off"
+    [ -z "$QUIET" ] && notify-send -u normal -t 5000 -- 'Caffeine Off' 'Screen may take a nap' 2> /dev/null
+    #xset s on
+    #xset +dpms
+    gsettings set org.gnome.desktop.notifications show-banners true
+    flock -n /var/lock/$USER.xautolock.lock \
+        xautolock -detectsleep \
+            -time 5 -locker "i3lock -d -c 000070" \
+            -notify 30 \
+            -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
+    rm $caffeine_status_file
+fi
