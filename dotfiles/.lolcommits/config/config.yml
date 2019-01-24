@@ -1,0 +1,21 @@
+---
+loltext:
+  :enabled: true
+  :message:
+    :color: 
+    :font: 
+    :position: 
+    :size: 
+    :stroke_color: 
+    :uppercase: 
+  :sha:
+    :color: 
+    :font: 
+    :position: 
+    :size: 
+    :stroke_color: 
+    :uppercase: 
+  :overlay:
+    :enabled: false
+  :border:
+    :enabled: false
