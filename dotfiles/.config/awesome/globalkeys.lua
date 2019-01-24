@@ -65,7 +65,7 @@ function make_global_keys(modkey)
         ),
 
         awful.key({ }, "XF86AudioMicMute",
-            function () awful.util.spawn("amixer set Capture 1+ toggle", false) end
+            function () awful.spawn("amixer set Capture 1+ toggle", false) end
         ),
     
         -- Brightness
@@ -85,42 +85,42 @@ function make_global_keys(modkey)
         -- Lock
     	awful.key({ }, "XF86Search",
               function ()
-                  awful.util.spawn("sync")
-                  awful.util.spawn("xautolock -enable")
-                  awful.util.spawn("xautolock -locknow")
+                  awful.spawn("sync")
+                  awful.spawn("xautolock -enable")
+                  awful.spawn("xautolock -locknow")
               end
     	),
     	awful.key({"Shift"}, "XF86Search",
-              function () awful.util.spawn("xautolock -toggle") end
+              function () awful.spawn.with_shell("~/.bin/caffeine") end
     	),
 
         -- Touchpad Control
         awful.key({}, "XF86Explorer",
-            function () awful.util.spawn_with_shell("~/.bin/touchpad_toggle") end
+            function () awful.spawn.with_shell("~/.bin/touchpad_toggle") end
         ),
         awful.key({ modkey}, "F12",
-            function () awful.util.spawn_with_shell("~/.bin/touchpad_toggle") end
+            function () awful.spawn.with_shell("~/.bin/touchpad_toggle") end
         ),
 
         -- Media Keys
         awful.key({}, "XF86AudioNext",
-            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Next") end
+            function () awful.spawn.with_shell("~/.bin/mediacontrol Next") end
         ),
         awful.key({}, "XF86AudioPrev",
-            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Previous") end
+            function () awful.spawn.with_shell("~/.bin/mediacontrol Previous") end
         ),
         awful.key({}, "XF86AudioPlay",
-            function () awful.util.spawn_with_shell("~/.bin/mediacontrol PlayPause") end
+            function () awful.spawn.with_shell("~/.bin/mediacontrol PlayPause") end
         ),
 
         awful.key({ modkey, "Control"}, "F3",
-            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Next") end
+            function () awful.spawn.with_shell("~/.bin/mediacontrol Next") end
         ),
         awful.key({ modkey, "Control"}, "F2",
-            function () awful.util.spawn_with_shell("~/.bin/mediacontrol Previous") end
+            function () awful.spawn.with_shell("~/.bin/mediacontrol Previous") end
         ),
         awful.key({ modkey, "Control"}, "F1",
-            function () awful.util.spawn_with_shell("~/.bin/mediacontrol PlayPause") end
+            function () awful.spawn.with_shell("~/.bin/mediacontrol PlayPause") end
         ),
 
         -- Toggle wibox.
@@ -134,7 +134,7 @@ function make_global_keys(modkey)
 
         -- Open file manager
         awful.key({ modkey}, "o",
-            function () awful.util.spawn("nautilus --no-desktop") end
+            function () awful.spawn("nautilus --no-desktop") end
         )
     )
     
