@@ -1,0 +1,4 @@
+#!/bin/sh
+### lolcommits hook (begin) ###
+LANG="en_US.UTF-8" && PATH="/usr/bin:/usr/bin:$PATH" && if [ ! -d "$GIT_DIR/rebase-merge" ] && [ "$LOLCOMMITS_CAPTURE_DISABLED" != "true" ]; then lolcommits --capture ; fi
+###  lolcommits hook (end)  ###

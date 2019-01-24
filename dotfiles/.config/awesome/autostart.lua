@@ -22,7 +22,7 @@ run_once("xmodmap ~/.Xmodmap")
 run_once("nm-applet")
 
 -- volume manager
-run_once("volti")
+run_once("pasystray")
 
 -- bluetooth?
 run_once("blueman-applet")

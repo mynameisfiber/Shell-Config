@@ -10,18 +10,24 @@ function inject_shell_custom() {
 	fi
 }
 
-function apt_install_requirements() {
-    local requirements=$1
+function _install_requirements() {
+    local method=$1
+    local requirements=$2
     local pkg_list=$( cat $requirements | grep -Ev '(#|^$)' | paste -d' ' -s - )
     echo "Installing packages: $pkg_list"
-    sudo apt install $pkg_list
+    sudo $1 install $pkg_list
 }
 
 echo "*******System Packages"
 if command -v apt > /dev/null 2>&1; then
-    apt_install_requirements requirements.dpkg
+    _install_requirements apt requirements.dpkg
     if [ ! -z "$DISPLAY" ]; then
-        apt_install_requirements requirements.gui.dpkg
+        _install_requirements apt requirements.gui.dpkg
+    fi
+fi
+if command -v snap > /dev/null 2>&1; then
+    if [ ! -z "$DISPLAY" ]; then
+        _install_requirements snap requirements.gui.snap
     fi
 fi
 
