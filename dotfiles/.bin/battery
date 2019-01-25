@@ -25,8 +25,9 @@ full_battery=$( battery_status "{charge,energy}_full" )
 percent=$( echo "$curr_battery / $full_battery" | bc -l )
 charging=$( cat /sys/class/power_supply/AC/online )
 
-# The strange negatives for full_hearts is to make sure we round up
-full_hearts=$( echo "(-1*$num_stars * $percent)/-1" | bc )
+# Add 0.5 so that we are rounding instead of just
+# truncating the number of hearts
+full_hearts=$( echo "($num_stars * $percent + 0.5)/1" | bc )
 empty_hearts=$( echo "($num_stars - $full_hearts)/1" | bc )
 
 [ $charging == 1 ] && echo -n $POWER
