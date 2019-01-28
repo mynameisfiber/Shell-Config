@@ -42,7 +42,7 @@ pyenv global 3.7.2
 
 echo "*******Installing required python packages"
 pip3 install -U --user pip
-pip3 install -Ur requirements.txt --user
+pip3 install --upgrade --force-reinstall -r requirements.txt --user
 
 if [ ! -z "$DISPLAY" ]; then
     echo "********Installing lolcommits"
