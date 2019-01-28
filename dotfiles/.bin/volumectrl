@@ -1,0 +1,40 @@
+#!/bin/bash
+
+VOLUME_BOX=${VOLUME_BOX:-"\u25a0"}
+OVERVOL_BOX=${OVERVOL_BOX:-"\u25cf"}
+EMPTY_BOX=${EMPTY_BOX:-"\u25a1"}
+MUTE_BOX=${MUTE_BOX:-"\u25a8"}
+
+action=$1
+num_boxes=${2:-10}
+
+function repeat() {
+    eval printf -- '$1%.s' {1..$2}
+}
+
+if [[ "$action" != "status" ]]; then
+    if [[ "$action" == "toggle" ]]; then
+        pulsemixer --toggle-mute
+    elif [ ! -z "$action" ]; then
+        pulsemixer --change-volume $action
+    fi
+fi
+
+IS_MUTE=$( pulsemixer --get-mute )
+VOLUME=$( pulsemixer --get-volume | cut -d' ' -f1 )
+
+if [ "$IS_MUTE" -eq "1" ]; then
+    VOL_CHAR=$MUTE_BOX
+else
+    VOL_CHAR=$VOLUME_BOX
+fi
+
+full_boxes=$( echo "($num_boxes * $VOLUME )/100" | bc )
+over_boxes=$( echo "($full_boxes - $num_boxes)/1" | bc )
+empty_boxes=$( echo "($num_boxes - $full_boxes)/1" | bc )
+full_boxes=$(( full_boxes > num_boxes ? num_boxes : full_boxes ))
+
+echo -ne "$VOLUME%"
+[ "$full_boxes" -gt 0 ] && repeat $VOL_CHAR $full_boxes
+[ "$empty_boxes" -gt 0 ] && repeat $EMPTY_BOX $empty_boxes
+[ "$over_boxes" -gt 0 ] && repeat $OVERVOL_BOX $over_boxes

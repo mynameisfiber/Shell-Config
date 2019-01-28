@@ -2,12 +2,16 @@ awesome
 i3lock
 xautolock
 libnotify-bin
-pasystray
 network-manager-gnome
 unagi
 x11-xserver-utils
 xbacklight
 xclip
+
+# audio utils
+pulseaudio-utils
+pulsemixer
+pasystray
 
 # for lolcommits
 ffmpeg
