@@ -1,9 +1,13 @@
-export SCREENLAYOUTSPATH=$HOME/.screenlayouts
+export SCREENLAYOUTSPATH=$HOME/.screenlayout/
 
 function screenlayout { 
     layout=$1
-    script=$SCREENLAYOUTSPATH/${layout}.sh
-    if [ -x "$script" ]; then
+    script_host=$SCREENLAYOUTSPATH/$(hostname)/${layout}.sh
+    script_global=$SCREENLAYOUTSPATH/${layout}.sh
+    if [ -x "$script_host" ]; then
+        echo "Setting layout to: ${layout}@$(hostname)"
+        eval ${script}
+    elif [ -x "$script_global"; then
         echo "Setting layout to: ${layout}"
         eval ${script}
     else
@@ -11,9 +15,17 @@ function screenlayout {
     fi
 }
 
+function _listlayouts() {
+    ( find -L $SCREENLAYOUTSPATH/{,$(hostname)} \
+           -maxdepth 1 \
+           -type f \
+           -printf "%f\n" | \
+      sed 's/\.sh//' 2> /dev/null )
+}
+
 _screenlayout()
 {
     local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $(compgen -W "$( ls $SCREENLAYOUTSPATH)" -- $cur | sed 's/.sh//') )
+    COMPREPLY=( $(compgen -W "$( _listlayouts )" ) )
 }
 complete -F _screenlayout screenlayout
