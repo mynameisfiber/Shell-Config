@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""
+Simple unicode progressbar utility
+"""
+
+from __future__ import print_function
+from __future__ import division
+from __future__ import unicode_literals
+
+import sys
+import argparse
+
+try:
+    import shutils
+    columns, _ = shutil.get_terminal_size()
+except (ImportError, AttributeError):
+    columns = 80
+
+THEMES = {
+    "smooth": "█ ▏▎▍▌▋▊▉",
+    "dots_1": "⣿ ⣀⣄⣤⣦⣶⣷",
+    "dots_2": "⣿ ⣀⣄⣆⣇⣧⣷",
+    "circles": '⬤ ○◔◐◕',
+    "squares_1": '■ □◱◧▣',
+    "squares_2": '■ □◱▨▩',
+    "squares_3": '■ □◱▥▦',
+    "shades_1": '█ ░▒▓',
+    "shades_2": '█ ░',
+    "shades_3": '⬛ ⬜',
+}
+DEFAULT_THEME = "smooth"
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('-c', '--characters',
+                    help=("Characters to use for progressbar. Provided in a string of the form "
+                          "'abcdef....z' "
+                          "where 'a' is the full block character, 'b' is the empty block character "
+                          "and all following characters are for partial blocks"))
+parser.add_argument('-t', '--theme', default=DEFAULT_THEME, choices=THEMES.keys(),
+                    help='Premade progress-bar themes')
+parser.add_argument('-b', '--border',
+                    help='Border character (optional)')
+parser.add_argument('-m', '--max-progress', default=100, type=float,
+                    help='Maximum progress value allowed')
+parser.add_argument('-p', '--progress', type=float, required=True,
+                    help='Progress')
+parser.add_argument('-w', '--width', type=int, default=columns,
+                    help='width of spectrogram')
+args = parser.parse_args()
+
+if __name__ == "__main__":
+    characters = args.characters or THEMES[args.theme]
+    progress = args.progress
+    max_progress = args.max_progress
+    width = args.width
+    border = args.border or ''
+    
+    if border:
+        width -= 2
+
+    (fb_c, eb_c, *pb_cs) = characters
+    progress_chars = ['', *pb_cs]
+
+    progress = min(max(0, progress), max_progress)
+    percent = progress / max_progress
+
+    full_blocks = int(percent * width)
+    remainder = (percent*width) % 1
+    partial_idx = int(remainder * len(progress_chars))
+    empty_blocks = (width - full_blocks - (partial_idx > 0))
+
+    print(
+        border +
+        (fb_c * full_blocks) +
+        (progress_chars[partial_idx]) +
+        (eb_c * empty_blocks) +
+        border,
+        end=''
+    )
+

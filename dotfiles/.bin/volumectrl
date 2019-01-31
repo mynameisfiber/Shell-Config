@@ -24,17 +24,10 @@ IS_MUTE=$( pulsemixer --get-mute )
 VOLUME=$( pulsemixer --get-volume | cut -d' ' -f1 )
 
 if [ "$IS_MUTE" -eq "1" ]; then
-    VOL_CHAR=$MUTE_BOX
+    CHARS="▨□◫"
 else
-    VOL_CHAR=$VOLUME_BOX
+    CHARS="■□◧"
 fi
 
-full_boxes=$( echo "($num_boxes * $VOLUME )/100" | bc )
-over_boxes=$( echo "($full_boxes - $num_boxes)/1" | bc )
-empty_boxes=$( echo "($num_boxes - $full_boxes)/1" | bc )
-full_boxes=$(( full_boxes > num_boxes ? num_boxes : full_boxes ))
-
 echo -ne "$VOLUME%"
-[ "$full_boxes" -gt 0 ] && repeat $VOL_CHAR $full_boxes
-[ "$empty_boxes" -gt 0 ] && repeat $EMPTY_BOX $empty_boxes
-[ "$over_boxes" -gt 0 ] && repeat $OVERVOL_BOX $over_boxes
+progress --characters="$CHARS" --progress=$VOLUME --width=10
