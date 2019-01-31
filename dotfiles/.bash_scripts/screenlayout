@@ -6,10 +6,10 @@ function screenlayout {
     script_global=$SCREENLAYOUTSPATH/${layout}.sh
     if [ -x "$script_host" ]; then
         echo "Setting layout to: ${layout}@$(hostname)"
-        eval ${script}
-    elif [ -x "$script_global"; then
+        eval ${script_host}
+    elif [ -x "$script_global" ]; then
         echo "Setting layout to: ${layout}"
-        eval ${script}
+        eval ${script_global}
     else
         echo "Could not find definition for layout: ${layout}"
     fi
@@ -26,6 +26,6 @@ function _listlayouts() {
 _screenlayout()
 {
     local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $(compgen -W "$( _listlayouts )" ) )
+    COMPREPLY=( $(compgen -W "$( _listlayouts )" -- $cur ) )
 }
 complete -F _screenlayout screenlayout
