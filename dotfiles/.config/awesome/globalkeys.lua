@@ -1,5 +1,6 @@
 local awful = require("awful")
 local naughty = require("naughty")
+local lain = require("lain")
 
 local naughtyvolumeid = nil
 function change_volume(how)
@@ -30,8 +31,18 @@ function change_brightness(how)
     })
 end
 
+local quake = lain.util.quake({
+    app = 'zeal',
+    height = 0.5,
+})
+
 function make_global_keys(modkey)
     local globalkeys = awful.util.table.join(
+        -- Quake
+        awful.key({ modkey}, "z",
+            function () quake:toggle() end
+        ),
+
         -- Audio keys
         awful.key({ }, "XF86AudioRaiseVolume",
             function () change_volume("+3") end
