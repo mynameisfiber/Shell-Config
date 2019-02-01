@@ -46,7 +46,7 @@ pip3 install --upgrade --force-reinstall -r requirements.txt --user
 
 if [ ! -z "$DISPLAY" ]; then
     echo "********Installing lolcommits"
-    gem install lolcommits lolcommits-loltext
+    gem install --user lolcommits lolcommits-loltext
 fi
 
 echo "*******Updating submodules"
