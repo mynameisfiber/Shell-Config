@@ -88,3 +88,12 @@
 [submodule "dotfiles/.pyenv"]
 	path = dotfiles/.pyenv
 	url = https://github.com/pyenv/pyenv.git
+[submodule "dotfiles/.vim/bundle/completor.vim"]
+	path = dotfiles/.vim/bundle/completor.vim
+	url = git@github.com:maralla/completor.vim.git
+[submodule "dotfiles/.vim/bundle/indentpython.vim"]
+	path = dotfiles/.vim/bundle/indentpython.vim
+	url = git@github.com:vim-scripts/indentpython.vim.git
+[submodule "dotfiles/.config/awesome/lain"]
+	path = dotfiles/.config/awesome/lain
+	url = https://github.com/lcpz/lain.git
