@@ -13,9 +13,10 @@ function inject_shell_custom() {
 function _install_requirements() {
     local method=$1
     local requirements=$2
-    local pkg_list=$( cat $requirements | grep -Ev '(#|^$)' | paste -d' ' -s - )
-    echo "Installing packages: $pkg_list"
-    sudo $1 install $pkg_list
+    echo "Installing packages: $( cat $requirements | grep -Ev '(#|^$)' | paste -d' ' -s - )"
+    cat $requirements | grep -Ev '(#|^$)' | (while read package; do
+        sudo $1 install $package
+    done)
 }
 
 echo "*******System Packages"

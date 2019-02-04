@@ -4,4 +4,5 @@ flake8
 proselint
 virtualenv
 ipython
+pipenv
 magic-wormhole
