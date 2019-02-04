@@ -2,9 +2,9 @@ firefox
 chromium
 signal-desktop
 yakyak
-slack
+slack --classic
 spotify
 vlc
 
 # for lolcommits
-ruby
+ruby --classic
