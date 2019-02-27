@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+from __future__ import print_function
+import sys
+import os
+
+BRIGHT_PATH="/sys/class/backlight/intel_backlight"
+
+
+def usage():
+    print("""{} [-+][percent][%] 
+    Modify system brightness.""".format(sys.argv[0]))
+    return
+
+
+if __name__ == "__main__":
+    command = sys.argv[1]
+    direction = command[0]
+    if direction not in '+-':
+        usage()
+        print("Must preface percent with - or +")
+        sys.exit(-1)
+    try:
+        tmp = command[1:].replace('%', '')
+        percent = float(tmp)
+    except ValueError:
+        usage()
+        print("Invalid percent")
+        sys.exit(-1)
+
+    if direction == '-':
+        percent *= -1
+
+    max_brightness = int(open(os.path.join(BRIGHT_PATH,
+                                           "max_brightness")).read())
+    cur_brightness = int(open(os.path.join(BRIGHT_PATH,
+                                           "brightness")).read())
+    new_brightness = cur_brightness + percent * max_brightness / 100.0
+    new_brightness = int(min(max(new_brightness, 0), max_brightness))
+
+    with open(os.path.join(BRIGHT_PATH, "brightness"), 'w') as fd:
+        fd.write(str(new_brightness))
+
+    new_percent = int(100 * new_brightness / max_brightness)
+    print("{:d}%".format(new_percent), end='', flush=True)
+    os.system(("bash -c 'progress "
+               "--characters=■□◧ "
+               "--progress={} "
+               "--width=20'").format(new_percent))

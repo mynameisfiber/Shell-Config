@@ -8,32 +8,34 @@ function change_volume(how)
     awful.spawn.easy_async_with_shell(
         command,
         function(stdout, stderr, reason, exit_code)
-            naughtybrightid = naughty.notify({
+            naughtyvolumeid = naughty.notify({
                 text = stdout:gsub("^%s*(.-)%s*$", "%1"),
                 title = "Volume",
+                replaces_id = naughtyvolumeid
+            }).id
+        end
+    )
+end
+
+local naughtybrightid = nil
+function change_brightness(how)
+    local command = "brightness " .. how
+    awful.spawn.easy_async_with_shell(
+        command,
+        function(stdout, stderr, reason, exit_code)
+            naughtybrightid = naughty.notify({
+                text = stdout:gsub("^%s*(.-)%s*$", "%1"),
+                title = "Brightness",
                 replaces_id = naughtybrightid
             }).id
         end
     )
 end
 
-local naughtybightid = nil
-function change_brightness(how)
-    os.execute("xbacklight " .. how)
-    awful.spawn.with_line_callback("xbacklight", {
-        stdout = function (line) 
-            naughtybrightid = naughty.notify({
-                text = string.format("%0.1f%%", tonumber(line)),
-                title = "Brightness",
-                replaces_id = naughtybrightid
-            }).id
-        end
-    })
-end
-
 local quake = lain.util.quake({
     app = 'zeal',
     height = 0.5,
+    followtag = true,
 })
 
 function make_global_keys(modkey)
