@@ -1,11 +1,11 @@
 #!/bin/bash
 # Must install python application `showsnearme` (http://github.com/mynameisfiber/showsnearme) and the crontab:
-# 0 * * * * /usr/local/bin/showsnearme -A 2 -n 3 --hide-url '<ADDRESS>' > ~/tmp/shows.txt
+# 0 * * * * /usr/local/bin/showsnearme -A 2 -n 3 --hide-url '<ADDRESS>' > $HOME/tmp/shows.txt
 
 function shows() {
-    if [[ -e ~/tmp/shows.txt ]]; then
+    if [[ -e $HOME/tmp/shows.txt ]]; then
         echo "$(tput setaf 2)Shows near me$(tput sgr0)"
-        cat ~/tmp/shows.txt | sed '/^\s*$/d';
+        cat $HOME/tmp/shows.txt | sed '/^\s*$/d';
     fi;
 }
 

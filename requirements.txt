@@ -5,3 +5,4 @@ proselint
 virtualenv
 ipython
 magic-wormhole
+git+http://github.com/mynameisfiber/showsnearme

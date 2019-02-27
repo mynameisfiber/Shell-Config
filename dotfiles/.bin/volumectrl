@@ -30,4 +30,4 @@ else
 fi
 
 echo -ne "$VOLUME%"
-progress --characters="$CHARS" --progress=$VOLUME --width=10
+progress --characters="$CHARS" --progress=$VOLUME --width=20
