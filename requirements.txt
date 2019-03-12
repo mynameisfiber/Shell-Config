@@ -4,5 +4,6 @@ flake8
 proselint
 virtualenv
 ipython
+pipenv
 magic-wormhole
 git+http://github.com/mynameisfiber/showsnearme
