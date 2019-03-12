@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if command -v google-chrome; then
-    CMD=$( which google-chrome )
+    eval google-chrome --incognito $@
 elif command -v chromium; then
-    CMD=$( which chromium )
-else
-    echo "No chromium based browser found"
-    exit
+    eval chromium --incognito $@
+elif command -v firefox; then
+    eval firefox --private-window $@
 fi
 
-$CMD --incognito $@
+echo "No chromium based browser found"
+exit 1
