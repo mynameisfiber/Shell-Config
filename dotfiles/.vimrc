@@ -21,6 +21,9 @@ nnoremap Q <nop>
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
+" insert timestamp for data entry
+nmap <leader>d i<C-R>=strftime("%s")<CR>
+
 " Tab completion from the top using SuperTab plugin
 let g:completor_python_binary = 'python'
 let g:completor_auto_trigger = 1
