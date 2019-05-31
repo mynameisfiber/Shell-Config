@@ -1,6 +1,6 @@
 #!/bin/bash
 # Must install and configure gcal-cli in addition to the crontab:
-# */10 * * * * /usr/local/bin/gcalcli agenda "$( date )" "$(date --date='2day')" > ~/tmp/agenda.txt
+# */10 * * * * python -m gcalcli.cli agenda "$( date )" "$(date --date='2day')" > ~/tmp/agenda.txt
 
 function agenda() {
     if [[ -e ~/tmp/agenda.txt ]]; then
