@@ -24,6 +24,12 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " insert timestamp for data entry
 nmap <leader>d i<C-R>=strftime("%s")<CR>
 
+" ale config for pipenv
+let g:ale_python_auto_pipenv = 1
+
+" Leader-Leader to move to last location of insert-mode
+nmap <leader><leader> `^
+
 " Tab completion from the top using SuperTab plugin
 let g:completor_python_binary = 'python'
 let g:completor_auto_trigger = 1
@@ -52,7 +58,6 @@ nmap Bv :vert sb<space>
 
 " General remapings
 nnoremap <Leader>w :w<CR>
-nmap <Leader><Leader> V
 map q: :q
 
 " Set vim keyboard so that the system copy buffer syncs with vims
