@@ -35,6 +35,13 @@ fi
 
 echo "*******Refreshing dotfiles"
 stow -R dotfiles
+
+echo "*******Injecting custom shell profiles"
+inject_shell_custom ~/.profile ~/.profile_custom
+inject_shell_custom ~/.bashrc ~/.bash_custom
+inject_shell_custom ~/.bash_profile ~/.bash_custom
+
+echo "*******Sourcing bashrc"
 . $HOME/.bashrc
 
 echo "*******Installing python"
@@ -53,11 +60,6 @@ fi
 echo "*******Updating submodules"
 git config --global core.excludesfile '~/.gitignore'
 git submodule update --init --recursive --remote
-
-echo "*******Injecting custom shell profiles"
-inject_shell_custom ~/.profile ~/.profile_custom
-inject_shell_custom ~/.bashrc ~/.bash_custom
-inject_shell_custom ~/.bash_profile ~/.bash_custom
 
 #echo "*******Installing LOLssh"
 #cd lolssh
