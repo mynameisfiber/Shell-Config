@@ -24,19 +24,30 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " insert timestamp for data entry
 nmap <leader>d i<C-R>=strftime("%s")<CR>
 
-" ale config for pipenv
-let g:ale_python_auto_pipenv = 1
-
 " Leader-Leader to move to last location of insert-mode
 nmap <leader><leader> `^
 
-" Tab completion from the top using SuperTab plugin
-let g:completor_python_binary = 'python'
-let g:completor_auto_trigger = 1
-inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Coc tab completion
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+
+" Use <Tab> and <S-Tab> to navigate the completion list:
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+" Use <cr> to confirm completion
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Yank, comment, paste.
 nmap <leader>Y yy,c<space>p

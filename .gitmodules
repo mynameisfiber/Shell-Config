@@ -25,9 +25,6 @@
 [submodule "dotfiles/.vim/bundle/vim-markdown"]
 	path = dotfiles/.vim/bundle/vim-markdown
 	url = https://github.com/hallison/vim-markdown.git
-[submodule "dotfiles/.vim/bundle/ack.vim"]
-	path = dotfiles/.vim/bundle/ack.vim
-	url = git://github.com/mileszs/ack.vim.git
 [submodule "dotfiles/.vim/bundle/dart"]
 	path = dotfiles/.vim/bundle/dart
 	url = git@github.com:dart-lang/dart-vim-plugin.git
@@ -49,9 +46,6 @@
 [submodule "lolssh"]
 	path = lolssh
 	url = git@github.com:mynameisfiber/lolssh.git
-[submodule "dotfiles/.vim/bundle/syntastic"]
-	path = dotfiles/.vim/bundle/syntastic
-	url = git@github.com:scrooloose/syntastic.git
 [submodule "dotfiles/.vim/bundle/ctrlpvim"]
 	path = dotfiles/.vim/bundle/ctrlpvim
 	url = git@github.com:ctrlpvim/ctrlp.vim.git
@@ -94,12 +88,10 @@
 [submodule "dotfiles/.config/awesome/lain"]
 	path = dotfiles/.config/awesome/lain
 	url = https://github.com/lcpz/lain.git
-[submodule "dotfiles/.vim/bundle/vim-jsx-typescript"]
-	path = dotfiles/.vim/bundle/vim-jsx-typescript
-	url = https://github.com/peitalin/vim-jsx-typescript.git
 [submodule "dotfiles/.vim/bundle/typescript-vim"]
 	path = dotfiles/.vim/bundle/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
 [submodule "dotfiles/.vim/bundle/coc.nvim"]
 	path = dotfiles/.vim/bundle/coc.nvim
 	url = git@github.com:neoclide/coc.nvim.git
+    branch = release

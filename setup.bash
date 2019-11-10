@@ -21,9 +21,9 @@ function _install_requirements() {
 
 echo "*******System Packages"
 if command -v apt > /dev/null 2>&1; then
-    _install_requirements apt requirements.dpkg
+    _install_requirements "apt -y" requirements.dpkg
     if [ ! -z "$DISPLAY" ]; then
-        _install_requirements apt requirements.gui.dpkg
+        _install_requirements "apt -y" requirements.gui.dpkg
     fi
 fi
 if command -v snap > /dev/null 2>&1; then

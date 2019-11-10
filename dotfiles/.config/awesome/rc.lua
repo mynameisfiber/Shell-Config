@@ -155,7 +155,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 spacer = wibox.widget.textbox(" ‖ ")
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%b %e, %l:%M")
+mytextclock = wibox.widget.textclock("%b %e, %H:%M")
 
 -- Battery Monitor
 batterymon = awful.widget.watch('bash -c "~/.bin/battery 20"', 30)
