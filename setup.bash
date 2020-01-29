@@ -45,6 +45,9 @@ echo "*******Sourcing bashrc"
 . $HOME/.bashrc
 
 echo "*******Installing python"
+export MAKEOPTS="-j"
+export CFLAGS="-O2"
+export PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions"
 pyenv install --skip-existing 3.7.2
 pyenv global 3.7.2
 
@@ -59,7 +62,7 @@ fi
 
 echo "*******Updating submodules"
 git config --global core.excludesfile '~/.gitignore'
-git submodule update --init --recursive --remote
+git submodule update --init --recursive --remote --njobs=-1
 
 #echo "*******Installing LOLssh"
 #cd lolssh
