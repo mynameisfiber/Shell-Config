@@ -9,6 +9,8 @@ function activate_cuda() {
         [ -z "$version" ] && version=$( ls -d /usr/local/cuda-* 2> /dev/null| cut -d- -f2 | head -n 1)
         export PATH=$PATH:/usr/local/cuda-$version/bin
         export CUDADIR=/usr/local/cuda-$version
+        export CUDA_HOME=/usr/local/cuda-$version
+        export NVCUDASAMPLES_ROOT=${CUDADIR}/samples
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$version/lib64
         echo $version > ~/.cuda_version
     fi

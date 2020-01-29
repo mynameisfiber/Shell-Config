@@ -16,3 +16,7 @@ libsqlite3-dev
 libbz2-dev
 zlib1g-dev
 libssl-dev
+
+# node stuff
+nodejs
+npm
