@@ -45,6 +45,9 @@ echo "*******Sourcing bashrc"
 #source $HOME/.bashrc
 
 echo "*******Installing python"
+export MAKEOPTS="-j"
+export CFLAGS="-O2"
+export PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions"
 pyenv install --skip-existing 3.7.2
 pyenv global 3.7.2
 

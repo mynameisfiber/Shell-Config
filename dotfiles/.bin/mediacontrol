@@ -18,6 +18,7 @@ do
                                      /org/freedesktop/DBus \
                                      org.freedesktop.DBus.ListNames | \
                                         fgrep org.mpris.MediaPlayer2. | \
+                                        grep -Fv '.chrom' | \
                                         head -1 | \
                                         awk '{print $2}' | \
                                         sed -e 's:"::g' )
