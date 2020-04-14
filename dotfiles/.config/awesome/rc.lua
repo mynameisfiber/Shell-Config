@@ -48,7 +48,7 @@ beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpaper.jpg"
 beautiful.border_focus   = "#a85454"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
