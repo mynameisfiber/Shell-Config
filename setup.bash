@@ -42,7 +42,7 @@ inject_shell_custom ~/.bashrc ~/.bash_custom
 inject_shell_custom ~/.bash_profile ~/.bash_custom
 
 echo "*******Sourcing bashrc"
-. $HOME/.bashrc
+#source $HOME/.bashrc
 
 echo "*******Installing python"
 export MAKEOPTS="-j"
@@ -52,8 +52,8 @@ pyenv install --skip-existing 3.7.2
 pyenv global 3.7.2
 
 echo "*******Installing required python packages"
-pip3 install -U --user pip
-pip3 install --upgrade --force-reinstall -r requirements.txt --user
+python3 -m pip install -U --user pip
+python3 -m pip install --upgrade --force-reinstall -r requirements.txt --user
 
 if [ ! -z "$DISPLAY" ]; then
     echo "********Installing lolcommits"
@@ -62,7 +62,7 @@ fi
 
 echo "*******Updating submodules"
 git config --global core.excludesfile '~/.gitignore'
-git submodule update --init --recursive --remote --njobs=-1
+git submodule update --init --recursive --remote --jobs=-1
 
 #echo "*******Installing LOLssh"
 #cd lolssh
