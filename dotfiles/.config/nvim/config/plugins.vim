@@ -11,7 +11,7 @@ unlet autoload_plug_path
 call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mkitt/tabline.vim'
+"Plug 'mkitt/tabline.vim'
 Plug 'altercation/vim-colors-solarized'
 
 Plug 'roxma/vim-tmux-clipboard'
