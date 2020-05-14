@@ -14,6 +14,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mkitt/tabline.vim'
 Plug 'altercation/vim-colors-solarized'
 
+Plug 'roxma/vim-tmux-clipboard'
+
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdcommenter'
