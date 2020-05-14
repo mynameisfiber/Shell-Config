@@ -1,5 +1,6 @@
 " air-line
 
+set cmdheight=1
 set laststatus=2 " always open
 
 let g:airline_powerline_fonts = 1

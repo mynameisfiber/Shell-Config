@@ -1,0 +1,23 @@
+#!/bin/bash
+
+CHARS="♥♡♥"
+
+function memory_status() {
+    cat /proc/meminfo | grep "$1" | column -t -s ' ' | cut -f 3 -d ' '
+}
+
+function repeat() {
+    eval printf -- '$1%.s' {1..$2}
+}
+
+if [[ -z "$1" ]]; then
+    num_stars=5
+else
+    num_stars=$1
+fi
+
+curr_memory=$( memory_status "MemTotal" )
+full_memory=$( memory_status "MemAvailable" )
+percent=$( echo "$curr_memory / $full_memory" | bc -l )
+
+progress --characters="$CHARS" --progress=$curr_memory --max-progress=$full_memory --width=$num_stars
