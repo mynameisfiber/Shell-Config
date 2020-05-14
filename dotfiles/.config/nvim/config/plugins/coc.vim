@@ -2,7 +2,7 @@
 " Base config taken from CoC's README.md
 " "
 
-let g:coc_global_extensions = ['coc-python', 'coc-highlight', 'coc-json', 'coc-tsserver', 'coc-html', 'coc-spell-checker', 'coc-yank']
+let g:coc_global_extensions = ['coc-python', 'coc-highlight', 'coc-json', 'coc-tsserver', 'coc-html', 'coc-yank']
 
 " coc-yank history window
 nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
