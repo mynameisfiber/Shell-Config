@@ -16,8 +16,8 @@ else
     num_stars=$1
 fi
 
-curr_memory=$( memory_status "MemTotal" )
-full_memory=$( memory_status "MemAvailable" )
+curr_memory=$( memory_status "MemAvailable" )
+full_memory=$( memory_status "MemTotal" )
 percent=$( echo "$curr_memory / $full_memory" | bc -l )
 
 progress --characters="$CHARS" --progress=$curr_memory --max-progress=$full_memory --width=$num_stars
