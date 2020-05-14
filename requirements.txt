@@ -9,3 +9,4 @@ magic-wormhole
 git+http://github.com/mynameisfiber/showsnearme
 black
 isort
+neovim
