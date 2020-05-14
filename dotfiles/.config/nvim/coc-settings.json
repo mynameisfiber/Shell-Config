@@ -1,4 +1,5 @@
 {
     "python.formatting.provider": "black",
-    "python.sortImports.path": "isort"
+    "python.sortImports.path": "isort",
+    "coc.preferences.formatOnSaveFiletypes": ["python"]
 }
