@@ -1,9 +1,9 @@
 _VIM=$( which vim )
 _NEOVIM=$( which nvim )
-#function vim() {
-#    if [ ! -z "$_NEOVIM" ]; then
-#        $_NEOVIM $@
-#    else
-#        $_VIM $@
-#    fi;
-#}
+function vim() {
+    if [ ! -z "$_NEOVIM" ]; then
+        $_NEOVIM $@
+    else
+        $_VIM $@
+    fi;
+}
