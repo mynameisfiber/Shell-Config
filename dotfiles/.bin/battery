@@ -19,6 +19,12 @@ if [[ -z "$1" ]]; then
 else
     num_stars=$1
 fi
+
+if [[ ! -d /sys/class/power_supply/BAT0 ]]; then
+    echo '🔌'
+    exit
+fi
+
 curr_battery=$( battery_status "{charge,energy}_now" )
 full_battery=$( battery_status "{charge,energy}_full" )
 percent=$( echo "$curr_battery / $full_battery" | bc -l )
