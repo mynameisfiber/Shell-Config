@@ -15,7 +15,7 @@ function _install_requirements() {
     local requirements=$2
     echo "Installing packages: $( cat $requirements | grep -Ev '(#|^$)' | paste -d' ' -s - )"
     cat $requirements | grep -Ev '(#|^$)' | (while read package; do
-        $1 install $package
+        $1 $package
     done)
 }
 
@@ -23,14 +23,14 @@ echo "*******System Packages"
 if command -v apt > /dev/null 2>&1; then
     _install_requirements "sudo add-apt-repository -yn" ppas.conf
     sudo apt update
-    _install_requirements "sudo apt -y" requirements.dpkg
+    _install_requirements "sudo apt -y install" requirements.dpkg
     if [ ! -z "$DISPLAY" ]; then
-        _install_requirements "sudo apt -y" requirements.gui.dpkg
+        _install_requirements "sudo apt -y install" requirements.gui.dpkg
     fi
 fi
 if command -v snap > /dev/null 2>&1; then
     if [ ! -z "$DISPLAY" ]; then
-        _install_requirements "sudo snap" requirements.gui.snap
+        _install_requirements "sudo snap install" requirements.gui.snap
     fi
 fi
 

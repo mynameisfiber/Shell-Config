@@ -1,6 +1,7 @@
 # the basics
 tmux
 vim
+neovim
 python3
 git
 build-essential
