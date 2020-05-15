@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CHARS="♥♡♥"
+#CHARS="♥♡♥"
 
 function memory_status() {
     cat /proc/meminfo | grep "$1" | column -t -s ' ' | cut -f 3 -d ' '
@@ -20,4 +20,5 @@ curr_memory=$( memory_status "MemAvailable" )
 full_memory=$( memory_status "MemTotal" )
 percent=$( echo "$curr_memory / $full_memory" | bc -l )
 
-progress --characters="$CHARS" --progress=$curr_memory --max-progress=$full_memory --width=$num_stars
+#progress --characters="$CHARS" --progress=$curr_memory --max-progress=$full_memory --width=$num_stars
+progress --theme dots_2 --progress=$curr_memory --max-progress=$full_memory --width=$num_stars
