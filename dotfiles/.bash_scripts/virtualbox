@@ -1,0 +1,1 @@
+alias start-windows10='VBoxHeadless --startvm "Windows10" --vrde on'
