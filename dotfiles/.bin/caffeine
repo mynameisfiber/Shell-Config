@@ -10,6 +10,7 @@ if xautolock -exit; then
     xset s off
     xset -dpms
     gsettings set org.gnome.desktop.notifications show-banners false
+    xautolock --exit
 else
     echo "Caffeine Off"
     [ -z "$QUIET" ] && notify-send -u normal -t 5000 -- 'Caffeine Off' 'Screen may take a nap' 2> /dev/null
