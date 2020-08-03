@@ -28,7 +28,7 @@ run_once("pasystray")
 run_once("blueman-applet")
 
 -- change monitor colors at night
-run_once("fluxgui")
+run_once("redshift-gtk")
 
 --- compositing for transparency
 --run_once("unagi")

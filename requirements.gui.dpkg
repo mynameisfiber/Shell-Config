@@ -20,4 +20,4 @@ ffmpeg
 # better touchpad
 xserver-xorg-input-synaptics
 
-# fluxgui
+redshift-gtk
