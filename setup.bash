@@ -50,6 +50,11 @@ echo "*******Installing python"
 export MAKEOPTS="-j"
 export CFLAGS="-O2"
 export PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions"
+pushd $(pyenv root)
+
+git checkout master
+git pull
+popd
 pyenv install --skip-existing 3.7.2
 pyenv global 3.7.2
 
