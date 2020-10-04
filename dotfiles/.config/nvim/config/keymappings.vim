@@ -87,6 +87,8 @@ nmap <leader><leader> `^
 " Yank, comment, paste.
 nmap <leader>Y yy,c<space>p
 vmap <leader>Y ygv,c<space>P
+nnoremap p :pu<CR>
+nnoremap P :pu!<CR>
 
 "In normal mode, press Space to toggle the current fold open/closed. However, if
 "the cursor is not in a fold, move to the right (the default behavior). In
