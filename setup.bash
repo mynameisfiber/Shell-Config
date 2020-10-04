@@ -55,8 +55,8 @@ pushd $(pyenv root)
 git checkout master
 git pull
 popd
-pyenv install --skip-existing 3.7.2
-pyenv global 3.7.2
+pyenv install --skip-existing 3.8.6
+pyenv global 3.8.6
 
 echo "*******Installing required python packages"
 python3 -m pip install -U --user pip
