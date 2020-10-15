@@ -11,6 +11,7 @@ stow
 exuberant-ctags
 
 # python stuff
+liblzma-dev
 libffi-dev
 libreadline-dev
 libsqlite3-dev
