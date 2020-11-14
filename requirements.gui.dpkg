@@ -9,10 +9,13 @@ xbacklight
 xclip
 zeal
 
+blueman-applet
+
 # audio utils
 pulseaudio-utils
 pulsemixer
 pasystray
+pavucontrol
 
 # for lolcommits
 ffmpeg
