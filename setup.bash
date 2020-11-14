@@ -34,6 +34,9 @@ if command -v snap > /dev/null 2>&1; then
     fi
 fi
 
+echo "*******Updating submodules"
+git config --global core.excludesfile '~/.gitignore'
+git submodule update --init --recursive --remote --jobs=-1
 
 echo "*******Refreshing dotfiles"
 stow -R dotfiles
@@ -56,22 +59,21 @@ git checkout master
 git pull
 popd
 
-pyenv install --skip-existing 3.7.4
 pyenv install --skip-existing 3.8.6
-pyenv global 3.8.6 3.7.4
+pyenv global 3.8.6
+pyenv local 3.8.6
 
 echo "*******Installing required python packages"
+if ! python -m pip --help; then
+    curl https://bootstrap.pypa.io/get-pip.py | python3 -
+fi
 python3 -m pip install -U --user pip
-python3 -m pip install --upgrade --force-reinstall -r requirements.txt --user
+python3 -m pip install --upgrade --force-reinstall -r requirements.txt
 
 if [ ! -z "$DISPLAY" ]; then
     echo "********Installing lolcommits"
     gem install --user lolcommits lolcommits-loltext
 fi
-
-echo "*******Updating submodules"
-git config --global core.excludesfile '~/.gitignore'
-git submodule update --init --recursive --remote --jobs=-1
 
 #echo "*******Installing LOLssh"
 #cd lolssh
