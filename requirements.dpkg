@@ -20,8 +20,6 @@ zlib1g-dev
 libssl-dev
 
 # node stuff
-libssl1.0-dev
-nodejs-dev
 nodejs
 node-gyp
 npm
