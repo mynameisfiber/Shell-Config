@@ -3,7 +3,7 @@
 #CHARS="♥♡♥"
 
 function memory_status() {
-    cat /proc/meminfo | grep "$1" | column -t -s ' ' | cut -f 3 -d ' '
+    cat /proc/meminfo | grep "$1" | grep -Eo '([0-9]+)'
 }
 
 function repeat() {
