@@ -20,7 +20,7 @@ else
     num_stars=$1
 fi
 
-if [[ ! -d /sys/class/power_supply/BAT0 ]]; then
+if ! compgen -G "/sys/class/power_supply/BAT*" > /dev/null; then
     echo '🔌'
     exit
 fi
@@ -28,7 +28,7 @@ fi
 curr_battery=$( battery_status "{charge,energy}_now" )
 full_battery=$( battery_status "{charge,energy}_full" )
 percent=$( echo "$curr_battery / $full_battery" | bc -l )
-charging=$( cat /sys/class/power_supply/AC/online )
+charging=$( cat /sys/class/power_supply/AC*/online )
 
-[ $charging == 1 ] && echo -n $POWER
+[[ $charging == 1 ]] && echo -n $POWER
 progress --characters="$CHARS" --progress=$curr_battery --max-progress=$full_battery --width=$num_stars

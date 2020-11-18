@@ -1,5 +1,7 @@
 #!/bin/sh
 
-for ruby in $( find $HOME/.gem/ruby/ -maxdepth 2 -type d -name bin ); do
-    export PATH="$PATH:$ruby"
-done
+if [ -d "$HOME/.gem/ruby" ]; then
+    for ruby in $( find $HOME/.gem/ruby/ -maxdepth 2 -type d -name bin ); do
+        export PATH="$PATH:$ruby"
+    done
+fi

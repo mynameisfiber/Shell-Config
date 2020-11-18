@@ -1,0 +1,15 @@
+#!/bin/bash
+
+delay=${1:-60s}
+echo "Jittering mouse every $delay"
+
+randdir() {
+    echo $(( $RANDOM % 3 - 1 ))
+}
+
+while true; do
+    x=$(randdir)
+    y=$(randdir)
+    xdotool mousemove_relative -- $x $y;
+    sleep $delay;
+done;
