@@ -19,10 +19,10 @@ function project() {
     else
         local name=$1
     fi
-    if  tmux has-session -t "${name}"; then
-        tmux attach -t $name
+    if  tmux has-session -t="${name}"; then
+        tmux attach -t "$name"
     else
-        tmux new -s ${name}
+        tmux new -s "${name}"
     fi
 }
 
