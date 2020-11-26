@@ -1,0 +1,10 @@
+#!/bin/bash
+
+outfile=~/tmp/apod.png
+IMG=$( curl -s "https://apod.nasa.gov/apod/astropix.html" | grep -iE '<img src="[^"]+"' | cut -d= -f2 | tr -d '"' )
+temp_file=$(mktemp)
+
+wget --quiet -O $temp_file "https://apod.nasa.gov/apod/${IMG}"
+convert $temp_file -gravity center -crop 16:9 $outfile
+feh --bg-scale ~/tmp/apod.png
+rm $temp_file
