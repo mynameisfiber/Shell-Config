@@ -39,7 +39,7 @@ git config --global core.excludesfile '~/.gitignore'
 git submodule update --init --recursive --remote --jobs=-1
 
 echo "*******Refreshing dotfiles"
-stow -R dotfiles
+stow --no-folding -R dotfiles
 
 echo "*******Injecting custom shell profiles"
 inject_shell_custom ~/.profile ~/.profile_custom

@@ -23,3 +23,7 @@ libssl-dev
 nodejs
 node-gyp
 npm
+
+# utils
+ncal
+tree
