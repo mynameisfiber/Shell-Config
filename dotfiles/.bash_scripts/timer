@@ -25,8 +25,11 @@ function timer() {
     for t in $target; do
         python <<EOF
 from datetime import datetime
-t = int(open("$TIMERPATH/$t").read().strip())
-print "$t:", str(datetime.now() - datetime.fromtimestamp(t))
+try:
+    t = int(open("$TIMERPATH/$t").read().strip())
+    print("$t:", str(datetime.now() - datetime.fromtimestamp(t)))
+except (ValueError, TypeError):
+    pass
 EOF
     done
 }
