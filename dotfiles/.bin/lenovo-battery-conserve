@@ -1,0 +1,12 @@
+#!/bin/bash
+
+value=$( cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode )
+value=$((1-value))
+
+if ((value)); then
+    echo "Battery Conservation is OFF, turning it ON";
+else
+    echo "Battery Conservation is ON, turning it OFF";
+fi
+
+echo $value | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode > /dev/null

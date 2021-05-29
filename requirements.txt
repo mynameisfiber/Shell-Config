@@ -11,3 +11,4 @@ black
 isort
 neovim
 csvkit
+httpie
