@@ -1,0 +1,21 @@
+#!/bin/bash
+
+action=$1
+device=$( nmcli device status | egrep "wifi[^-]" | cut -f1 -d' ' )
+
+if [ "$action" == "export" ]; then
+    nmcli device wifi show-password ifname $device
+elif [ "$action" == "import" ]; then
+    data=$( zbarcam --oneshot )
+    if [[ "$data" =~ .*":WIFI:".* ]]; then
+        SSID=$( echo $data | cut -f 4 -d: | cut -f1 -d';' )
+        PASSWORD=$( echo $data | cut -f 6 -d: | cut -f1 -d';' )
+        echo "Connecting to $SSID ($PASSWORD)"
+        nmcli device wifi connect "$SSID" password "$PASSWORD"
+    else
+        echo "Invalid QR code: $data"
+    fi
+else
+    echo "Unknown action: $action"
+    echo "$0 [import|export]"
+fi
