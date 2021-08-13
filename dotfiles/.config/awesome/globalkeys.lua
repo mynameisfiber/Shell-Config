@@ -32,6 +32,20 @@ function change_brightness(how)
     )
 end
 
+function rotate_screen(identifier, how)
+    local command = 'xrandr --output "' .. identifier .. '" --rotate ' .. how
+    awful.spawn.easy_async_with_shell(
+        command,
+        function(stdout, stderr, reason, exit_code)
+            naughty.notify({
+                text = "Rotated screen " .. identifier .. " to: " .. how,
+                title = "Screen Rotation",
+                replaces_id = naughtybrightid
+            })
+        end
+    )
+end
+
 local quake = lain.util.quake({
     app = 'zeal',
     height = 0.5,
@@ -149,6 +163,40 @@ function make_global_keys(modkey)
         -- Open file manager
         awful.key({ modkey}, "o",
             function () awful.spawn("nautilus --no-desktop") end
+        ),
+
+        -- Screen Rotation
+        awful.key({ modkey, "Control"}, "Left",
+            function()
+                local screen = awful.screen.focused()
+                for output in pairs(screen.outputs) do
+                    rotate_screen(output, 'left')
+                end
+            end
+        ),
+        awful.key({ modkey, "Control"}, "Right",
+            function()
+                local screen = awful.screen.focused()
+                for output in pairs(screen.outputs) do
+                    rotate_screen(output, 'right')
+                end
+            end
+        ),
+        awful.key({ modkey, "Control"}, "Up",
+            function()
+                local screen = awful.screen.focused()
+                for output in pairs(screen.outputs) do
+                    rotate_screen(output, 'normal')
+                end
+            end
+        ),
+        awful.key({ modkey, "Control"}, "Down",
+            function()
+                local screen = awful.screen.focused()
+                for output in pairs(screen.outputs) do
+                    rotate_screen(output, 'inverted')
+                end
+            end
         )
     )
     

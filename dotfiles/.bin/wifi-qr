@@ -11,7 +11,7 @@ elif [ "$action" == "import" ]; then
         SSID=$( echo $data | cut -f 4 -d: | cut -f1 -d';' )
         PASSWORD=$( echo $data | cut -f 6 -d: | cut -f1 -d';' )
         echo "Connecting to $SSID ($PASSWORD)"
-        nmcli device wifi connect "$SSID" password "$PASSWORD"
+        echo $PASSWORD | nmcli device wifi connect "$SSID" --ask
     else
         echo "Invalid QR code: $data"
     fi
