@@ -152,7 +152,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 spacer = wibox.widget.textbox(" ‖ ")
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%b %e, %H:%M")
+mytextclock = wibox.widget.textclock("%a %b %e, %H:%M")
 
 -- Battery Monitor
 batterymon = awful.widget.watch('bash -c "~/.bin/battery 20"', 30)
@@ -228,8 +228,13 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
+    -- set layout 1 to be default on landscape screens, 2 on portrait
+    local layout_idx = 1
+    if s.geometry.y < s.geometry.x then
+        layout_idx = 2
+    end
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[layout_idx])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()

@@ -1,8 +1,16 @@
 local awful = require("awful")
 local naughty = require("naughty")
 local lain = require("lain")
+local locktag = require('locktag')
 
 local naughtyvolumeid = nil
+
+function lockscreen()
+    awful.spawn("sync")
+    awful.spawn("xautolock -enable")
+    awful.spawn("xautolock -locknow")
+end
+
 function change_volume(how)
     local command = "volumectrl " .. how
     awful.spawn.easy_async_with_shell(
@@ -111,15 +119,16 @@ function make_global_keys(modkey)
         ),
     
         -- Lock
-    	awful.key({ }, "XF86Search",
-              function ()
-                  awful.spawn("sync")
-                  awful.spawn("xautolock -enable")
-                  awful.spawn("xautolock -locknow")
-              end
-    	),
+    	awful.key({ }, "XF86Lock", lockscreen),
+    	awful.key({ modkey }, "F10", lockscreen),
     	awful.key({"Shift"}, "XF86Search",
               function () awful.spawn.with_shell("~/.bin/caffeine") end
+    	),
+    	awful.key({ modkey}, "End",
+              function () 
+                  local t = awful.screen.focused().selected_tag
+                  locktag(t)
+              end
     	),
 
         -- Touchpad Control

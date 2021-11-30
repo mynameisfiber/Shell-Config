@@ -1,0 +1,54 @@
+#!/bin/bash
+
+CAPTAINS_LOG_DIR=${CAPTAINS_LOG_DIR:-~/Documents/log/}
+
+function usage() {
+    echo "Usage: ${0} [--write] [--file filename] [--read] [--help]"
+}
+
+function new_entry() {
+    local filename=$1
+    if [[ -e ${filename} ]]; then
+        echo -e "\n\n" >> $filename
+    fi
+    echo -e "## $(date) ##\n\n" >> $filename
+    
+    vim + ${filename}
+}
+
+function read_entries() {
+    (
+        echo "% CAPTAINSLOG(1) Version π | Your Thought Dreams" ;
+        echo "% $( whoami )" ;
+        echo "% $( date )" ;
+        find "$CAPTAINS_LOG_DIR" -type f -name '*.md' | sort -n -r | xargs tac -b -r -s "^##.+##$" | sed 's/^#/\n\n#/'
+    ) |
+    pandoc -s -f markdown -t man - |
+    MANWIDTH=80 man -l -
+}
+
+function main() {
+    new_entry "$1"
+    read_entries
+}
+
+FILENAME=${CAPTAINS_LOG_DIR}/$( date +%Y-%m-%d.md )
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -w | --write )          main ${FILENAME}
+                                exit
+                                ;;
+        -f | --file )           shift
+                                main $1
+                                exit
+                                ;;
+        -r | --read )           read_entries
+                                exit
+                                ;;
+        -h | --help )           usage
+                                exit
+                                ;;
+    esac
+    shift
+done

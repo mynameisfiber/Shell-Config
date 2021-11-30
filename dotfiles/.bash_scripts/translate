@@ -1,0 +1,6 @@
+function translate() {
+    lang=$1
+    shift
+    tty=`tty`
+    : | vipe | tee $tty | deepl text --to $lang $@ -
+}
