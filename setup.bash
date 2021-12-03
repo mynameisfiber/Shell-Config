@@ -28,18 +28,13 @@ if command -v apt > /dev/null 2>&1; then
         _install_requirements "sudo apt -y install" requirements.gui.dpkg
     fi
 fi
-if command -v snap > /dev/null 2>&1; then
-    if [ ! -z "$DISPLAY" ]; then
-        _install_requirements "sudo snap install" requirements.gui.snap
-    fi
-fi
 
 echo "*******Updating submodules"
 git config --global core.excludesfile '~/.gitignore'
 git submodule update --init --recursive --remote --jobs=-1
 
 echo "*******Refreshing dotfiles"
-stow --no-folding -R dotfiles
+stow -R dotfiles
 
 echo "*******Injecting custom shell profiles"
 inject_shell_custom ~/.profile ~/.profile_custom
@@ -59,15 +54,13 @@ popd
 export MAKEOPTS="-j"
 export CFLAGS="-O2 -fPIC"
 export PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions"
-pyenv install --skip-existing 3.8.6
-pyenv global 3.8.6
-pyenv local 3.8.6
+pyenv install --skip-existing 3.8.12
+pyenv global 3.8.12
+pyenv local 3.8.12
 
 echo "*******Installing required python packages"
-if ! python -m pip --help; then
-    curl https://bootstrap.pypa.io/get-pip.py | python3 -
-fi
-python3 -m pip install -U --user pip
+python3 -m ensurepip
+python3 -m pip install -U pip
 python3 -m pip install --upgrade --force-reinstall -r requirements.txt
 
 if [ ! -z "$DISPLAY" ]; then

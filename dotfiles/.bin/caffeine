@@ -17,7 +17,7 @@ else
     xset s on
     xset +dpms
     gsettings set org.gnome.desktop.notifications show-banners true
-    flock -n /var/lock/$USER.xautolock.lock \
+    flock --nonblock /var/lock/$USER.xautolock.lock \
         xautolock -detectsleep \
             -time 5 -locker "i3lock -d -c 000070" \
             -notify 30 \

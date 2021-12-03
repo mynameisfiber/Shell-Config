@@ -3,13 +3,13 @@ i3lock
 xautolock
 libnotify-bin
 network-manager-gnome
-picom
+#picom
 x11-xserver-utils
 xbacklight
 xclip
 zeal
 
-blueman-applet
+blueman
 
 # audio utils
 pulseaudio-utils

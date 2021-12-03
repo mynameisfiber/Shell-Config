@@ -21,9 +21,7 @@ libssl-dev
 
 # node stuff
 nodejs
-node-gyp
-npm
 
 # utils
-ncal
+bsdmainutils
 tree

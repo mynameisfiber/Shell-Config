@@ -1,7 +1,6 @@
 local awful = require("awful")
 local naughty = require("naughty")
 local lain = require("lain")
-local locktag = require('locktag')
 
 local naughtyvolumeid = nil
 
@@ -117,18 +116,24 @@ function make_global_keys(modkey)
         awful.key({ "Shift"}, "XF86MonBrightnessDown",
             function() change_brightness("-1%") end
         ),
+        awful.key({ modkey }, "F6",
+            function() change_brightness("+5%") end
+        ),
+        awful.key({ modkey }, "F5",
+            function() change_brightness("-5%") end
+        ),
+        awful.key({ modkey, "Shift"}, "F6",
+            function() change_brightness("+1%") end
+        ),
+        awful.key({ modkey, "Shift"}, "F5",
+            function() change_brightness("-1%") end
+        ),
     
         -- Lock
     	awful.key({ }, "XF86Lock", lockscreen),
     	awful.key({ modkey }, "F10", lockscreen),
     	awful.key({"Shift"}, "XF86Search",
               function () awful.spawn.with_shell("~/.bin/caffeine") end
-    	),
-    	awful.key({ modkey}, "End",
-              function () 
-                  local t = awful.screen.focused().selected_tag
-                  locktag(t)
-              end
     	),
 
         -- Touchpad Control

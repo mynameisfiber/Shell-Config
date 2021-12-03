@@ -1,6 +1,0 @@
-.include /etc/pulse/default.pa
-
-# Add noise a canceling input device
-# https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index45h3
-load-module module-echo-cancel
-
