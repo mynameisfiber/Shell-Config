@@ -1,11 +1,12 @@
 {
     "python.pythonPath": "python",
+    "python.venvPath": "./venv/",
     "python.formatting.provider": "black",
     "python.sortImports.path": "isort",
     "python.linting.flake8Enabled": true,
-    "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "coc.preferences.formatOnSaveFiletypes": ["python"],
     "coc.preferences.extensionUpdateCheck": "daily",
-    "yaml.format.enable": true
+    "yaml.format.enable": true,
+    "jedi.jediSettings.autoImportModules": ["numpy", "pandas"]
 }

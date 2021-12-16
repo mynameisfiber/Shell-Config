@@ -4,6 +4,11 @@
 
 let g:coc_global_extensions = ['coc-python', 'coc-highlight', 'coc-json', 'coc-html', 'coc-yank']
 
+" https://github.com/fannheyward/coc-pyright/issues/521#issuecomment-858530052
+" https://github.com/neoclide/coc.nvim/wiki/Using-workspaceFolders#resolve-workspace-folder
+"autocmd FileType python let b:coc_root_patterns = ['venv', 'setup.py', '.git']
+au FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyrightconfig.json', 'env']
+
 " coc-yank history window
 nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 

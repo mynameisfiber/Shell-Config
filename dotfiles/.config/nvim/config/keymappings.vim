@@ -47,15 +47,10 @@ map <C-j> 5<C-W>+
 map <C-h> 5<C-w><
 
 "Tab Movement and creation
-:map <C-S-tab> :tabprevious<CR>
-:map <C-tab> :tabnext<CR>
-:imap <C-S-tab> <Esc>:tabprevious<CR>i
-:imap <C-tab> <Esc>:tabnext<CR>i
-:nmap <C-S-t> :tabnew<CR>
-:imap <C-S-t> <Esc>:tabnew<CR>
-
-noremap fj gt
-noremap fJ gT
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
+noremap fj :tabnext<CR>
+noremap fJ :tabprevious<CR>
 nmap gt <nop>
 nmap gT <nop>
 

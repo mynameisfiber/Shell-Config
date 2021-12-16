@@ -6,28 +6,36 @@ fi
 
 function timer_start() {
     mkdir -p "$TIMERPATH";
-    if [[ -e "$TIMERPATH/$1" ]]; then
-        echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" >> $TIMERPATH/_HISTORY
-    fi;
     date +%s > $TIMERPATH/$1
 }
 
 function timer_stop() {
-    echo -e "$1\t`date +%s`\t$(( `date +%s` - `cat $TIMERPATH/$1` ))" >> $TIMERPATH/_HISTORY
     rm -i $TIMERPATH/$1
 }
 
 function timer() {
     target=$1
     if [[ -z "$target" ]]; then
-        target=$( ls $TIMERPATH | grep -v "_HISTORY" )
+        target=$( grep -R '' $TIMERPATH | sort -t: -k 2 | cut -d: -f1 | sed "s|$TIMERPATH||" )
     fi
     for t in $target; do
         python <<EOF
 from datetime import datetime
 try:
+    import humanize
+except ImportError:
+    humanize = None
+try:
     t = int(open("$TIMERPATH/$t").read().strip())
-    print("$t:", str(datetime.now() - datetime.fromtimestamp(t)))
+    tname = "$t".rsplit('/')[-1]
+    dt = abs(datetime.now() - datetime.fromtimestamp(t))
+    if humanize:
+        dt_s = humanize.precisedelta(
+            dt, suppress=["minutes", "seconds", "milliseconds", "microseconds"]
+        )
+        print(f"{tname}: {dt_s}")
+    else:
+        print(f"{tname}: {dt}")
 except (ValueError, TypeError):
     pass
 EOF
@@ -39,7 +47,7 @@ timer
 _timer()
 {
     local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $(compgen -W "$( ls $TIMERPATH | grep -v "_HISTORY"; cat $TIMERPATH/_HISTORY | cut -f1 )" -- $cur) )
+    COMPREPLY=( $(compgen -W "$( ls $TIMERPATH )" -- $cur) )
 }
 complete -F _timer timer_start
 complete -F _timer timer_stop
