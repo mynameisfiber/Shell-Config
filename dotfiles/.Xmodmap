@@ -6,3 +6,6 @@ add control = Control_L Control_R
 
 ! Insert into end
 keycode 118 = End
+
+! Stop keyboard sleep button
+keycode 150=
