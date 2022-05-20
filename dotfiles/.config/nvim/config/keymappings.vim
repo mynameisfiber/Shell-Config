@@ -82,6 +82,7 @@ nmap <leader><leader> `^
 " Yank, comment, paste.
 nmap <leader>Y yy,c<space>p
 vmap <leader>Y ygv,c<space>P
+nmap Y yy
 nnoremap p :pu<CR>
 nnoremap P :pu!<CR>
 

@@ -3,3 +3,4 @@ list-commands-history.json
 list-symbols-history.json
 memos.json
 extensions/
+*history*

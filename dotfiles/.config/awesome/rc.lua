@@ -12,9 +12,53 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- OS for file handling
 local os = require("os")
+local lain = require("./lain")
 
 -- Autostart
 require("autostart")
+
+function nlog(text) 
+    naughty.notify({text=text})
+end
+
+
+-- Enable tag-screen affinity so that when a tag's screen goes away, it'll try
+-- to go back to it's rightful place when the screen comes back
+tag.connect_signal("property::screen", function(t)
+    t.preferred_screen_name = t.preferred_screen_name or (t.screen.outputs and t.screen.outputs.name) or nil
+end)
+
+tag.connect_signal("request::screen", function(t)
+    clients = t:clients()
+    for s in screen do
+        if s ~= t.screen and clients and next(clients) then
+            t.screen = s
+            t.original_tag_name = t.original_tag_name or t.name
+            t.name = t.name .. "'"
+            t.volatile = true
+            return
+        end
+    end
+end)
+
+function return_tags_to_preferred_screen(s)
+    local screen_name = (s.outputs and s.outputs.name) or nil
+    for k,t in pairs(root.tags()) do
+        if t.original_tag_name and t.volatile and t.preferred_screen_name == screen_name then
+          -- find the new tag on the new screen
+            new_tag = awful.tag.find_by_name(s, t.original_tag_name)
+            if new_tag then
+                nlog("Migrating tag "  .. t.name)
+                t.name = t.original_tag_name
+                t.original_tag_name = nil
+                new_tag:swap(t)
+                new_tag:delete(t, true)
+                new_tag.volatile = false
+            end
+        end
+    end
+end
+-- end of tag-screen affinity
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -47,6 +91,13 @@ beautiful.init(awful.util.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpaper.jpg"
 beautiful.border_focus   = "#a85454"
 
+-- highlight wibox of focused screen
+client.connect_signal("mouse::enter", function(c)
+    for s in screen do
+        s.mywibox.bg = awful.screen.focused() == s and beautiful.bg_urgent or beautiful.bg_systray
+    end
+end)
+
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "vim"
@@ -66,9 +117,9 @@ awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.floating,
     --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.top,
+    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
+    awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
@@ -277,6 +328,9 @@ awful.screen.connect_for_each_screen(function(s)
             s.mylayoutbox,
         },
     }
+
+    -- return volitile tags to this screen if applicable
+    return_tags_to_preferred_screen(s)
 end)
 -- }}}
 

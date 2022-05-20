@@ -6,7 +6,7 @@ device=$( nmcli device status | egrep "wifi[^-]" | cut -f1 -d' ' )
 if [ "$action" == "export" ]; then
     nmcli device wifi show-password ifname $device
 elif [ "$action" == "import" ]; then
-    data=$( zbarcam --oneshot )
+    data=$( zbarcam )
     if [[ "$data" =~ .*":WIFI:".* ]]; then
         SSID=$( echo $data | cut -f 4 -d: | cut -f1 -d';' )
         PASSWORD=$( echo $data | cut -f 6 -d: | cut -f1 -d';' )
