@@ -4,6 +4,7 @@ vim
 neovim
 python3
 git
+git-crypt
 build-essential
 fonts-powerline
 cmake

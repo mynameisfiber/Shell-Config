@@ -3,7 +3,7 @@ i3lock
 xautolock
 libnotify-bin
 network-manager-gnome
-#picom
+unagi
 x11-xserver-utils
 xbacklight
 xclip

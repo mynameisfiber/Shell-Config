@@ -88,7 +88,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.get_themes_dir() .. "zenburn/theme.lua")
-beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpaper.jpg"
+beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpapers/wallpaper.large.jpg"
 beautiful.border_focus   = "#a85454"
 
 -- highlight wibox of focused screen
@@ -262,14 +262,7 @@ local tasklist_buttons = awful.util.table.join(
 
 local function set_wallpaper(s)
     -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
+    gears.wallpaper.maximized(beautiful.wallpaper, nil, true)
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -504,7 +497,19 @@ for i = 1, 9 do
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
                         local screen = awful.screen.focused()
-                        local tag = screen.tags[i]
+                        local curtag = screen.selected_tag
+                        local idxstr = tostring(i)
+                        local basetag = awful.tag.find_by_name(screen, idxstr)
+                        local tag = Nil
+
+                        if curtag.name:find(idxstr, 1, true) == 1 then
+                            tag = awful.tag.find_by_name(screen, curtag.name .. "'")
+                            if not tag then
+                                tag = basetag
+                            end
+                        else
+                            tag = basetag
+                        end
                         if tag then
                            tag:view_only()
                         end

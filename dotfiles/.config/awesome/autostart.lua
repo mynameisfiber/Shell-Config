@@ -31,4 +31,5 @@ run_once("blueman-applet")
 run_once("redshift-gtk")
 
 --- compositing for transparency
-run_once("picom")
+run_once("unagi")
+
