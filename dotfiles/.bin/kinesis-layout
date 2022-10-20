@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DISPLAY=":0.0"
+HOME=/home/micha/
+XAUTHORITY=$HOME/.Xauthority
+export DISPLAY XAUTHORITY HOME
+
+/usr/bin/notify-send "loading keyboard"
+/usr/bin/xmodmap $HOME/.Xmodmap

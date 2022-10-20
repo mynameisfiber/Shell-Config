@@ -6,6 +6,13 @@ filetype plugin indent on
 " Set vim keyboard so that the system copy buffer syncs with vims
 set clipboard^=unnamed,unnamedplus
 
+" Spellcheck language and auto-turn-on for markdown
+set spelllang=fr,en
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
+autocmd FileType markdown setlocal complete+=kspell
+autocmd FileType gitcommit setlocal complete+=kspell
+
 " Colors!
 syntax enable
 set background=dark

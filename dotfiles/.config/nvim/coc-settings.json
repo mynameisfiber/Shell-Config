@@ -1,4 +1,5 @@
 {
+    "suggest.noselect": true,
     "python.pythonPath": "python",
     "python.venvPath": "./venv/",
     "python.formatting.provider": "black",

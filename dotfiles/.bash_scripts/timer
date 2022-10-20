@@ -26,18 +26,24 @@ try:
 except ImportError:
     humanize = None
 try:
+    now = datetime.now()
     for path in sys.argv[1:]:
         with open(path) as fd:
             t = int(fd.read().strip())
             tname = path.rsplit('/')[-1]
-            dt = abs(datetime.now() - datetime.fromtimestamp(t))
+            target = datetime.fromtimestamp(t)
+            dt = abs(now - target)
+            if target > now:
+                sign = "-"
+            else:
+                sign = "+"
             if humanize:
                 dt_s = humanize.precisedelta(
                     dt, suppress=["minutes", "seconds", "milliseconds", "microseconds"]
                 )
-                print(f"{tname}: {dt_s}")
+                print(f"{tname}: T{sign} {dt_s}")
             else:
-                print(f"{tname}: {dt}")
+                print(f"{tname}: T{sign} {dt}")
 except (ValueError, TypeError):
     pass
 EOF

@@ -24,7 +24,7 @@ Plug 'sjl/gundo.vim'
 Plug 'terryma/vim-expand-region'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'

@@ -2,12 +2,28 @@ local awful = require("awful")
 local naughty = require("naughty")
 local lain = require("lain")
 
+local clock = os.clock
 local naughtyvolumeid = nil
+local naughtybrightid = nil
+local naughtyrotateid = nil
+
+
+function sleep(n)  -- seconds
+   local t0 = clock()
+   while clock() - t0 <= n do
+   end
+end
 
 function lockscreen()
     awful.spawn("sync")
     awful.spawn("xautolock -enable")
     awful.spawn("xautolock -locknow")
+end
+
+function lockscreen_sleep()
+    lockscreen()
+    sleep(5)
+    awful.spawn("systemctl suspend")
 end
 
 function change_volume(how)
@@ -24,7 +40,6 @@ function change_volume(how)
     )
 end
 
-local naughtybrightid = nil
 function change_brightness(how)
     local command = "brightness " .. how
     awful.spawn.easy_async_with_shell(
@@ -44,26 +59,28 @@ function rotate_screen(identifier, how)
     awful.spawn.easy_async_with_shell(
         command,
         function(stdout, stderr, reason, exit_code)
-            naughty.notify({
+            naughtyrotateid = naughty.notify({
                 text = "Rotated screen " .. identifier .. " to: " .. how,
                 title = "Screen Rotation",
-                replaces_id = naughtybrightid
-            })
+                replaces_id = naughtyrotateid
+            }).id
         end
     )
 end
 
-local quake = lain.util.quake({
+local qzeal = lain.util.quake({
     app = 'zeal',
     height = 0.5,
     followtag = true,
+    vert = 'top',
 })
+
 
 function make_global_keys(modkey)
     local globalkeys = awful.util.table.join(
-        -- Quake
+        -- Quakes
         awful.key({ modkey}, "z",
-            function () quake:toggle() end
+            function () qzeal:toggle() end
         ),
 
         -- Audio keys
@@ -132,6 +149,8 @@ function make_global_keys(modkey)
         -- Lock
     	awful.key({ }, "XF86Lock", lockscreen),
     	awful.key({ modkey }, "F10", lockscreen),
+    	awful.key({ "Control", modkey }, "F10", lockscreen_sleep),
+    	awful.key({ "Control", }, "XF86Lock", lockscreen_sleep),
     	awful.key({"Shift"}, "XF86Search",
               function () awful.spawn.with_shell("~/.bin/caffeine") end
     	),

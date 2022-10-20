@@ -17,6 +17,11 @@ local lain = require("./lain")
 -- Autostart
 require("autostart")
 
+-- Habbit notifications
+local habbits = require('habbits')
+
+
+-- Convinience
 function nlog(text) 
     naughty.notify({text=text})
 end
@@ -53,7 +58,7 @@ function return_tags_to_preferred_screen(s)
                 t.original_tag_name = nil
                 new_tag:swap(t)
                 new_tag:delete(t, true)
-                new_tag.volatile = false
+                t.volatile = false
             end
         end
     end
@@ -90,6 +95,7 @@ end
 beautiful.init(awful.util.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.wallpaper = awful.util.get_configuration_dir() .. "/wallpapers/wallpaper.large.jpg"
 beautiful.border_focus   = "#a85454"
+beautiful.notification_font = "sans 12"
 
 -- highlight wibox of focused screen
 client.connect_signal("mouse::enter", function(c)

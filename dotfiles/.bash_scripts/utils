@@ -1,0 +1,16 @@
+ensure-crontab() {
+    name=$1;
+    shift
+    tab=$@;
+    suffix="# ${name} - autoinstalled"
+    fulltab="$tab $suffix";
+    echo $fulltab;
+    crontab -l | ( grep -Ev "${suffix}$" ; echo ${fulltab} ) | crontab - ;
+}
+
+noglob () {
+    set -o noglob
+    echo "Running noglob command: $@"
+    $@
+    set +o noglob
+}

@@ -2,6 +2,10 @@
 # Must install python application `showsnearme` (http://github.com/mynameisfiber/showsnearme) and the crontab:
 # 0 * * * * /usr/local/bin/showsnearme -A 2 -n 3 --hide-url '<ADDRESS>' > $HOME/tmp/shows.txt
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+. ${SCRIPT_DIR}/utils
+noglob ensure-crontab "showsnearme" '0 * * * * python -m showsnearme.cli -A 2 -n 3 --hide-url > $HOME/tmp/shows.txt'  > /dev/null 2>&1 &
+
 function shows() {
     if [[ -e $HOME/tmp/shows.txt ]]; then
         echo "$(tput setaf 2)Events near me$(tput sgr0)"

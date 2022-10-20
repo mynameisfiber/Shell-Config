@@ -1,0 +1,7 @@
+#!/bin/sh
+
+sudo hciconfig hci0 down
+sudo rmmod btusb
+sudo modprobe btusb
+sleep 2s
+sudo hciconfig hci0 up
