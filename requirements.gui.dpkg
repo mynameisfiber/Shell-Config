@@ -24,3 +24,6 @@ ffmpeg
 xserver-xorg-input-synaptics
 
 redshift-gtk
+
+# for python
+tk-dev

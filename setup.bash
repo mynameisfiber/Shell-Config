@@ -54,9 +54,9 @@ popd
 export MAKEOPTS="-j"
 export CFLAGS="-O2 -fPIC"
 export PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions"
-pyenv install --skip-existing 3.8.12
-pyenv global 3.8.12
-pyenv local 3.8.12
+pyenv install --skip-existing 3.11.0
+pyenv global 3.11.0
+pyenv local 3.11.0
 
 echo "*******Installing required python packages"
 python3 -m ensurepip
