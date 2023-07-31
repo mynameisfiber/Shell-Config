@@ -153,23 +153,21 @@ local function client_menu_toggle_fn()
 end
 
 local function caffeineStatus()
-    return awful.util.file_readable(
-        os.getenv("HOME") .. "/.caffeine"
-    )
+    return os.execute("bash -c 'lockscreen status'") == true
 end
 
 local function caffeineText(isOn)
     if isOn then
-        return '☑'
+        return '☕'
     else
-        return '☐'
+        return '🥛'
     end
 end
 
 local function caffeineToggle()
     awful.spawn.with_shell("~/.bin/caffeine")
     local caffeine_on = caffeineStatus()
-    if caffeine_on == True then
+    if caffeine_on then
         -- caffeine ON
         naughty.suspend()
     else

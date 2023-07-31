@@ -1,26 +1,25 @@
 #!/bin/bash
 
 QUIET=$1
-caffeine_status_file=~/.caffeine
+LOCKFILE=/var/lock/$USER.xautolock.lock
 
-if xautolock -exit; then
+function notify() {
+    dbus-send --type=method_call --dest='org.freedesktop.Notifications' /org/freedesktop/Notifications org.freedesktop.Notifications.Notify string:'caffeine' uint32:1 string:'[ICON]' string:"$1" string:"$2" array:string:'' dict:string:string:'',''
+}
+
+if lockscreen status; then
     echo "Caffeine On"
-    touch $caffeine_status_file
-    [ -z "$QUIET" ] && notify-send -u normal -t 5000 -- 'Caffeine On' 'Screen will not sleep' 2> /dev/null
+    [ -z "$QUIET" ] && notify 'Caffeine On' 'Screen will not sleep' 2> /dev/null
     xset s off
     xset -dpms
     gsettings set org.gnome.desktop.notifications show-banners false
-    xautolock --exit
+    xautolock -exit
+    lockscreen stop
 else
     echo "Caffeine Off"
-    [ -z "$QUIET" ] && notify-send -u normal -t 5000 -- 'Caffeine Off' 'Screen may take a nap' 2> /dev/null
+    [ -z "$QUIET" ] && notify 'Caffeine Off' 'Screen may take a nap' 2> /dev/null
     xset s on
     xset +dpms
     gsettings set org.gnome.desktop.notifications show-banners true
-    flock --nonblock /var/lock/$USER.xautolock.lock \
-        xautolock -detectsleep \
-            -time 5 -locker "i3lock -d -c 000070 --ignore-empty-password" \
-            -notify 30 \
-            -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
-    rm $caffeine_status_file
+    lockscreen start
 fi

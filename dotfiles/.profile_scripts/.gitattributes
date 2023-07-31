@@ -1,1 +1,2 @@
 remarkable filter=git-crypt diff=git-crypt
+openai filter=git-crypt diff=git-crypt

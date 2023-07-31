@@ -28,6 +28,8 @@ Plug 'preservim/tagbar'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+
+Plug 'kamykn/spelunker.vim'
 call plug#end()
 
 if plug_install

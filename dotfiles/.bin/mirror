@@ -1,0 +1,3 @@
+#!/bin/env bash
+
+cvlc v4l2:///dev/video4 :v4l2-hflip=1 :v4l2-aspect-ratio=16\:9 :v4l2-width=1280 :v4l2-height=720 :v4l2-fps=60 :v4l2-chroma=h264

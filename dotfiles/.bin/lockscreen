@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+cmd=$1
+LOCKFILE=/var/lock/$USER.xautolock.lock
+
+if [ "${cmd}" == "lock" ]; then
+    i3lock -d -c 000070 --ignore-empty-password
+elif [ "${cmd}" == "status" ]; then
+    fuser "${LOCKFILE}"
+elif [ "${cmd}" == "stop" ]; then
+    xautolock -exit
+    pkill -u "$(whoami)" -f xautolock
+    fuser --kill "${LOCKFILE}"
+elif [[ "${cmd}" == "start" || "${cmd}" == "" ]]; then
+    flock --nonblock ${LOCKFILE} \
+        xautolock -detectsleep \
+            -time 5 -locker "lockscreen lock" \
+            -notify 30 \
+            -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
+else
+    echo "Command ${cmd} not recognized"
+fi

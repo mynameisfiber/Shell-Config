@@ -1,0 +1,9 @@
+function webcam-control {
+    local device=$( ls /dev/video* | sort -n | tail -n 2 | head -n 1 )
+    local params=""
+    echo $1
+    if [[ "$1" == "quiet" ]]; then
+        params="$params --control_panel"
+    fi
+    guvcview --device ${device} ${params}
+}

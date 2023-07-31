@@ -3,6 +3,7 @@
 	email = mynameisfiber@gmail.com
 [push]
 	default = simple
+	followTags = true
 [init]
 	templatedir = ~/.gitrc/git_templates
 [core]

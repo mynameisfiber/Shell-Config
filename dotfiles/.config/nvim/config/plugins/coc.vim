@@ -1,4 +1,7 @@
-let g:coc_global_extensions = ['coc-python', 'coc-highlight', 'coc-json', 'coc-html', 'coc-yank']
+let g:coc_global_extensions = [ 'coc-pyright', 'coc-highlight', 'coc-json', 'coc-html', 'coc-yank', 'coc-eslint', 'coc-ltex', 'coc-tsserver', 'coc-go' ]
+
+" https://github.com/josa42/coc-go#examples
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " https://github.com/fannheyward/coc-pyright/issues/521#issuecomment-858530052
 " https://github.com/neoclide/coc.nvim/wiki/Using-workspaceFolders#resolve-workspace-folder

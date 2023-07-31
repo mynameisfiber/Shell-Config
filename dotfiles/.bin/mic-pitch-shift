@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function cleanup {
+    echo "Cleaning up"
+    pactl unload-module module-loopback
+}
+
+pactl load-module module-loopback latency_msec=100
+trap cleanup EXIT
+
+PERCENT=${1:-+180}
+
+sox -d -d pitch $PERCENT contrast 100

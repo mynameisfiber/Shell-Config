@@ -12,3 +12,4 @@ isort
 neovim
 csvkit
 httpie
+gcalcli

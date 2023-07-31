@@ -1,0 +1,13 @@
+
+
+function video-stabalize() {
+    # https://github.com/georgmartius/vid.stab#available-options-with-vidstab-filters
+    detect_params="tripod=1"
+    transform_params="tripod=1"
+    invideo=$1
+    outvideo=$2
+
+    ffmpeg -i "${invideo}" -vf vidstabdetect=${detect_params} -f null -
+    ffmpeg -i "${invideo}" -vf vidstabtransform=${transform_params},unsharp=5:5:0.8:3:3:0.4 "${outvideo}"
+    rm "transforms.trf"
+}

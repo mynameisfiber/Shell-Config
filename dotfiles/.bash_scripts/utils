@@ -14,3 +14,30 @@ noglob () {
     $@
     set +o noglob
 }
+
+draw-horizline () {
+    printf "${COLOR_POWDER_BLUE=}%.0s⧟${COLOR_NORMAL}" $( seq ${1:-$(tput cols)} )
+    echo
+}
+
+display-center(){
+    columns="$(tput cols)"
+    line=$1
+    printf "%*s\n" $(( (${#line} + columns) / 2)) "$line"
+}
+
+COLOR_NORMAL=$(tput sgr0)
+COLOR_BLACK=$(tput setaf 0)
+COLOR_RED=$(tput setaf 1)
+COLOR_GREEN=$(tput setaf 2)
+COLOR_YELLOW=$(tput setaf 3)
+COLOR_LIME_YELLOW=$(tput setaf 190)
+COLOR_POWDER_BLUE=$(tput setaf 153)
+COLOR_BLUE=$(tput setaf 4)
+COLOR_MAGENTA=$(tput setaf 5)
+COLOR_CYAN=$(tput setaf 6)
+COLOR_WHITE=$(tput setaf 7)
+COLOR_BRIGHT=$(tput bold)
+COLOR_BLINK=$(tput blink)
+COLOR_REVERSE=$(tput smso)
+COLOR_UNDERLINE=$(tput smul)

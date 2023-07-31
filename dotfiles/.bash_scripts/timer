@@ -1,5 +1,8 @@
 export TIMERPATH=$HOME/.timer
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+. ${SCRIPT_DIR}/utils
+
 if [ ! -d "$TIMERPATH" ] ; then
     mkdir $TIMERPATH
 fi
@@ -41,7 +44,7 @@ try:
                 dt_s = humanize.precisedelta(
                     dt, suppress=["minutes", "seconds", "milliseconds", "microseconds"]
                 )
-                print(f"{tname}: T{sign} {dt_s}")
+                print(f"${COLOR_GREEN}{tname}:${COLOR_NORMAL} T{sign} {dt_s}")
             else:
                 print(f"{tname}: T{sign} {dt}")
 except (ValueError, TypeError):
@@ -50,6 +53,7 @@ EOF
 }
 
 timer
+draw-horizline
 
 _timer()
 {
