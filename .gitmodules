@@ -36,7 +36,7 @@
 	url = git@github.com:jszakmeister/markdown2ctags.git
 [submodule "dotfiles/.vim/bundle/targets.vim"]
 	path = dotfiles/.vim/bundle/targets.vim
-	url = git://github.com/wellle/targets.vim.git
+    url = git@github.com:wellle/targets.vim.git
 [submodule "dotfiles/.vim/bundle/Dockerfile.vim"]
 	path = dotfiles/.vim/bundle/Dockerfile.vim
 	url = git@github.com:ekalinin/Dockerfile.vim.git
