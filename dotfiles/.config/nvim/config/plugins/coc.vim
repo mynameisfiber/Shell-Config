@@ -1,5 +1,20 @@
 let g:coc_global_extensions = [ 'coc-pyright', 'coc-highlight', 'coc-json', 'coc-html', 'coc-yank', 'coc-eslint', 'coc-ltex', 'coc-tsserver', 'coc-go' ]
 
+" From
+" https://github.com/neoclide/coc.nvim/issues/3908#issuecomment-1290991549 to
+" remove extentions no longer in global extentions list
+function! CocClean() abort
+  let g:extensions_to_clean = CocAction("loadedExtensions")
+      \ ->filter({idx, extension -> extension !~ 'friendly-snippets'})
+      \ ->filter({idx, extension -> index(g:coc_global_extensions, extension) == -1})
+  if len(g:extensions_to_clean)
+    exe 'CocUninstall' join(map(g:extensions_to_clean, {_, line -> split(line)[0]}))
+  else
+    echo 'Nothing to clean'
+  endif
+endfunction
+command! -nargs=0 CocClean :call CocClean()
+
 " https://github.com/josa42/coc-go#examples
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 

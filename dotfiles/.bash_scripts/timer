@@ -52,8 +52,10 @@ except (ValueError, TypeError):
 EOF
 }
 
-timer
-draw-horizline
+if is-term; then
+    timer
+    draw-horizline
+fi
 
 _timer()
 {

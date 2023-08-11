@@ -1,7 +1,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 . ${SCRIPT_DIR}/utils
 noglob ensure-crontab "gtasks" '*/15 * * * * 'COLUMNS=120 $(which gtasks)' tasks view -l Life --sort due > ~/tmp/todo.txt 2> ~/tmp/todo.txt.log'  > /dev/null 2>&1 &
-if [ -e ~/tmp/todo.txt ]; then
+if [ -e ~/tmp/todo.txt -a is-term ]; then
   cat ~/tmp/todo.txt
   draw-horizline
 fi

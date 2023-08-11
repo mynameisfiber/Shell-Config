@@ -16,28 +16,46 @@ noglob () {
 }
 
 draw-horizline () {
-    printf "${COLOR_POWDER_BLUE=}%.0s⧟${COLOR_NORMAL}" $( seq ${1:-$(tput cols)} )
-    echo
+    if is-term; then
+        printf "${COLOR_POWDER_BLUE=}%.0s⧟${COLOR_NORMAL}" $( seq ${1:-$(tput_safe cols)} )
+        echo
+    fi
 }
 
 display-center(){
-    columns="$(tput cols)"
-    line=$1
-    printf "%*s\n" $(( (${#line} + columns) / 2)) "$line"
+    if is-term; then
+        columns="$(tput_safe cols)"
+        line=$1
+        printf "%*s\n" $(( (${#line} + columns) / 2)) "$line"
+    fi
 }
 
-COLOR_NORMAL=$(tput sgr0)
-COLOR_BLACK=$(tput setaf 0)
-COLOR_RED=$(tput setaf 1)
-COLOR_GREEN=$(tput setaf 2)
-COLOR_YELLOW=$(tput setaf 3)
-COLOR_LIME_YELLOW=$(tput setaf 190)
-COLOR_POWDER_BLUE=$(tput setaf 153)
-COLOR_BLUE=$(tput setaf 4)
-COLOR_MAGENTA=$(tput setaf 5)
-COLOR_CYAN=$(tput setaf 6)
-COLOR_WHITE=$(tput setaf 7)
-COLOR_BRIGHT=$(tput bold)
-COLOR_BLINK=$(tput blink)
-COLOR_REVERSE=$(tput smso)
-COLOR_UNDERLINE=$(tput smul)
+tput_safe() {
+    is-term && tput $@ || echo ""
+}
+
+is-term() {
+    if tty -s; then
+        return 0 # yes
+    fi
+    return 1 # no
+}
+
+if [ -z $COLOR_INIT ]; then
+    declare -r COLOR_INIT=1
+    declare -r COLOR_NORMAL=$(tput_safe sgr0)
+    declare -r COLOR_BLACK=$(tput_safe setaf 0)
+    declare -r COLOR_RED=$(tput_safe setaf 1)
+    declare -r COLOR_GREEN=$(tput_safe setaf 2)
+    declare -r COLOR_YELLOW=$(tput_safe setaf 3)
+    declare -r COLOR_LIME_YELLOW=$(tput_safe setaf 190)
+    declare -r COLOR_POWDER_BLUE=$(tput_safe setaf 153)
+    declare -r COLOR_BLUE=$(tput_safe setaf 4)
+    declare -r COLOR_MAGENTA=$(tput_safe setaf 5)
+    declare -r COLOR_CYAN=$(tput_safe setaf 6)
+    declare -r COLOR_WHITE=$(tput_safe setaf 7)
+    declare -r COLOR_BRIGHT=$(tput_safe bold)
+    declare -r COLOR_BLINK=$(tput_safe blink)
+    declare -r COLOR_REVERSE=$(tput_safe smso)
+    declare -r COLOR_UNDERLINE=$(tput_safe smul)
+fi

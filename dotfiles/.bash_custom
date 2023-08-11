@@ -16,5 +16,8 @@ do
         source "$script"
     fi
 done
+export LOADED_BASH_CUSTOM=1
 
-source ~/.profile_custom
+if [ ! -v LOADED_PROFILE_CUSTOM ]; then
+    source ~/.profile_custom
+fi
