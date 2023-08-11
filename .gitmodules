@@ -36,7 +36,7 @@
 	url = git@github.com:jszakmeister/markdown2ctags.git
 [submodule "dotfiles/.vim/bundle/targets.vim"]
 	path = dotfiles/.vim/bundle/targets.vim
-	url = git://github.com/wellle/targets.vim.git
+	url = git@github.com:wellle/targets.vim.git
 [submodule "dotfiles/.vim/bundle/Dockerfile.vim"]
 	path = dotfiles/.vim/bundle/Dockerfile.vim
 	url = git@github.com:ekalinin/Dockerfile.vim.git
@@ -66,7 +66,7 @@
 	url = git@github.com:airblade/vim-gitgutter.git
 [submodule "dotfiles/.vim/bundle/stan.vim"]
 	path = dotfiles/.vim/bundle/stan.vim
-	url = https://github.com/lindemann09/stan.vim.git
+	url = git@github.com:lindemann09/stan.vim.git
 [submodule "stowsh"]
 	path = stowsh
 	url = git@github.com:williamsmj/stowsh.git
@@ -81,16 +81,16 @@
 	url = git@github.com:roxma/vim-tmux-clipboard.git
 [submodule "dotfiles/.pyenv"]
 	path = dotfiles/.pyenv
-	url = https://github.com/pyenv/pyenv.git
+	url = git@github.com:pyenv/pyenv.git
 [submodule "dotfiles/.vim/bundle/indentpython.vim"]
 	path = dotfiles/.vim/bundle/indentpython.vim
 	url = git@github.com:vim-scripts/indentpython.vim.git
 [submodule "dotfiles/.config/awesome/lain"]
 	path = dotfiles/.config/awesome/lain
-	url = https://github.com/lcpz/lain.git
+	url = git@github.com:lcpz/lain.git
 [submodule "dotfiles/.vim/bundle/typescript-vim"]
 	path = dotfiles/.vim/bundle/typescript-vim
-	url = https://github.com/leafgarland/typescript-vim.git
+	url = git@github.com:leafgarland/typescript-vim.git
 [submodule "dotfiles/.vim/bundle/coc.nvim"]
 	path = dotfiles/.vim/bundle/coc.nvim
 	url = git@github.com:neoclide/coc.nvim.git
