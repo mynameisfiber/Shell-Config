@@ -14,4 +14,6 @@ function shows() {
     fi;
 }
 
-shows
+if is-term ; then
+    shows
+fi

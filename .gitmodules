@@ -6,7 +6,7 @@
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "dotfiles/.vim/bundle/tagbar"]
 	path = dotfiles/.vim/bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
+    url = git@github.com:preservim/tagbar.git
 [submodule "dotfiles/.vim/bundle/vim-fugitive"]
 	path = dotfiles/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git

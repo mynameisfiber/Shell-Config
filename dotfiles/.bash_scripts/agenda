@@ -18,4 +18,6 @@ function agenda() {
     fi;
 }
 
-agenda 10
+if is-term; then
+    agenda 10
+fi
