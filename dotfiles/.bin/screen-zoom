@@ -1,0 +1,17 @@
+#!/bin/bash
+
+dz=$1
+device=$2
+if [[ "$device" == "" ]]; then
+    device=$( xrandr --verbose | grep " connected" | cut -f1 -d' ' )
+fi
+
+if [[ "$dz" == "reset" ]]; then
+    new_scale=1
+else
+    cur_scale=$( xrandr --verbose | grep "$device connected" -A 10 | grep "Transform" | cut -f 3 -d' ' )
+    new_scale=$( echo "$cur_scale + $dz" | bc -l | xargs printf "%0.3f" )
+fi
+
+echo "Setting new scale to $new_scale"
+xrandr --output $device --scale $new_scale &> /dev/null

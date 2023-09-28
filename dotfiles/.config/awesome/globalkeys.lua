@@ -40,6 +40,20 @@ function change_volume(how)
     )
 end
 
+function change_screen_zoom(how)
+    local command = "screen-zoom " .. how
+    awful.spawn.easy_async_with_shell(
+        command,
+        function(stdout, stderr, reason, exit_code)
+            naughtyzoomid = naughty.notify({
+                text = stdout:gsub("^%s*(.-)%s*$", "%1"),
+                title = "Screen Zoom",
+                replaces_id = naughtyzoomid
+            }).id
+        end
+    )
+end
+
 function change_brightness(how)
     local command = "brightness " .. how
     awful.spawn.easy_async_with_shell(
@@ -144,6 +158,17 @@ function make_global_keys(modkey)
         ),
         awful.key({ modkey, "Shift"}, "F5",
             function() change_brightness("-1%") end
+        ),
+
+        -- screen zoom
+        awful.key({ "Control", modkey, "Shift" }, "=",
+            function() change_screen_zoom("0.05") end
+        ),
+        awful.key({ "Control", modkey }, "-",
+            function() change_screen_zoom("-0.05") end
+        ),
+        awful.key({ "Control", modkey }, "0",
+            function() change_screen_zoom("reset") end
         ),
     
         -- Lock
