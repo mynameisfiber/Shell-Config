@@ -18,6 +18,4 @@ do
 done
 export LOADED_BASH_CUSTOM=1
 
-if [ ! -v LOADED_PROFILE_CUSTOM ]; then
-    source ~/.profile_custom
-fi
+source ~/.profile_custom

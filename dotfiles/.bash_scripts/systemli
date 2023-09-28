@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function systemli-meet {
+    echo "https://meet.systemli.org/$( openssl rand -hex 24 )"
+}
+
+function systemli-meet-copy {
+    systemli-meet | xclip -i -selection "clipboard"
+}
