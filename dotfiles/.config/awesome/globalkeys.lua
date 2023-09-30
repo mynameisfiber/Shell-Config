@@ -89,9 +89,53 @@ local qzeal = lain.util.quake({
     vert = 'top',
 })
 
+function run_typr(terminal, params)
+    --awful.spawn(terminal .. " -- typr --debug " .. params)
+    local typrpid = awful.spawn.easy_async_with_shell(
+        "typr --debug " .. params,
+        function(stdout, stderr, reason, exit_code)
+            naughty.destroy(naughtytyprid)
+        end
+    )
+    local naughtytyprid = naughty.notify({
+        title = "typr is running",
+        text = "careful... microphone is listening",
+        timeout = 0,
+        ignore_suspend = true,
+        bg = "#FF0000",
+        run = function(n)
+            awful.spawn("kill " .. typrpid)
+            n.die(naughty.notificationClosedReason.dismissedByUser)
+        end
+    })
+end
 
-function make_global_keys(modkey)
+function create_typr_menu(terminal)
+    local typeitems = {
+        { "type general",  function() run_typr(terminal, "type") end },
+        { "type english",  function() run_typr(terminal, "--model base.en type") end },
+        { "type french",  function() run_typr(terminal, "--model base --language french type") end },
+    }
+    local copyitems = {
+        { "copy general",  function() run_typr(terminal, "copy") end },
+        { "copy english",  function() run_typr(terminal, "--model base.en copy") end },
+        { "copy french",  function() run_typr(terminal, "--model base --language french copy") end },
+    }
+    local menu = awful.menu({ items = { 
+        { "type",  typeitems },
+        { "copy",  copyitems},
+    }})
+    return menu
+end
+
+function make_global_keys(modkey, terminal)
+    local typrmenu = create_typr_menu(terminal)
     local globalkeys = awful.util.table.join(
+        -- typr
+        awful.key({ modkey}, "l",
+            function () typrmenu:toggle() end
+        ),
+
         -- Quakes
         awful.key({ modkey}, "z",
             function () qzeal:toggle() end
@@ -161,10 +205,16 @@ function make_global_keys(modkey)
         ),
 
         -- screen zoom
+        awful.key({ "Control", modkey }, "=",
+            function() change_screen_zoom("0.1") end
+        ),
+        awful.key({ "Control", modkey }, "-",
+            function() change_screen_zoom("-0.1") end
+        ),
         awful.key({ "Control", modkey, "Shift" }, "=",
             function() change_screen_zoom("0.05") end
         ),
-        awful.key({ "Control", modkey }, "-",
+        awful.key({ "Control", modkey, "Shift" }, "-",
             function() change_screen_zoom("-0.05") end
         ),
         awful.key({ "Control", modkey }, "0",

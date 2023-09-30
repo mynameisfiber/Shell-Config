@@ -1,7 +1,15 @@
 #!/bin/sh
 
-if [ -d "$HOME/.gem/ruby" ]; then
-    for ruby in $( find $HOME/.gem/ruby/ -maxdepth 2 -type d -name bin ); do
-        export PATH="$PATH:$ruby"
-    done
-fi
+function add-ruby-path {
+    basepath=$1
+    if [ -d $basepath ]; then
+        for ruby in $( find $basepath -maxdepth 2 -type d -name bin ); do
+            export PATH="$PATH:$ruby"
+        done
+    fi
+}
+
+add-ruby-path "$HOME/.gem/ruby"
+add-ruby-path "$HOME/.local/share/gem/ruby"
+
+unset add-ruby-path

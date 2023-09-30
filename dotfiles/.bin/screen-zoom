@@ -6,10 +6,19 @@ if [[ "$device" == "" ]]; then
     device=$( xrandr --verbose | grep " connected" | cut -f1 -d' ' )
 fi
 
+function get-cur-scale() {
+    xrandr --verbose | grep "$device connected" -A 10 | grep "Transform" | cut -f 3 -d' '
+}
+
 if [[ "$dz" == "reset" ]]; then
     new_scale=1
+elif [[ "$dz" == "status" ]]; then
+    echo "Current scale: $( get-cur-scale )"
+    exit
+elif [[ "${dz:0:1}" == "=" ]]; then
+    new_scale=${dz:1}
 else
-    cur_scale=$( xrandr --verbose | grep "$device connected" -A 10 | grep "Transform" | cut -f 3 -d' ' )
+    cur_scale=$( get-cur_scale )
     new_scale=$( echo "$cur_scale + $dz" | bc -l | xargs printf "%0.3f" )
 fi
 

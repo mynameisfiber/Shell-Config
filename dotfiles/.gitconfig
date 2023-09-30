@@ -6,6 +6,7 @@
 	followTags = true
 [init]
 	templatedir = ~/.gitrc/git_templates
+	defaultBranch = main
 [core]
 	excludesfile = ~/.gitignore
 [filter "lfs"]

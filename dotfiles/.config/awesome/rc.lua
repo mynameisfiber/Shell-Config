@@ -342,7 +342,7 @@ root.buttons(awful.util.table.join(
 -- {{{ Key bindings
 --
 -- Custom Global Keys
-globalkeys = require("globalkeys")(modkey)
+globalkeys = require("globalkeys")(modkey, terminal)
 
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Shift"   }, "/",      hotkeys_popup.show_help,
