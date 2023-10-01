@@ -34,6 +34,7 @@ function change_volume(how)
             naughtyvolumeid = naughty.notify({
                 text = stdout:gsub("^%s*(.-)%s*$", "%1"),
                 title = "Volume",
+                ignore_suspend = true,
                 replaces_id = naughtyvolumeid
             }).id
         end
@@ -48,6 +49,7 @@ function change_screen_zoom(how)
             naughtyzoomid = naughty.notify({
                 text = stdout:gsub("^%s*(.-)%s*$", "%1"),
                 title = "Screen Zoom",
+                ignore_suspend = true,
                 replaces_id = naughtyzoomid
             }).id
         end
@@ -62,6 +64,7 @@ function change_brightness(how)
             naughtybrightid = naughty.notify({
                 text = stdout:gsub("^%s*(.-)%s*$", "%1"),
                 title = "Brightness",
+                ignore_suspend = true,
                 replaces_id = naughtybrightid
             }).id
         end
@@ -76,6 +79,7 @@ function rotate_screen(identifier, how)
             naughtyrotateid = naughty.notify({
                 text = "Rotated screen " .. identifier .. " to: " .. how,
                 title = "Screen Rotation",
+                ignore_suspend = true,
                 replaces_id = naughtyrotateid
             }).id
         end
