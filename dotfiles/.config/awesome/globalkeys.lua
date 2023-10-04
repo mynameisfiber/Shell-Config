@@ -115,15 +115,28 @@ function run_typr(params)
 end
 
 function create_typr_menu()
+    local function typr_prompt(params)
+        awful.prompt.run {
+            prompt       = '<b>Typr Prompt: </b>',
+            bg_cursor    = '#ff0000',
+            textbox      = mouse.screen.mypromptbox.widget,
+            exe_callback = function(input)
+                if not input or #input == 0 then return end
+                run_typr('--prompt "' .. input .. '" ' .. params)
+            end
+        }
+    end
     local typeitems = {
-        { "type general",  function() run_typr("type") end },
-        { "type english",  function() run_typr("--model base.en type") end },
-        { "type french",  function() run_typr("--model base --language french type") end },
+        { "general",  function() run_typr("type") end },
+        { "english",  function() run_typr("--model base.en type") end },
+        { "french",  function() run_typr("--model base --language french type") end },
+        { "prompt",  function() typr_prompt("type") end },
     }
     local copyitems = {
-        { "copy general",  function() run_typr("copy") end },
-        { "copy english",  function() run_typr("--model base.en copy") end },
-        { "copy french",  function() run_typr("--model base --language french copy") end },
+        { "general",  function() run_typr("copy") end },
+        { "english",  function() run_typr("--model base.en copy") end },
+        { "french",  function() run_typr("--model base --language french copy") end },
+        { "prompt",  function() typr_prompt("copy") end },
     }
     local menu = awful.menu({ items = { 
         { "type",  typeitems },
