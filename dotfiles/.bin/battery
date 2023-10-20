@@ -28,7 +28,7 @@ fi
 curr_battery=$( battery_status "{charge,energy}_now" )
 full_battery=$( battery_status "{charge,energy}_full" )
 percent=$( echo "$curr_battery / $full_battery" | bc -l )
-charging=$( cat /sys/class/power_supply/AC*/online )
+charging=$( cat /sys/class/power_supply/{AC*,ADP*}/online 2> /dev/null )
 
 [[ $charging == 1 ]] && echo -n $POWER
 progress --characters="$CHARS" --progress=$curr_battery --max-progress=$full_battery --width=$num_stars
