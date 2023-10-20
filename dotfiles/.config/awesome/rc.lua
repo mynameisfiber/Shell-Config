@@ -20,6 +20,9 @@ require("autostart")
 -- Habbit notifications
 local habbits = require('habbits')
 
+-- Notify when webcam in use
+local webcam = require('webcam')
+
 
 -- Convinience
 function nlog(text) 
