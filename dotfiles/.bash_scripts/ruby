@@ -9,6 +9,11 @@ function add-ruby-path {
     fi
 }
 
+if command -v rbenv ; then
+    eval "$(rbenv init -)"
+fi
+
+
 add-ruby-path "$HOME/.gem/ruby"
 add-ruby-path "$HOME/.local/share/gem/ruby"
 
