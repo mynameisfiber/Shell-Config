@@ -12,4 +12,4 @@ function add-ruby-path {
 add-ruby-path "$HOME/.gem/ruby"
 add-ruby-path "$HOME/.local/share/gem/ruby"
 
-unset add-ruby-path
+unset -f add-ruby-path
