@@ -30,6 +30,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 Plug 'kamykn/spelunker.vim'
+
+Plug 'ekickx/clipboard-image.nvim'
 call plug#end()
 
 if plug_install

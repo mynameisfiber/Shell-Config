@@ -62,6 +62,9 @@ echo "*******Installing required python packages"
 python3 -m ensurepip
 python3 -m pip install -U pip
 python3 -m pip install --upgrade --force-reinstall -r requirements.txt
+if [ ! -z "$DISPLAY" ]; then
+    python3 -m pip install --upgrade --force-reinstall -r requirements.gui.txt
+fi
 
 if [ ! -z "$DISPLAY" ]; then
     echo "********Installing lolcommits"

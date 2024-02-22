@@ -17,7 +17,7 @@ noglob () {
 
 draw-horizline () {
     if is-term; then
-        printf "${COLOR_POWDER_BLUE=}%.0s⧟${COLOR_NORMAL}" $( seq ${1:-$(tput_safe cols)} )
+        printf "${COLOR_POWDER_BLUE=}%.0s=${COLOR_NORMAL}" $( seq ${1:-$(tput_safe cols)} )
         echo
     fi
 }

@@ -8,6 +8,9 @@ function! SourceDirectory(relativePath)
   for f in split(glob(stdpath('config') . '/' . a:relativePath . '/*.vim'), '\n')
     exe 'source' f
   endfor
+  for f in split(glob(stdpath('config') . '/' . a:relativePath . '/*.lua'), '\n')
+    exe 'luafile' f
+  endfor
 endfunction
 
 call SourceConfig('config/plugins.vim')

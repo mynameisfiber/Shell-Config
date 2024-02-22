@@ -1,1 +1,1 @@
-eval $( pyenv init --path )
+eval $( /home/micha/.pyenv/bin/pyenv init --path )

@@ -34,7 +34,23 @@ function change_volume(how)
             naughtyvolumeid = naughty.notify({
                 text = stdout:gsub("^%s*(.-)%s*$", "%1"),
                 title = "Volume",
+                ignore_suspend = true,
                 replaces_id = naughtyvolumeid
+            }).id
+        end
+    )
+end
+
+function change_screen_zoom(how)
+    local command = "screen-zoom " .. how
+    awful.spawn.easy_async_with_shell(
+        command,
+        function(stdout, stderr, reason, exit_code)
+            naughtyzoomid = naughty.notify({
+                text = stdout:gsub("^%s*(.-)%s*$", "%1"),
+                title = "Screen Zoom",
+                ignore_suspend = true,
+                replaces_id = naughtyzoomid
             }).id
         end
     )
@@ -48,6 +64,7 @@ function change_brightness(how)
             naughtybrightid = naughty.notify({
                 text = stdout:gsub("^%s*(.-)%s*$", "%1"),
                 title = "Brightness",
+                ignore_suspend = true,
                 replaces_id = naughtybrightid
             }).id
         end
@@ -62,6 +79,7 @@ function rotate_screen(identifier, how)
             naughtyrotateid = naughty.notify({
                 text = "Rotated screen " .. identifier .. " to: " .. how,
                 title = "Screen Rotation",
+                ignore_suspend = true,
                 replaces_id = naughtyrotateid
             }).id
         end
@@ -75,9 +93,66 @@ local qzeal = lain.util.quake({
     vert = 'top',
 })
 
+function run_typr(params)
+    local typrnotification = nil
+    local typrpid = awful.spawn.easy_async_with_shell(
+        "typr --debug " .. params,
+        function(stdout, stderr, reason, exit_code)
+            typrnotification.die(naughty.notificationClosedReason.dismissedByUser)
+        end
+    )
+    typrnotification = naughty.notify({
+        title = "typr is running",
+        text = "careful... microphone is listening",
+        timeout = 0,
+        ignore_suspend = true,
+        bg = "#FF0000",
+        run = function(n)
+            awful.spawn("kill " .. typrpid)
+            n.die(naughty.notificationClosedReason.dismissedByUser)
+        end
+    })
+end
+
+function create_typr_menu()
+    local function typr_prompt(params)
+        awful.prompt.run {
+            prompt       = '<b>Typr Prompt: </b>',
+            bg_cursor    = '#ff0000',
+            textbox      = mouse.screen.mypromptbox.widget,
+            exe_callback = function(input)
+                if not input or #input == 0 then return end
+                run_typr('--prompt "' .. input .. '" ' .. params)
+            end
+        }
+    end
+    local typeitems = {
+        { "general",  function() run_typr("type") end },
+        { "english",  function() run_typr("--model base.en type") end },
+        { "french",  function() run_typr("--model base --language french type") end },
+        { "prompt",  function() typr_prompt("type") end },
+    }
+    local copyitems = {
+        { "general",  function() run_typr("copy") end },
+        { "english",  function() run_typr("--model base.en copy") end },
+        { "french",  function() run_typr("--model base --language french copy") end },
+        { "prompt",  function() typr_prompt("copy") end },
+    }
+    local menu = awful.menu({ items = { 
+        { "type",  typeitems },
+        { "copy",  copyitems},
+    }})
+    return menu
+end
 
 function make_global_keys(modkey)
+    local typrmenu = create_typr_menu()
     local globalkeys = awful.util.table.join(
+        -- typr
+        awful.key({ modkey}, "`",
+            function () typrmenu:toggle() end
+        ),
+
         -- Quakes
         awful.key({ modkey}, "z",
             function () qzeal:toggle() end
@@ -144,6 +219,23 @@ function make_global_keys(modkey)
         ),
         awful.key({ modkey, "Shift"}, "F5",
             function() change_brightness("-1%") end
+        ),
+
+        -- screen zoom
+        awful.key({ "Control", modkey }, "=",
+            function() change_screen_zoom("0.1") end
+        ),
+        awful.key({ "Control", modkey }, "-",
+            function() change_screen_zoom("-0.1") end
+        ),
+        awful.key({ "Control", modkey, "Shift" }, "=",
+            function() change_screen_zoom("0.05") end
+        ),
+        awful.key({ "Control", modkey, "Shift" }, "-",
+            function() change_screen_zoom("-0.05") end
+        ),
+        awful.key({ "Control", modkey }, "0",
+            function() change_screen_zoom("reset") end
         ),
     
         -- Lock
