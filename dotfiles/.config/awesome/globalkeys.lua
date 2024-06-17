@@ -148,6 +148,14 @@ end
 function make_global_keys(modkey)
     local typrmenu = create_typr_menu()
     local globalkeys = awful.util.table.join(
+        -- set transparency
+        awful.key({ modkey, }, "Page_Up",
+            function () awful.spawn("transset --inc 0.05 --actual") end
+        ),
+        awful.key({ modkey }, "Page_Down",
+            function () awful.spawn("transset --dec 0.05 --actual") end
+        ),
+
         -- typr
         awful.key({ modkey}, "`",
             function () typrmenu:toggle() end

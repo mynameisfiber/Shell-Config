@@ -51,12 +51,13 @@ git checkout master
 git pull
 popd
 
+PYTHON_VERSION="3.12.3"
 export MAKEOPTS="-j"
 export CFLAGS="-O2 -fPIC"
 export PYTHON_CONFIGURE_OPTS="--enable-loadable-sqlite-extensions"
-pyenv install --skip-existing 3.11.0
-pyenv global 3.11.0
-pyenv local 3.11.0
+pyenv install --skip-existing $PYTHON_VERSION
+pyenv global $PYTHON_VERSION
+pyenv local $PYTHON_VERSION
 
 echo "*******Installing required python packages"
 python3 -m ensurepip
