@@ -1,4 +1,4 @@
-let g:coc_global_extensions = [ 'coc-pyright', 'coc-highlight', 'coc-json', 'coc-html', 'coc-yank', 'coc-eslint', 'coc-ltex', 'coc-tsserver', 'coc-go' ]
+let g:coc_global_extensions = [ 'coc-pyright', 'coc-highlight', 'coc-json', 'coc-html', 'coc-yank', 'coc-eslint', 'coc-tsserver', 'coc-go' ]
 
 " From
 " https://github.com/neoclide/coc.nvim/issues/3908#issuecomment-1290991549 to
