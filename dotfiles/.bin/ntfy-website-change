@@ -1,0 +1,40 @@
+#!/bin/env bash
+
+URL=$1
+TOPIC=${2:-WebsiteChange}
+TIMEOUT=${3:-10}
+IGNORE=${4:-asdsldfhsdjghaweuhf9824353498yt23489fhasds}
+
+
+function get_url() {
+    local url=$1;
+    local output=$2;
+    curl --silent --location "${url}" | pandoc -f html -t markdown | grep -v "$IGNORE" > ${output};
+}
+
+WORK_DIR=`mktemp -d`
+if [[ ! "$WORK_DIR" || ! -d "$WORK_DIR" ]]; then
+  echo "Could not create temp dir"
+  exit 1
+fi
+echo $WORK_DIR
+
+function cleanup {      
+  rm -rf "$WORK_DIR"
+}
+trap cleanup EXIT
+
+get_url ${URL} ${WORK_DIR}/base.md
+while true; do
+    get_url ${URL} ${WORK_DIR}/candidate.md
+    echo -ne "."
+    DIFF=$( diff ${WORK_DIR}/base.md ${WORK_DIR}/candidate.md | grep -v "Privacy")
+    echo $DIFF > ${WORK_DIR}/diff.latest.txt
+    if [ -n "${DIFF}" ] ; then
+        echo -ne "!"
+        export NTFY_MESSAGE=${DIFF}
+        ntfy send -p high --click "${URL}" --quiet --title "Website Changed" "${TOPIC}"
+        mv ${WORK_DIR}/candidate.md ${WORK_DIR}/base.md
+    fi
+    sleep ${TIMEOUT}
+done;
