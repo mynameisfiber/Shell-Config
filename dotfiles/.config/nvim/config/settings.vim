@@ -13,15 +13,6 @@ autocmd FileType gitcommit setlocal spell
 autocmd FileType markdown setlocal complete+=kspell
 autocmd FileType gitcommit setlocal complete+=kspell
 
-" Colors!
-syntax enable
-set background=dark
-colorscheme solarized
-
-" Solarized background strangeness fix
-highlight Normal ctermbg=None
-highlight LineNr ctermfg=grey ctermbg=None
-
 " gitgutter
 let g:gitgutter_override_sign_column_highlight = 0
 highlight SignColumn ctermbg=None

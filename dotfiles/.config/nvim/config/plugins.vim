@@ -32,6 +32,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'kamykn/spelunker.vim'
 
 Plug 'ekickx/clipboard-image.nvim'
+
+" Themes
+Plug 'ellisonleao/gruvbox.nvim'
+
 call plug#end()
 
 if plug_install
