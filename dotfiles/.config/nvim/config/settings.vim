@@ -3,6 +3,10 @@ filetype on
 filetype plugin on
 filetype plugin indent on
 
+" utf8
+set encoding=utf-8
+" right click extends current selection
+set mousemodel=extend
 " Set vim keyboard so that the system copy buffer syncs with vims
 set clipboard^=unnamed,unnamedplus
 

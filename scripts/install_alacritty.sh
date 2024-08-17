@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 if ! which git > /dev/null; then
     echo "Please install git"
     exit 1

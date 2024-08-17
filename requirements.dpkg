@@ -8,8 +8,12 @@ git-crypt
 build-essential
 fonts-powerline
 cmake
+pkg-config
+automake
 stow
-exuberant-ctags
+
+# this is for our custom built ctags
+libjansson-dev
 
 # python stuff
 liblzma-dev

@@ -1,5 +1,5 @@
 " Opens tagbar with F2
-map <F2> :TagbarToggle<CR>
+"map <F2> :TagbarToggle<CR>
 
 " map F1 to escape because I keep hitting it with this new keyboard
 map <F1> <Esc>

@@ -72,6 +72,9 @@ if [ ! -z "$DISPLAY" ]; then
     gem install --user lolcommits lolcommits-loltext
 fi
 
+echo "******Installing custom built programs"
+./scripts/install_universal_ctags.sh
+
 #echo "*******Installing LOLssh"
 #cd lolssh
 #python3 setup.py install --user
