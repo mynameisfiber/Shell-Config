@@ -73,6 +73,8 @@ if [ ! -z "$DISPLAY" ]; then
 fi
 
 echo "******Installing custom built programs"
+./scripts/install_neovim.sh
+./scripts/install_nerd_fonts.sh
 ./scripts/install_universal_ctags.sh
 
 #echo "*******Installing LOLssh"
