@@ -129,13 +129,13 @@ function create_typr_menu()
     local typeitems = {
         { "general",  function() run_typr("type") end },
         { "english",  function() run_typr("--model base.en type") end },
-        { "french",  function() run_typr("--model base --language french type") end },
+        { "french",  function() run_typr("--model base --language fr type") end },
         { "prompt",  function() typr_prompt("type") end },
     }
     local copyitems = {
         { "general",  function() run_typr("copy") end },
         { "english",  function() run_typr("--model base.en copy") end },
-        { "french",  function() run_typr("--model base --language french copy") end },
+        { "french",  function() run_typr("--model base --language fr copy") end },
         { "prompt",  function() typr_prompt("copy") end },
     }
     local menu = awful.menu({ items = { 

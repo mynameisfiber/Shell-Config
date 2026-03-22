@@ -37,6 +37,11 @@ Plug 'ekickx/clipboard-image.nvim'
 " Themes
 Plug 'ellisonleao/gruvbox.nvim'
 
+Plug 'nvim-lua/plenary.nvim'
+
+" interesting but i never was interested enough to install and test:
+" Plug 'olimorris/codecompanion' 
+
 call plug#end()
 
 if plug_install

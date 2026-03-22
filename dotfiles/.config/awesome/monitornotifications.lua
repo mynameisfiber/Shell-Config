@@ -27,6 +27,11 @@ awful.spawn.with_line_callback(webcam_cmd, {
             local note = naughty.getById(nid)
             note.die(naughty.notificationClosedReason.dismissedByUser)
             webcam_notifications[device] = nil
+        else
+            naughty.notify({
+                title = "Unparsable webcam event",
+                text = line .. "\n" .. nid
+            })
         end
     end,
     stderr = function(line)

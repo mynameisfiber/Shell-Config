@@ -9,3 +9,5 @@ mcd()
 }
 
 export PROMPT_DIRTRIM=2
+
+alias weather="curl wttr.in?format=v2"

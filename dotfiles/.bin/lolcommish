@@ -1,0 +1,42 @@
+#!/bin/env bash
+
+# Variables for the text to be added
+COMMIT_MSG="Your commit message here"
+COMMIT_HASH="abc123def"
+WRAP_WIDTH=20
+FONT="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+DATE=$(date +"%Y/%m/%d@%H\:%M")
+LENGTH=5
+
+# Function to insert line breaks into the COMMIT_MSG
+wrap_text() {
+    local input="$1"
+    local width="$2"
+    echo "$input" | fold -s -w "$width"
+}
+WRAPPED_COMMIT_MSG=$(wrap_text "$COMMIT_MSG" $WRAP_WIDTH)
+
+# Step 1: Determine the webcam with the highest resolution
+DEVICE=$(v4l2-ctl --list-devices | grep -A 1 "video" | grep "/dev/video" | while read -r line; do
+    v4l2-ctl --device="$line" --list-formats-ext | grep "Size: Discrete" | awk '{print $3}' | sort -nr | head -1
+    echo "$line"
+done | head -2 | tail -1)
+
+# Step 2: Capture 5 seconds of video from the webcam
+ffmpeg -f v4l2 -framerate 30 -video_size 640x480 -i "$DEVICE" -t ${LENGTH} output.mp4
+
+# Step 3: Add text overlay with COMMIT_MSG, COMMIT_HASH, and DATE
+ffmpeg -i output.mp4 \
+-vf "drawtext=fontfile=${FONT}:text='$WRAPPED_COMMIT_MSG':fontcolor=white:fontsize=48:borderw=2:bordercolor=black:x=(w-text_w)/2:y=h-(text_h*2), \
+drawtext=fontfile=${FONT}:text='$COMMIT_HASH':fontcolor=white:fontsize=32:borderw=2:bordercolor=black:x=w-(text_w+20):y=20, \
+drawtext=fontfile=${FONT}:text='$DATE':fontcolor=white:fontsize=24:borderw=2:bordercolor=black:x=20:y=20" \
+output_text.mp4
+
+# Step 4: Generate a color palette for the GIF
+ffmpeg -i output_text.mp4 -vf "fps=10,scale=640:-1:flags=lanczos,palettegen" palette.png
+
+# Step 5: Generate the final GIF using the color palette
+ffmpeg -i output_text.mp4 -i palette.png -filter_complex "fps=10,scale=640:480:flags=lanczos[x];[x][1:v]paletteuse" output.gif
+
+# Clean up intermediate files
+rm output.mp4 output_text.mp4 palette.png

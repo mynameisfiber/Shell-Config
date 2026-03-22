@@ -1,0 +1,9 @@
+#/bin/bash
+
+function bw-higgs-otp() {
+    bw get totp "higgs ssh";
+}
+
+function bw-higgs-otp-copy {
+    bw-higgs-otp | xclip -i -selection "clipboard"
+}

@@ -29,6 +29,11 @@ function nlog(text)
     naughty.notify({text=text})
 end
 
+-- disable edge snapping
+awful.mouse.snap.edge_enabled = false
+--awful.mouse.drag_to_tag.enabled = true
+awful.mouse.snap.client_enabled = false
+
 
 -- Enable tag-screen affinity so that when a tag's screen goes away, it'll try
 -- to go back to it's rightful place when the screen comes back

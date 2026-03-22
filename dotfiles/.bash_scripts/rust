@@ -1,0 +1,5 @@
+
+if type -P rustup > /dev/null; then
+    source <( rustup completions bash )          # for rustup
+    source <( rustup completions bash cargo )    # for cargo
+fi

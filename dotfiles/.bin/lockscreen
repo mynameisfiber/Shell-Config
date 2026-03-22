@@ -5,6 +5,7 @@ cmd=$1
 LOCKFILE=/var/lock/$USER.xautolock.lock
 
 if [ "${cmd}" == "lock" ]; then
+    pulsemixer --mute
     i3lock -d -c 000070 --ignore-empty-password
 elif [ "${cmd}" == "status" ]; then
     fuser "${LOCKFILE}"
