@@ -1,0 +1,34 @@
+# the basics
+tmux
+vim
+python3
+git
+git-crypt
+build-essential
+fonts-powerline
+cmake
+pkg-config
+automake
+stow
+
+# for appimages
+libfuse2
+
+# this is for our custom built ctags
+libjansson-dev
+
+# python stuff
+liblzma-dev
+libffi-dev
+libreadline-dev
+libsqlite3-dev
+libbz2-dev
+zlib1g-dev
+libssl-dev
+
+# node stuff
+nodejs
+
+# utils
+bsdmainutils
+tree

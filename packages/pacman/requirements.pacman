@@ -1,0 +1,41 @@
+# the basics
+tmux
+vim
+neovim
+powerline
+powerline-fonts
+
+# Arch package 'python' is Python 3
+python
+git
+git-crypt
+
+# group: equivalent to build-essential
+base-devel
+cmake
+
+# Arch package is 'pkgconf'
+pkgconf
+automake
+stow
+
+# for appimages
+fuse2
+
+# this is for our custom built ctags
+jansson
+
+# python stuff
+xz
+libffi
+readline
+sqlite
+bzip2
+zlib
+openssl
+
+# node stuff
+nodejs
+
+# utils
+tree

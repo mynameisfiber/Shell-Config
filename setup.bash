@@ -20,18 +20,28 @@ function _install_requirements() {
 }
 
 echo "*******System Packages"
-if command -v apt > /dev/null 2>&1; then
-    _install_requirements "sudo add-apt-repository -yn" ppas.conf
-    sudo apt update
-    _install_requirements "sudo apt -y install" requirements.dpkg
+if command -v pacman > /dev/null 2>&1; then
+    echo "Updating system"
+    sudo pacman -Suy --noconfirm
+    echo "Installing system packages"
+    sudo pacman -Sy --needed --noconfirm $( cat packages/pacman/requirements.pacman | grep -v "^#" | paste -sd ' ' )
     if [ ! -z "$DISPLAY" ]; then
-        _install_requirements "sudo apt -y install" requirements.gui.dpkg
+    	echo "Installing graphical packages"
+    	sudo pacman -Sy --needed --noconfirm $( cat packages/pacman/requirements.gui.pacman | grep -v "^#" | paste -sd ' ' )
+    fi
+fi
+
+if command -v apt > /dev/null 2>&1; then
+    _install_requirements "sudo add-apt-repository -yn" packages/dpkg/ppas.conf
+    sudo apt update
+    _install_requirements "sudo apt -y install" packages/dpkg/requirements.dpkg
+    if [ ! -z "$DISPLAY" ]; then
+        _install_requirements "sudo apt -y install" packages/dpkg/requirements.gui.dpkg
     fi
 fi
 
 echo "*******Updating submodules"
-git config --global core.excludesfile '~/.gitignore'
-git submodule update --init --recursive --remote --jobs=-1
+git submodule update --init --recursive --remote --jobs=4
 
 echo "*******Refreshing dotfiles"
 stow -R dotfiles
@@ -42,7 +52,8 @@ inject_shell_custom ~/.bashrc ~/.bash_custom
 inject_shell_custom ~/.bash_profile ~/.bash_custom
 
 echo "*******Sourcing bashrc"
-#source $HOME/.bashrc
+source $HOME/.bashrc
+source $HOME/.profile
 
 echo "*******Installing python"
 pushd $(pyenv root)
