@@ -1,0 +1,12 @@
+#/bin/bash
+
+color=$(gdbus call --session --dest org.gnome.Shell.Screenshot --object-path /org/gnome/Shell/Screenshot --method org.gnome.Shell.Screenshot.PickColor)
+echo "COLOR: $color"
+
+numbers=$(echo $color | sed 's/[^0-9,.]*//g')
+echo "FLOAT: $numbers"
+
+rgb=$(echo $numbers | awk -F',' '{ print $1 * 255, $2 * 255, $3 * 255 }')
+echo "RGB: $rgb"
+
+printf "HEX: #%x%x%x\n" $rgb
