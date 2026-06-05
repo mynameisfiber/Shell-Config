@@ -1,7 +1,4 @@
-if [[ $TERM == "screen" ]]
-  then
-    export PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
-  fi
+source .bash_scripts/pyenv
 
 export PATH="/usr/local/bin:$PATH"
 
@@ -12,7 +9,7 @@ export EDITOR="vim"
 
 for script in ~/.bash_scripts/*;
 do
-    if [ -r "$script" -a -f "$script" ]; then
+    if [[ -r "$script" && -f "$script" ]] && file "$script" | grep -q "text"; then
         source "$script"
     fi
 done

@@ -1,7 +1,14 @@
-# the basics
+# basics
+bc
+binutils
+curl
+man-db
+
+# general util
 tmux
 vim
 neovim
+npm
 powerline
 powerline-fonts
 
@@ -36,6 +43,7 @@ openssl
 
 # node stuff
 nodejs
+npm
 
 # utils
 tree

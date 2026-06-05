@@ -27,7 +27,7 @@ if [[ "`uname`" == "Darwin" ]]
 # General shell scripts
 for script in ~/.profile_scripts/*;
 do
-    if [ -r "$script" ]; then
+    if [[ -r "$script" && -f "$script" ]] && file "$script" | grep -q "text"; then
         source "$script"
     fi
 done

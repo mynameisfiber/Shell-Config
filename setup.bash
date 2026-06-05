@@ -52,8 +52,8 @@ inject_shell_custom ~/.bashrc ~/.bash_custom
 inject_shell_custom ~/.bash_profile ~/.bash_custom
 
 echo "*******Sourcing bashrc"
-source $HOME/.bashrc
-source $HOME/.profile
+#source $HOME/.bashrc
+#source $HOME/.profile
 
 echo "*******Installing python"
 pushd $(pyenv root)
@@ -84,7 +84,7 @@ if [ ! -z "$DISPLAY" ]; then
 fi
 
 echo "******Installing custom built programs"
-./scripts/install_neovim.sh
+#./scripts/install_neovim.sh
 ./scripts/install_nerd_fonts.sh
 ./scripts/install_universal_ctags.sh
 

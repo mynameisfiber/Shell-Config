@@ -113,7 +113,7 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 

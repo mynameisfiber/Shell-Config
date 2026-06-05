@@ -1,7 +1,7 @@
 #!/bin/bash
 
 action=$1
-device=$( nmcli device status | egrep "wifi[^-]" | cut -f1 -d' ' )
+device=$( nmcli device status | grep -E "wifi[^-]" | cut -f1 -d' ' )
 
 if [ "$action" == "export" ]; then
     nmcli device wifi show-password ifname $device

@@ -2,7 +2,7 @@
 
 
 cmd=$1
-LOCKFILE=/var/lock/$USER.xautolock.lock
+LOCKFILE=/tmp/$USER.xautolock.lock
 
 if [ "${cmd}" == "lock" ]; then
     pulsemixer --mute

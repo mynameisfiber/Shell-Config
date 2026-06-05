@@ -1,7 +1,7 @@
 #!/bin/bash
 
 QUIET=$1
-LOCKFILE=/var/lock/$USER.xautolock.lock
+LOCKFILE=/tmp/$USER.xautolock.lock
 
 function notify() {
     dbus-send --type=method_call --dest='org.freedesktop.Notifications' /org/freedesktop/Notifications org.freedesktop.Notifications.Notify string:'caffeine' uint32:1 string:'[ICON]' string:"$1" string:"$2" array:string:'' dict:string:string:'',''

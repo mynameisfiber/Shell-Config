@@ -1,0 +1,240 @@
+#!/usr/bin/env bash
+
+# Timer manager using ~/.timerrc
+# Format: one timer per line: "<name> <unix_timestamp>"
+# Display order follows the line order in the file.
+
+TIMERRC="${HOME}/.timerrc"
+[ -f "$TIMERRC" ] || touch "$TIMERRC"
+
+usage() {
+    printf 'Usage: timer\n'
+    printf '       timer --add <name> [<timestamp>] [<position>]\n'
+    printf '       timer --remove <name>\n'
+}
+
+fmt_duration() {
+    local s="$1"
+    local d=$((s / 86400))
+    local h=$(((s % 86400) / 3600))
+    local m=$(((s % 3600) / 60))
+    local r=$((s % 60))
+    local parts=()
+    [ "$d" -gt 0 ] && parts+=("${d}d")
+    [ "$h" -gt 0 ] && parts+=("${h}h")
+    [ "$m" -gt 0 ] && parts+=("${m}m")
+    [ "$r" -gt 0 ] && parts+=("${r}s")
+    if [ "${#parts[@]}" -eq 0 ]; then
+        printf '0s'
+    else
+        local IFS=' '
+        printf '%s' "${parts[*]}"
+    fi
+}
+
+read_timers() {
+    names=()
+    stamps=()
+    local line
+    while IFS= read -r line || [ -n "$line" ]; do
+        [ -z "$line" ] && continue
+        if [[ "$line" =~ ^(.*)[[:space:]]+([0-9]+)$ ]]; then
+            local tname="${BASH_REMATCH[1]}"
+            tname="${tname%%[[:space:]]*}"
+            names+=("$tname")
+            stamps+=("${BASH_REMATCH[2]}")
+        fi
+        line=""
+    done < "$TIMERRC"
+}
+
+write_timers() {
+    local tmp i
+    tmp=$(mktemp "${TIMERRC}.tmp.XXXXXX")
+    for ((i=0; i < ${#names[@]}; i++)); do
+        printf '%s %s\n' "${names[i]}" "${stamps[i]}" >> "$tmp"
+    done
+    mv "$tmp" "$TIMERRC"
+}
+
+cmd_show() {
+    local now i green normal diff sign
+    now=$(date +%s)
+    green=''; normal=''
+    if [ -t 1 ]; then
+        green=$'\033[32m'
+        normal=$'\033[0m'
+    fi
+
+    read_timers
+    for ((i=0; i < ${#names[@]}; i++)); do
+        diff=$((now - stamps[i]))
+        sign='+'
+        if [ "$diff" -lt 0 ]; then
+            sign='-'
+            diff=$((-diff))
+        fi
+        printf '%s%s:%s T%s %s\n' \
+            "$green" "${names[i]}" "$normal" "$sign" "$(fmt_duration "$diff")"
+    done
+}
+
+cmd_add() {
+    local name="$1" timestamp="$2" position="$3"
+    local i idx
+    local new_names=()
+    local new_stamps=()
+
+    if [ -z "$name" ]; then
+        printf 'Error: timer name cannot be empty.\n' >&2
+        return 1
+    fi
+
+    # Trim trailing whitespace from name
+    name="${name%%[[:space:]]*}"
+
+    [ -z "$timestamp" ] && timestamp=$(date +%s)
+    if [[ ! "$timestamp" =~ ^[0-9]+$ ]]; then
+        printf 'Error: timestamp must be a positive integer (unix epoch).\n' >&2
+        return 1
+    fi
+
+    if [ -n "$position" ] && [[ ! "$position" =~ ^[0-9]+$ ]]; then
+        printf 'Error: position must be a positive integer (1-based).\n' >&2
+        return 1
+    fi
+
+    read_timers
+
+    # Remove existing entry with the same name, if present.
+    for ((i=0; i < ${#names[@]}; i++)); do
+        if [ "${names[i]}" != "$name" ]; then
+            new_names+=("${names[i]}")
+            new_stamps+=("${stamps[i]}")
+        fi
+    done
+    names=("${new_names[@]}")
+    stamps=("${new_stamps[@]}")
+
+    # Determine insertion index (0-based; default is append).
+    idx="${#names[@]}"
+    if [ -n "$position" ]; then
+        idx=$((position - 1))
+        [ "$idx" -lt 0 ] && idx=0
+        [ "$idx" -gt "${#names[@]}" ] && idx="${#names[@]}"
+    fi
+
+    # Rebuild arrays with the new timer inserted.
+    new_names=()
+    new_stamps=()
+    for ((i=0; i < idx; i++)); do
+        new_names+=("${names[i]}")
+        new_stamps+=("${stamps[i]}")
+    done
+    new_names+=("$name")
+    new_stamps+=("$timestamp")
+    for ((i=idx; i < ${#names[@]}; i++)); do
+        new_names+=("${names[i]}")
+        new_stamps+=("${stamps[i]}")
+    done
+    names=("${new_names[@]}")
+    stamps=("${new_stamps[@]}")
+
+    write_timers
+}
+
+cmd_remove() {
+    local name="$1" i found
+    local new_names=()
+    local new_stamps=()
+
+    if [ -z "$name" ]; then
+        printf 'Error: timer name cannot be empty.\n' >&2
+        return 1
+    fi
+
+    read_timers
+    found=0
+    for ((i=0; i < ${#names[@]}; i++)); do
+        if [ "${names[i]}" = "$name" ]; then
+            found=1
+        else
+            new_names+=("${names[i]}")
+            new_stamps+=("${stamps[i]}")
+        fi
+    done
+
+    if [ "$found" -eq 0 ]; then
+        printf 'Error: no such timer: %s\n' "$name" >&2
+        return 1
+    fi
+
+    names=("${new_names[@]}")
+    stamps=("${new_stamps[@]}")
+    write_timers
+}
+
+main() {
+    case "${1:-}" in
+        --add|-a)
+            shift
+            if [ $# -lt 1 ]; then
+                usage >&2
+                exit 1
+            fi
+            cmd_add "$@"
+            ;;
+        --remove|-r)
+            shift
+            if [ $# -lt 1 ]; then
+                usage >&2
+                exit 1
+            fi
+            cmd_remove "$@"
+            ;;
+        --help|-h)
+            usage
+            ;;
+        "")
+            cmd_show
+            ;;
+        *)
+            printf 'Unknown option: %s\n' "$1" >&2
+            usage >&2
+            exit 1
+            ;;
+    esac
+}
+
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+    main "$@"
+fi
+
+_timer_completion() {
+    local cur="$2" prev="$3" line
+    local names=()
+    while IFS= read -r line || [ -n "$line" ]; do
+        [ -z "$line" ] && continue
+        if [[ "$line" =~ ^(.*)[[:space:]]+([0-9]+)$ ]]; then
+            local tname="${BASH_REMATCH[1]}"
+            tname="${tname%%[[:space:]]*}"
+            names+=("$tname")
+        fi
+        line=""
+    done < "$TIMERRC"
+
+    case "$prev" in
+        --remove|-r)
+            COMPREPLY=( $(compgen -W "${names[*]}" -- "$cur") )
+            return 0
+            ;;
+        --add|-a)
+            return 0
+            ;;
+    esac
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $(compgen -W "--add --remove --help" -- "$cur") )
+    fi
+}
+complete -F _timer_completion timer 2>/dev/null || true
