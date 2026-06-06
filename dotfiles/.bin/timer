@@ -13,22 +13,86 @@ usage() {
     printf '       timer --remove <name>\n'
 }
 
+# Format seconds into:
+#   "4 years, 8 months, 21 days and 4.08 hours"
+#   "1 year, 8 months and 22.99 hours"
+#   "23 days and 23.99 hours"
+#   "0.26 hours"
 fmt_duration() {
     local s="$1"
-    local d=$((s / 86400))
-    local h=$(((s % 86400) / 3600))
-    local m=$(((s % 3600) / 60))
-    local r=$((s % 60))
+    local y m d h rem h_dec
     local parts=()
-    [ "$d" -gt 0 ] && parts+=("${d}d")
-    [ "$h" -gt 0 ] && parts+=("${h}h")
-    [ "$m" -gt 0 ] && parts+=("${m}m")
-    [ "$r" -gt 0 ] && parts+=("${r}s")
-    if [ "${#parts[@]}" -eq 0 ]; then
-        printf '0s'
+
+    # Approximate breakdown (365-day years, 30-day months)
+    y=$((s / 31536000))
+    rem=$((s % 31536000))
+
+    m=$((rem / 2592000))
+    rem=$((rem % 2592000))
+
+    d=$((rem / 86400))
+    rem=$((rem % 86400))
+
+    h=$((rem / 3600))
+    h_dec=$(((rem % 3600) * 100 / 3600))
+
+    # Years
+    if [ "$y" -gt 0 ]; then
+        if [ "$y" -eq 1 ]; then
+            parts+=("1 year")
+        else
+            parts+=("${y} years")
+        fi
+    fi
+
+    # Months
+    if [ "$m" -gt 0 ]; then
+        if [ "$m" -eq 1 ]; then
+            parts+=("1 month")
+        else
+            parts+=("${m} months")
+        fi
+    fi
+
+    # Days
+    if [ "$d" -gt 0 ]; then
+        if [ "$d" -eq 1 ]; then
+            parts+=("1 day")
+        else
+            parts+=("${d} days")
+        fi
+    fi
+
+    # Hours (always shown with 2 decimals if non-zero; if everything is zero, show 0.00)
+    local hours_str
+    if [ "$h" -eq 1 ] && [ "$h_dec" -eq 0 ]; then
+        hours_str="1 hour"
     else
-        local IFS=' '
-        printf '%s' "${parts[*]}"
+        if [ "$h_dec" -lt 10 ]; then
+            hours_str="${h}.0${h_dec} hours"
+        else
+            hours_str="${h}.${h_dec} hours"
+        fi
+    fi
+
+    if [ "$h" -gt 0 ] || [ "$h_dec" -gt 0 ]; then
+        parts+=("$hours_str")
+    elif [ "${#parts[@]}" -eq 0 ]; then
+        parts+=("0.00 hours")
+    fi
+
+    # Join with commas and "and"
+    local n=${#parts[@]}
+    if [ "$n" -eq 1 ]; then
+        printf '%s' "${parts[0]}"
+    elif [ "$n" -eq 2 ]; then
+        printf '%s and %s' "${parts[0]}" "${parts[1]}"
+    else
+        local i
+        for ((i=0; i < n - 2; i++)); do
+            printf '%s, ' "${parts[i]}"
+        done
+        printf '%s and %s' "${parts[n-2]}" "${parts[n-1]}"
     fi
 }
 
@@ -90,7 +154,6 @@ cmd_add() {
         return 1
     fi
 
-    # Trim trailing whitespace from name
     name="${name%%[[:space:]]*}"
 
     [ -z "$timestamp" ] && timestamp=$(date +%s)

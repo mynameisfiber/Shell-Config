@@ -3,6 +3,7 @@ bc
 binutils
 curl
 man-db
+bash-completion
 
 # general util
 tmux
