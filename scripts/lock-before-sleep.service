@@ -1,0 +1,17 @@
+[Unit]
+Description=Lock screen on session lock signal
+After=lock.target
+
+[Service]
+Type=oneshot
+# Clean up xautolock but NOT flock (caffeine needs it)
+ExecStartPre=-/usr/bin/pkill xautolock
+ExecStartPre=/home/%u/.bin/caffeine
+ExecStart=/bin/sh -c '/usr/bin/xautolock -enable && /usr/bin/xautolock -locknow'
+ExecStartPost=/usr/bin/sleep 1
+# Allow flock background process to remain without warnings
+KillMode=none
+RemainAfterExit=no
+
+[Install]
+WantedBy=lock.target

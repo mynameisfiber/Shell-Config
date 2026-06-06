@@ -1,0 +1,11 @@
+[Unit]
+Description=Trigger lock signal before suspend
+Before=sleep.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u %i)/bus /sbin/runuser -u %i -- systemctl --user restart lock-before-sleep.service'
+ExecStartPost=/usr/bin/sleep 1
+
+[Install]
+WantedBy=suspend.target hibernate.target hybrid-sleep.target

@@ -19,6 +19,28 @@ function _install_requirements() {
     done)
 }
 
+function setup_suspend_locking() {
+    echo "Setting up automatic screen lock on suspend..."
+
+    # System service
+    if [ -f "scripts/user-suspend@.service" ]; then
+        sudo cp -f "scripts/user-suspend@.service" "/etc/systemd/system/"
+        sudo chmod 644 "/etc/systemd/system/user-suspend@.service"
+        sudo systemctl daemon-reload
+        sudo systemctl enable "user-suspend@${USER}.service"
+    fi
+
+    # User service
+    mkdir -p "$HOME/.config/systemd/user"
+    if [ -f "scripts/lock-before-sleep.service" ]; then
+        cp -f "scripts/lock-before-sleep.service" "$HOME/.config/systemd/user/"
+        chmod 644 "$HOME/.config/systemd/user/lock-before-sleep.service"
+        systemctl --user daemon-reload
+        systemctl --user enable lock-before-sleep.service
+    fi
+}
+
+
 echo "*******System Packages"
 if command -v pacman > /dev/null 2>&1; then
     echo "Updating system"
@@ -50,6 +72,9 @@ echo "*******Injecting custom shell profiles"
 inject_shell_custom ~/.profile ~/.profile_custom
 inject_shell_custom ~/.bashrc ~/.bash_custom
 inject_shell_custom ~/.bash_profile ~/.bash_custom
+
+echo "*******Installing custom systemd services"
+setup_suspend_locking
 
 echo "*******Sourcing bashrc"
 #source $HOME/.bashrc
