@@ -13,14 +13,10 @@ usage() {
     printf '       timer --remove <name>\n'
 }
 
-# Format seconds into:
-#   "4 years, 8 months, 21 days and 4.08 hours"
-#   "1 year, 8 months and 22.99 hours"
-#   "23 days and 23.99 hours"
-#   "0.26 hours"
+# Format seconds into human-readable duration
+# Optimized: uses printf for decimal formatting and simplified pluralization
 fmt_duration() {
-    local s="$1"
-    local y m d h rem h_dec
+    local s=$1 y m d h h_dec rem
     local parts=()
 
     # Approximate breakdown (365-day years, 30-day months)
@@ -34,81 +30,76 @@ fmt_duration() {
     rem=$((rem % 86400))
 
     h=$((rem / 3600))
-    h_dec=$(((rem % 3600) * 100 / 3600))
+    # Use printf for proper decimal formatting (2 decimal places)
+    h_dec=$(printf '%.2f' $(echo "scale=2; $rem / 3600" | bc 2>/dev/null || echo "$((rem * 100 / 36000)).$((rem * 100 / 3600 % 10))"))
 
-    # Years
-    if [ "$y" -gt 0 ]; then
-        if [ "$y" -eq 1 ]; then
-            parts+=("1 year")
+    # Build parts with ternary-style pluralization
+    [ "$y" -gt 0 ] && parts+=("$(printf '%d year%s' "$y" "$([ "$y" -eq 1 ] || echo s)")")
+    [ "$m" -gt 0 ] && parts+=("$(printf '%d month%s' "$m" "$([ "$m" -eq 1 ] || echo s)")")
+    [ "$d" -gt 0 ] && parts+=("$(printf '%d day%s' "$d" "$([ "$d" -eq 1 ] || echo s)")")
+
+    # Hours logic: show if non-zero or if no other parts exist
+    if [ "$h" -gt 0 ] || [ "${#parts[@]}" -eq 0 ]; then
+        [ "$h" -eq 1 ] && [ "$((rem % 3600))" -eq 0 ] && parts+=("1 hour") || parts+=("$(printf '%.2f hours' "$h_dec")")
+    fi
+
+    # Join with commas and "and" - optimized case statement
+    case ${#parts[@]} in
+        1) printf '%s' "${parts[0]}" ;;
+        2) printf '%s and %s' "${parts[0]}" "${parts[1]}" ;;
+        *) printf '%s, ' "${parts[@]:0:${#parts[@]}-2}"
+           printf '%s and %s' "${parts[-2]}" "${parts[-1]}" ;;
+    esac
+}
+
+# Alternative pure-bash fmt_duration (no bc dependency, faster):
+fmt_duration_fast() {
+    local s=$1 y m d h h_frac rem
+    local parts=()
+
+    y=$((s / 31536000))
+    rem=$((s % 31536000))
+    m=$((rem / 2592000))
+    rem=$((rem % 2592000))
+    d=$((rem / 86400))
+    rem=$((rem % 86400))
+    h=$((rem / 3600))
+    # Calculate 2-digit fraction: (remainder * 100 / 3600) = (remainder / 36)
+    h_frac=$((rem % 3600 * 100 / 3600))
+    [ "$h_frac" -lt 10 ] && h_frac="0$h_frac"
+
+    [ "$y" -gt 0 ] && parts+=("$(printf '%d year%s' "$y" "$([ "$y" -eq 1 ] && echo '' || echo s)")")
+    [ "$m" -gt 0 ] && parts+=("$(printf '%d month%s' "$m" "$([ "$m" -eq 1 ] && echo '' || echo s)")")
+    [ "$d" -gt 0 ] && parts+=("$(printf '%d day%s' "$d" "$([ "$d" -eq 1 ] && echo '' || echo s)")")
+
+    if [ "$h" -gt 0 ] || [ "$h_frac" -gt 0 ] || [ "${#parts[@]}" -eq 0 ]; then
+        if [ "$h" -eq 1 ] && [ "$h_frac" -eq 0 ]; then
+            parts+=("1 hour")
         else
-            parts+=("${y} years")
+            parts+=("$(printf '%d.%s hours' "$h" "$h_frac")")
         fi
     fi
 
-    # Months
-    if [ "$m" -gt 0 ]; then
-        if [ "$m" -eq 1 ]; then
-            parts+=("1 month")
-        else
-            parts+=("${m} months")
-        fi
-    fi
-
-    # Days
-    if [ "$d" -gt 0 ]; then
-        if [ "$d" -eq 1 ]; then
-            parts+=("1 day")
-        else
-            parts+=("${d} days")
-        fi
-    fi
-
-    # Hours (always shown with 2 decimals if non-zero; if everything is zero, show 0.00)
-    local hours_str
-    if [ "$h" -eq 1 ] && [ "$h_dec" -eq 0 ]; then
-        hours_str="1 hour"
-    else
-        if [ "$h_dec" -lt 10 ]; then
-            hours_str="${h}.0${h_dec} hours"
-        else
-            hours_str="${h}.${h_dec} hours"
-        fi
-    fi
-
-    if [ "$h" -gt 0 ] || [ "$h_dec" -gt 0 ]; then
-        parts+=("$hours_str")
-    elif [ "${#parts[@]}" -eq 0 ]; then
-        parts+=("0.00 hours")
-    fi
-
-    # Join with commas and "and"
-    local n=${#parts[@]}
-    if [ "$n" -eq 1 ]; then
-        printf '%s' "${parts[0]}"
-    elif [ "$n" -eq 2 ]; then
-        printf '%s and %s' "${parts[0]}" "${parts[1]}"
-    else
-        local i
-        for ((i=0; i < n - 2; i++)); do
-            printf '%s, ' "${parts[i]}"
-        done
-        printf '%s and %s' "${parts[n-2]}" "${parts[n-1]}"
-    fi
+    case ${#parts[@]} in
+        1) printf '%s' "${parts[0]}" ;;
+        2) printf '%s and %s' "${parts[0]}" "${parts[1]}" ;;
+        *) printf '%s, ' "${parts[@]:0:${#parts[@]}-2}"
+           printf '%s and %s' "${parts[-2]}" "${parts[-1]}" ;;
+    esac
 }
 
 read_timers() {
     names=()
     stamps=()
-    local line
-    while IFS= read -r line || [ -n "$line" ]; do
-        [ -z "$line" ] && continue
-        if [[ "$line" =~ ^(.*)[[:space:]]+([0-9]+)$ ]]; then
-            local tname="${BASH_REMATCH[1]}"
-            tname="${tname%%[[:space:]]*}"
-            names+=("$tname")
-            stamps+=("${BASH_REMATCH[2]}")
-        fi
-        line=""
+    local line name stamp
+    while IFS=' ' read -r name stamp || [ -n "$name" ]; do
+        [ -z "$name" ] && continue
+        # Fast parse: trim trailing spaces from name
+        name="${name%%[[:space:]]*}"
+        # Validate stamp is numeric
+        [[ "$stamp" =~ ^[0-9]+$ ]] || continue
+        names+=("$name")
+        stamps+=("$stamp")
     done < "$TIMERRC"
 }
 
@@ -139,7 +130,7 @@ cmd_show() {
             diff=$((-diff))
         fi
         printf '%s%s:%s T%s %s\n' \
-            "$green" "${names[i]}" "$normal" "$sign" "$(fmt_duration "$diff")"
+            "$green" "${names[i]}" "$normal" "$sign" "$(fmt_duration_fast "$diff")"
     done
 }
 

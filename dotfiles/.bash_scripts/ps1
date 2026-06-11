@@ -10,4 +10,6 @@ WHITE="\[\033[00m\]"
 if [[ -e /usr/share/git/git-prompt.sh ]]; then
     source /usr/share/git/git-prompt.sh
     export PS1='\[\033[01;30m\]`if [ $? = 0 ]; then echo "\[\033[01;32m\]ツ"; else echo "\[\033[01;31m\]✗"; fi`\[\033[00;32m\]\h\[\033[00;37m\]:\[\033[31m\]$(__git_ps1 "(%s)\[\033[01m\]")\[\033[00;34m\]\w\[\033[00m\]$ '
+else
+    export PS1='\[\033[01;30m\]`if [ $? = 0 ]; then echo "\[\033[01;32m\]ツ"; else echo "\[\033[01;31m\]✗"; fi`\[\033[00;32m\]\h\[\033[00;37m\]:\[\033[31m\]\[\033[00;34m\]\w\[\033[00m\]$ '
 fi
