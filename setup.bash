@@ -51,6 +51,7 @@ if command -v pacman > /dev/null 2>&1; then
     	echo "Installing graphical packages"
     	sudo pacman -Sy --needed --noconfirm $( cat packages/pacman/requirements.gui.pacman | grep -v "^#" | paste -sd ' ' )
     fi
+    ./scripts/install_yay.sh
 fi
 
 if command -v apt > /dev/null 2>&1; then
@@ -103,15 +104,15 @@ if [ ! -z "$DISPLAY" ]; then
     python3 -m pip install --upgrade --force-reinstall -r requirements.gui.txt
 fi
 
-if [ ! -z "$DISPLAY" ]; then
-    echo "********Installing lolcommits"
-    gem install --user lolcommits lolcommits-loltext
-fi
-
 echo "******Installing custom built programs"
 #./scripts/install_neovim.sh
 ./scripts/install_nerd_fonts.sh
 ./scripts/install_universal_ctags.sh
+
+if [ ! -z "$DISPLAY" ]; then
+    echo "********Installing lolcommits"
+    gem install --user lolcommits lolcommits-loltext
+fi
 
 #echo "*******Installing LOLssh"
 #cd lolssh

@@ -2,10 +2,10 @@ export SCREENLAYOUTSPATH=$HOME/.screenlayout/
 
 function screenlayout { 
     layout=$1
-    script_host=$SCREENLAYOUTSPATH/$(hostname)/${layout}.sh
+    script_host=$SCREENLAYOUTSPATH/$HOSTNAME/${layout}.sh
     script_global=$SCREENLAYOUTSPATH/${layout}.sh
     if [ -x "$script_host" ]; then
-        echo "Setting layout to: ${layout}@$(hostname)"
+        echo "Setting layout to: ${layout}@$HOSTNAME"
         eval ${script_host}
     elif [ -x "$script_global" ]; then
         echo "Setting layout to: ${layout}"
@@ -16,7 +16,7 @@ function screenlayout {
 }
 
 function _listlayouts() {
-    ( find -L $SCREENLAYOUTSPATH/{,$(hostname)} \
+    ( find -L $SCREENLAYOUTSPATH/{,$HOSTNAME} \
            -maxdepth 1 \
            -type f \
            -printf "%f\n" | \
