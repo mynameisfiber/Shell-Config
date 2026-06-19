@@ -1,11 +1,10 @@
-source .bash_scripts/pyenv
+source ~/.profile
 
 export PATH="/usr/local/bin:$PATH"
 
 # VI mode!
 set -o vi
 export EDITOR="vim"
-
 
 for script in ~/.bash_scripts/*;
 do
@@ -21,6 +20,3 @@ do
     fi
 done
 
-export LOADED_BASH_CUSTOM=1
-
-source ~/.profile_custom

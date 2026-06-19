@@ -31,4 +31,3 @@ do
         source "$script"
     fi
 done
-export LOADED_PROFILE_CUSTOM=1
