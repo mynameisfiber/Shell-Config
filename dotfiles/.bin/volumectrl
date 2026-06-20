@@ -14,14 +14,17 @@ function repeat() {
 
 if [[ "$action" != "status" ]]; then
     if [[ "$action" == "toggle" ]]; then
-        pulsemixer --toggle-mute
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
     elif [ ! -z "$action" ]; then
-        pulsemixer --change-volume $action
+        # convert pulsemixer-style delta (+5/-5) to wpctl style (5%+/5%-)
+        sign="${action:0:1}"
+        num="${action:1}"
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "${num}%${sign}"
     fi
 fi
 
-IS_MUTE=$( pulsemixer --get-mute )
-VOLUME=$( pulsemixer --get-volume | cut -d' ' -f1 )
+IS_MUTE=$( wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -c MUTED )
+VOLUME=$( wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf "%d", $2 * 100}' )
 
 if [ "$IS_MUTE" -eq "1" ]; then
     CHARS="▨□◫"
