@@ -295,7 +295,7 @@ function make_global_keys(modkey)
 
         -- Open file manager
         awful.key({ modkey}, "o",
-            function () awful.spawn("nautilus --no-desktop") end
+            function () awful.spawn("nemo") end
         ),
 
         -- Screen Rotation

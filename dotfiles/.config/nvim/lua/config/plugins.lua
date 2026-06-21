@@ -59,7 +59,7 @@ require("lazy").setup({
   -- Fuzzy finder: load on command or key
   {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
+    version="*",
     cmd = "Telescope",
     keys = {
       { "t", ":Telescope find_files<CR>", desc = "Find files" },
