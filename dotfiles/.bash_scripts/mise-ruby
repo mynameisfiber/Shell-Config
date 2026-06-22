@@ -1,0 +1,4 @@
+eval "$(mise activate bash)"
+
+mise settings ruby.compile=false
+mise use --silent --global ruby 

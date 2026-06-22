@@ -111,7 +111,8 @@ echo "******Installing custom built programs"
 
 if [ ! -z "$DISPLAY" ]; then
     echo "********Installing lolcommits"
-    gem install --user lolcommits lolcommits-loltext
+    gem install lolcommits lolcommits-loltext
+    lolcommits --enable
 fi
 
 #echo "*******Installing LOLssh"

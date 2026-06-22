@@ -32,7 +32,11 @@ pasystray
 pavucontrol
 
 # for lolcommits
+mise
 ffmpeg
+mplayer
+imagemagick
+v4l-utils
 
 # better touchpad
 xf86-input-synaptics
