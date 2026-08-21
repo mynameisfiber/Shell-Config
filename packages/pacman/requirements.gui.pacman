@@ -26,6 +26,9 @@ inotify-tools
 
 blueman
 
+# wifiqr import
+zbar
+
 # audio utils
 # pulseaudio includes the utils
 pasystray

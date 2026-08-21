@@ -1,2 +1,3 @@
 remarkable filter=git-crypt diff=git-crypt
 openai filter=git-crypt diff=git-crypt
+huggingface filter=git-crypt diff=git-crypt

@@ -27,7 +27,7 @@ function lockscreen_sleep()
 end
 
 function change_volume(how)
-    local command = "volumectrl " .. how
+    local command = "/home/micha/.bin/volumectrl " .. how
     awful.spawn.easy_async_with_shell(
         command,
         function(stdout, stderr, reason, exit_code)

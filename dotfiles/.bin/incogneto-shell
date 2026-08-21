@@ -1,0 +1,3 @@
+#!/bin/bash
+
+bash --init-file <( echo 'echo "Going Incognito"; . ~/.bashrc ; unset HISTFILE ; export PS1="🤫$PS1"' ) && echo "Leaving Incognito"

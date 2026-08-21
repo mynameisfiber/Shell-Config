@@ -5,6 +5,7 @@ require("telescope").setup({
       "node_modules",
       "%.pyc",
       "%.git/",
+      "venv",
     },
   },
   pickers = {
