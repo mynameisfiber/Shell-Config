@@ -1,11 +1,13 @@
 #!/bin/bash
 
-source ~/.bashrc
-xmodmap ~/.Xmodmap
+[ -f "$HOME/.profile" ] && . "$HOME/.profile"
+[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+[ -f "$HOME/.Xmodmap" ] && xmodmap ~/.Xmodmap
 
 if [[ "$(cat /etc/hostname)X" = "featherX" ]]; then
     xrandr -o 3
     screen-zoom =0.6
 fi
+
 
 exec awesome

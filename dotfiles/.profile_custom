@@ -1,33 +1,8 @@
+[ -n "${LOADED_PROFILE_CUSTOM_INNER}" ] && return 0
+LOADED_PROFILE_CUSTOM_INNER=1
+
 export PATH="/usr/sbin:$PATH"
 
-#Gnome alias for portability
-if [[ $DESKTOP_SESSION == "gnome" ]]
-  then
-    alias open="gnome-open"
-  fi
-
-#OSX specific
-if [[ "`uname`" == "Darwin" ]]
-  then
-    alias vim="mvim -v"
-    
-    # asciidoc crap
-    export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
-
-    # Adding git-annex to git
-    export PATH="/Applications/git-annex.app/Contents/MacOS:$PATH"
-
-    # python path from `brew install llvm`
-    export PYTHONPATH="/usr/local/opt/llvm/lib/python2.7/site-packages:$PYTHONPATH"
-
-    # python path for homebrew
-    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-  fi
-
-# General shell scripts
-for script in ~/.profile_scripts/*;
-do
-    if [[ -r "$script" && -f "$script" ]] && file "$script" | grep -q "text"; then
-        source "$script"
-    fi
+for script in "$HOME"/.profile_scripts/*; do
+    [ -r "$script" ] && [ -f "$script" ] && . "$script"
 done

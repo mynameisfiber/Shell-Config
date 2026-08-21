@@ -1,3 +1,6 @@
+[ -n "${LOADED_BASH_CUSTOM_INNER}" ] && return 0
+LOADED_BASH_CUSTOM_INNER=1
+
 source ~/.profile
 
 export PATH="/usr/local/bin:$PATH"
