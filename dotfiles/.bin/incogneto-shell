@@ -1,3 +1,44 @@
 #!/bin/bash
+# incognito - launch a child bash shell that leaves as little trace as
+# possible, then cleans everything up when it exits.
 
-bash --init-file <( echo 'echo "Going Incognito"; . ~/.bashrc ; unset HISTFILE ; export PS1="🤫$PS1"' ) && echo "Leaving Incognito"
+set -u
+
+INCOGNITO_DIR=$(mktemp -d "${TMPDIR:-/tmp}/incognito.XXXXXXXX") || exit 1
+
+cleanup() {
+    rm -rf -- "$INCOGNITO_DIR"
+    clear
+    echo "Leaving Incognito"
+}
+trap cleanup EXIT
+
+cat > "$INCOGNITO_DIR/init.bash" <<'EOF'
+echo "Going Incognito"
+
+. ~/.bashrc
+
+unset HISTFILE
+HISTSIZE=0
+HISTFILESIZE=0
+history -c
+
+export TMPDIR="$INCOGNITO_DIR/tmp"
+export XDG_CACHE_HOME="$INCOGNITO_DIR/cache"
+export XDG_STATE_HOME="$INCOGNITO_DIR/state"
+export XDG_DATA_HOME="$INCOGNITO_DIR/data"
+
+export MYSQL_HISTFILE=/dev/null
+export PSQL_HISTORY=/dev/null
+export SQLITE_HISTORY=/dev/null
+export PYTHON_HISTORY=/dev/null
+export NODE_REPL_HISTORY=/dev/null
+export LESSHISTFILE=/dev/null
+export VIMINFO=NONE
+
+mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$XDG_STATE_HOME" "$XDG_DATA_HOME" 
+
+export PS1="🤫$PS1"
+EOF
+
+INCOGNITO_DIR="$INCOGNITO_DIR" bash --init-file "$INCOGNITO_DIR/init.bash"
